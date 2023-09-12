@@ -1,5 +1,5 @@
 # Goo Grinders 🎮
-### 🦠🌳🌳🌄🌌🪐🚀🌠🌍🌿🌊🌋🌳 PantherDev Fall 2023 🌿🌵🌋🌴🦠🌴🌳🌴🐉🌲🌲🦠🪲🟩
+### 🦠🌳🌳🌄🌌🪐🚀🌠🌍🌊🌋 PantherDev Fall 2023 🌿🌵🌋🌴🦠🌴🌳🌴🐉🌲🦠🪲
 
 ***
 
