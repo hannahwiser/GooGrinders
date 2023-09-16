@@ -1,4 +1,4 @@
-Goo Grinder Title2![Goo Grinder Title3](https://github.com/hannahwiser/GooGrinders/assets/47337405/af77ed31-386d-4f31-a410-456f145ee754)
+![Goo Grinder Title3](https://github.com/hannahwiser/GooGrinders/assets/47337405/af77ed31-386d-4f31-a410-456f145ee754)
 
 ### 🦠🌳🌳🌄🌌🪐🚀🌠🌍🌊 PantherDev Fall 2023 🌿🌵🪐🌴🦠🌴🌳🌴🐉🌲🦠
 
