@@ -1,3 +1,10 @@
+/**
+ * File: PlayerMovement
+ * Programmer: Sagar Patel
+ * Description: Player movement script made using this video guide: https://youtu.be/HmouLR4X47I?si=n64C2xzECbeYyT05
+ * Date: Sept 17, 2023
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
