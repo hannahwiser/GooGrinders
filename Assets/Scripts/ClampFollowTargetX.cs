@@ -17,8 +17,10 @@ public class ClampFollowTargetX : MonoBehaviour
     private Transform playerTransform;
     private Transform followTargetTransform;
     private float minX;
+
     // Offset to prevent immediate clamping when the game starts
     public float minXOffset = 1.0f;
+
     // Smoothing factor to try to prevent the jumpyness of the camera
     public float smoothTime = 0.2f;
 
@@ -26,7 +28,7 @@ public class ClampFollowTargetX : MonoBehaviour
 
     void Start()
     {
-        // "FollowTarget" is a child of player 
+        // "FollowTarget" is a child of player
         playerTransform = transform.parent;
         followTargetTransform = transform;
 
@@ -46,7 +48,12 @@ public class ClampFollowTargetX : MonoBehaviour
         float targetX = Mathf.Max(minX, playerTransform.position.x);
 
         // interpolate the current X position of "FollowTarget" towards targetX
-        float newX = Mathf.SmoothDamp(followTargetTransform.position.x, targetX, ref velocity.x, smoothTime);
+        float newX = Mathf.SmoothDamp(
+            followTargetTransform.position.x,
+            targetX,
+            ref velocity.x,
+            smoothTime
+        );
 
         // Update the position of "FollowTarget"
         Vector3 newPosition = followTargetTransform.position;

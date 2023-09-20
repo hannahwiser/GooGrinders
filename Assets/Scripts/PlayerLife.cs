@@ -1,7 +1,7 @@
 /**
  * File: PlayerLife
  * Programmer: Sagar Patel
- * Description: Player movement script made using this video guide: https://www.youtube.com/watch?v=YQEq6Lkd69c
+ * Description: Player death script made using this video guide: https://www.youtube.com/watch?v=YQEq6Lkd69c
  * Date: Sept 19, 2023
  */
 
@@ -16,20 +16,22 @@ public class PlayerLife : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.y < -7.5f && !dead) {
+        if (transform.position.y < -7.5f && !dead)
+        {
             Die();
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (collision.gameObject.CompareTag("Enemy Body")) {
-        // GetComponent<MeshRenderer>().enabled = false;
-        // GetComponent<Rigidbody>().isKinematic = true;
-        // GetComponent<PlayerMovement>().enabled = false;
-        //    Die();
-        //}
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Enemy Body"))
+    //    {
+    //        GetComponent<MeshRenderer>().enabled = false;
+    //        GetComponent<Rigidbody>().isKinematic = true;
+    //        GetComponent<PlayerMovement>().enabled = false;
+    //        Die();
+    //    }
+    //}
 
     void Die()
     {
@@ -38,7 +40,7 @@ public class PlayerLife : MonoBehaviour
         Debug.Log("The player has died.");
     }
 
-    void ReloadLevel() 
+    void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
