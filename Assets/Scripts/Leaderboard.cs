@@ -67,7 +67,7 @@ public class Leaderboard : MonoBehaviour
 
         if (ContainsProfanityOrSlurs(username))
         {
-            Debug.LogWarning("SetLeaderboardEntry(): Username contains profanity or slurs.");
+            Debug.LogWarning("SetLeaderboardEntry(): Username contains profanity or slurs. Defaulting the name to Sporet...");
             //return;
 
             // It's better to set their name to a default name instead of giving an error and letting them try again.
@@ -77,7 +77,6 @@ public class Leaderboard : MonoBehaviour
 
         // Process the username
         usernameToUpload = usernameToUpload.Substring(0, Mathf.Min(usernameToUpload.Length, 7));
-
 
         LeaderboardCreator.UploadNewEntry(
             publicLeaderboardKey,
