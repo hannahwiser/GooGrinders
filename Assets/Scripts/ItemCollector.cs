@@ -1,5 +1,5 @@
 /**
- * File: Rotate
+ * File: ItemCollector
  * Programmer: Sagar Patel
  * Description: Simple item collection script made using this video guide: https://www.youtube.com/watch?v=YQEq6Lkd69c
  * Date: Sept 19, 2023
@@ -15,7 +15,7 @@ public class ItemCollector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("googorger"))
+        if (other.gameObject.CompareTag("GooGorger"))
         {
             Destroy(other.gameObject);
             coins++;
