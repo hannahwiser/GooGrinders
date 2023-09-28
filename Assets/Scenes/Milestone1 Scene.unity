@@ -3287,6 +3287,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3449293870546182630, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: Damping.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449293870546182630, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: Damping.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449293870546182630, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: Damping.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449293870546182630, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: CameraSide
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4349166327896600587, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.77
@@ -3315,6 +3331,14 @@ PrefabInstance:
       propertyPath: fakePrefab
       value: 
       objectReference: {fileID: 722875280}
+    - target: {fileID: 4349166327896600591, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: playerSpeedLimit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4349166327896600591, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: horizontalSpeedLimit
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5699021488352134533, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.7700195
@@ -3383,6 +3407,10 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1835081389}
+    - target: {fileID: 6974848261172546046, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: m_StandbyUpdate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8145925471209307523, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_IsActive
       value: 1
