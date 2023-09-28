@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Rail
+  - GooGorger
   - Fly
-  - Googorger
   layers:
   - Default
   - TransparentFX
