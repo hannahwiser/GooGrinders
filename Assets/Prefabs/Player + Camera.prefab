@@ -29,8 +29,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4349166327896600587}
-  - {fileID: 5699021488352134533}
-  - {fileID: 5984377327235639663}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -64,8 +62,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3874904847384481464}
-  m_Father: {fileID: 923936404366614782}
-  m_RootOrder: 2
+  m_Father: {fileID: 4349166327896600587}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2875862392252351127
 MonoBehaviour:
@@ -137,13 +135,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6795183900993809481}
   m_LocalRotation: {x: 0.041227885, y: -0, z: -0, w: 0.9991498}
-  m_LocalPosition: {x: 0, y: 1.24, z: -15}
+  m_LocalPosition: {x: 0, y: 1.2399979, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8687068197829911465}
-  m_Father: {fileID: 923936404366614782}
-  m_RootOrder: 1
+  m_Father: {fileID: 4349166327896600587}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6974848261172546046
 MonoBehaviour:
@@ -495,6 +493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33bbe3a854593a47864b9ceed57ff6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathLevelY: -7.5
+  spawnPoint: {fileID: 0}
+  sporetParent: {fileID: 0}
 --- !u!114 &8964883977644907199
 MonoBehaviour:
   m_ObjectHideFlags: 0

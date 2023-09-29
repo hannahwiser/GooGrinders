@@ -5,6 +5,9 @@ public class Player : MonoBehaviour
 {
     //Speed limit
     public float horizontalSpeedLimit = 30.0f;
+    //Adjustable acceleration
+
+
 
     // stored objects
     private SplineContainer spline;
@@ -139,7 +142,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position,jumpUpVector * 3,Color.blue);
         if(jumpInput && OnRail && !BelowRail)
         {
-            jump.Play();
+            //jump.Play();
             splineCollider.enabled = false;
             HandleJump(jumpUpVector,2);
             //HandleJump(Vector3.up,1);

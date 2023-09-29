@@ -12,15 +12,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
-    bool dead = false; 
-    
+    bool dead = false;
+    public float deathLevelY = -7.5f;
+
     //hannah added this
     public Transform spawnPoint;
     public GameObject sporetParent;
 
     void Update()
     {
-        if (transform.position.y < -7.5f && !dead)
+        if (transform.position.y < deathLevelY && !dead)
         {
             Die();
         }

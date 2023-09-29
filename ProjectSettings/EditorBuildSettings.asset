@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 9f2b598eb11f05246b501121b83b321d
+  - enabled: 1
+    path: Assets/Scenes/MainMenu With Liquid.unity
+    guid: 5c485f63c37e06842b09a27f9d992e28
   - enabled: 1
     path: Assets/Scenes/Milestone1 Scene.unity
     guid: 94205caca13cc0c4dbc6c4eb797fcfde
