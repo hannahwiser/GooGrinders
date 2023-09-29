@@ -17,7 +17,6 @@ public class BlockRaycasts : MonoBehaviour
     {
         for (int i = 0; i < rayObjects.Length; i++)
         {
-            Debug.Log("run");
             rayObjects[i].GetComponent<Collider>().enabled = false;
         }
     }

@@ -17,13 +17,13 @@ public class MainMenuBehavior : MonoBehaviour
     public string zoomInTitle;
     public string zoomOutTitle;
     public GameObject textObject;
-    public GameObject raycastBlock;
+    public AudioSource backgroundAudio;
+
 
     void Start()
     {
         startButton.enabled = false;
         textObject.SetActive(false);
-        raycastBlock.SetActive(false);
     }
 
     void Update()
@@ -53,13 +53,13 @@ public class MainMenuBehavior : MonoBehaviour
             textObject.GetComponent<TextMeshProUGUI>().text = "";
             anim.Play(zoomInTitle);
             StartCoroutine(WaitForAnim(true));
+            if (gameObject.GetComponent<AudioSource>() != null) gameObject.GetComponent<AudioSource>().Play();
         }
     }
 
     IEnumerator WaitForAnim(bool target) //coroutine to make sure player cannot double input.. not necessary but hunter requested lol
     {
         yield return new WaitForSeconds(.02f);
-        raycastBlock.SetActive(target);
         isZoomed = target;
         startButton.enabled = target;
     }
@@ -67,6 +67,21 @@ public class MainMenuBehavior : MonoBehaviour
     public void NextLevel()
     {
         anim.Play("MainMenuFadeOut");
-        //this is where we will go to the next level
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
+        asyncLoad.allowSceneActivation = false;
+        StartCoroutine(WaitForAnimation());
+    }
+
+    IEnumerator WaitForAnimation()
+    {
+        float timeCrunch = backgroundAudio.volume;
+        while (timeCrunch > 0)
+        {
+            Debug.Log("RUN");
+            backgroundAudio.volume = timeCrunch;
+            timeCrunch-=.01f;
+            yield return new WaitForSeconds(.01f);
+        }
+        SceneManager.LoadScene(1);
     }
 }
