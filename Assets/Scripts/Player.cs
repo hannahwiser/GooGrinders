@@ -38,6 +38,15 @@ public class Player : MonoBehaviour
     public bool BelowRail = false;
     //HOPEFULLY prevent reattatching to the rail
     private float jumpRegroundCooldown = .2f;
+
+    //audio assets
+    public AudioSource jump;
+    public AudioSource land;
+
+    //
+    public Transform spawnPoint;
+    public GameObject sporetParent;
+
     void Start()
     {
         if(!rb)
@@ -127,12 +136,14 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position,jumpUpVector * 3,Color.blue);
         if(jumpInput && OnRail && !BelowRail)
         {
+            jump.Play();
             splineCollider.enabled = false;
             HandleJump(jumpUpVector,2);
             //HandleJump(Vector3.up,1);
         }
         if(gooflingInput && OnRail && !BelowRail && gooflingCharge >0)
         {
+            jump.Play();
             splineCollider.enabled = false;
             HandleJump(jumpUpVector,Mathf.Clamp(gooflingMultiplier * gooflingCharge,2,5));
             //HandleJump(Vector3.up,1);
@@ -236,6 +247,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            land.Play();
             jumpRegroundCooldown = .15f;
             if(fakeObject)
                 DestroyImmediate(fakeObject);
@@ -350,7 +362,7 @@ public class Player : MonoBehaviour
     private float textPos = 0;
     private void DrawText(string text)
     {
-        GUI.Box(new Rect(0,textPos,150,20), text);
+        //GUI.Box(new Rect(0,textPos,150,20), text);
         textPos += 20;
     }
     private void OnGUI()
@@ -391,8 +403,12 @@ public class Player : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter(Collision other) {
+    void OnCollisionEnter(Collision other) {
         CheckCollider(other);
+        if (other.gameObject.tag == "Death")
+        {
+            sporetParent.transform.position = spawnPoint.position;
+        }
     }
     private void OnCollisionStay(Collision other) {
         CheckCollider(other);
