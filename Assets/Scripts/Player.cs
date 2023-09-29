@@ -146,7 +146,7 @@ public class Player : MonoBehaviour
         }
         if(gooflingInput && OnRail && !BelowRail && gooflingCharge >0)
         {
-            jump.Play();
+            //jump.Play();
             splineCollider.enabled = false;
             HandleJump(jumpUpVector,Mathf.Clamp(gooflingMultiplier * gooflingCharge,2,5));
             //HandleJump(Vector3.up,1);
@@ -261,7 +261,7 @@ public class Player : MonoBehaviour
             jumpRegroundCooldown = .15f;
             if (fakeObject)
             {
-                land.Play();
+                //land.Play();
                 DestroyImmediate(fakeObject);
             }
             //renable the join when you ARE on a rail
