@@ -247,10 +247,12 @@ public class Player : MonoBehaviour
         }
         else
         {
-            land.Play();
             jumpRegroundCooldown = .15f;
-            if(fakeObject)
+            if (fakeObject)
+            {
+                land.Play();
                 DestroyImmediate(fakeObject);
+            }
             //renable the join when you ARE on a rail
             EnableJoint();
             //move the model's position based on if we are hanging on the rail or not
