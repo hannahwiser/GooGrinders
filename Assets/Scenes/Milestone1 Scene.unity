@@ -14233,7 +14233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 600
+  m_Intensity: 50000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -14355,9 +14355,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2802.5015
-  m_Range: 50.4
-  m_SpotAngle: 30
+  m_Intensity: 78629.24
+  m_Range: 150
+  m_SpotAngle: 52
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -14412,14 +14412,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656249240}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -552.91, y: 131.4, z: -35.03}
+  m_LocalRotation: {x: 0.2553474, y: 0.1576776, z: -0.042249594, w: 0.95296925}
+  m_LocalPosition: {x: -552.91, y: 187.88, z: -96.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 18.79, z: 0}
 --- !u!4 &1685938474 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4349166327896600587, guid: b999676de9fb477448074fe1536b2017, type: 3}
