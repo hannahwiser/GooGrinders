@@ -142,14 +142,16 @@ public class Player : MonoBehaviour
         Debug.DrawRay(transform.position,jumpUpVector * 3,Color.blue);
         if(jumpInput && OnRail && !BelowRail)
         {
-            //jump.Play();
+            jump.time = .1f;
+            jump.Play();
             splineCollider.enabled = false;
             HandleJump(jumpUpVector,2);
             //HandleJump(Vector3.up,1);
         }
         if(gooflingInput && OnRail && !BelowRail && gooflingCharge >0)
         {
-            //jump.Play();
+            jump.time = .1f;
+            jump.Play();
             splineCollider.enabled = false;
             HandleJump(jumpUpVector,Mathf.Clamp(gooflingMultiplier * gooflingCharge,2,5));
             //HandleJump(Vector3.up,1);
@@ -264,7 +266,8 @@ public class Player : MonoBehaviour
             jumpRegroundCooldown = .15f;
             if (fakeObject)
             {
-                //land.Play();
+                land.time = .15f;
+                land.Play();
                 DestroyImmediate(fakeObject);
             }
             //renable the join when you ARE on a rail
