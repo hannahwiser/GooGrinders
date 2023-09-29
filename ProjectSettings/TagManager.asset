@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Rail
   - GooGorger
+  - Raycast Target
+  - Death
   layers:
   - Default
   - TransparentFX
