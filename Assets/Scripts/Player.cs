@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         inputVector.y = Input.GetAxis("Vertical");
         inputVector = inputVector.normalized;
         jumpInput = Input.GetButtonDown("Jump");
-        gooflingInput = Input.GetButtonDown("Fire1");
+        gooflingInput = Input.GetButtonDown("Fire1"); // Changed the button for the goo-fling to the "Shift" key
     }
 
     private void DisableJoint()
