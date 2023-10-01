@@ -25,6 +25,10 @@ public class PlayerLife : MonoBehaviour
         {
             Die();
         }
+        if (Input.GetKey(KeyCode.G))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     //private void OnCollisionEnter(Collision collision)

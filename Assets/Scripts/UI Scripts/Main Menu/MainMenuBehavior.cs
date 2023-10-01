@@ -34,6 +34,11 @@ public class MainMenuBehavior : MonoBehaviour
             anim.Play(zoomOutTitle);
             StartCoroutine(WaitForAnim(false));
         }
+
+        if (Input.GetKeyDown(KeyCode.G)) //makes sure we are not already zoomed in when player presses esc
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void OnMouseOver()
