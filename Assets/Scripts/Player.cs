@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public float horizontalSpeedLimit = 30.0f;
     //Adjustable acceleration
 
+    // Toggle GUI Box
+    [SerializeField] private bool enableDebuggingBox = false;
 
 
     // stored objects
@@ -381,7 +383,9 @@ public class Player : MonoBehaviour
     private float textPos = 0;
     private void DrawText(string text)
     {
-        //GUI.Box(new Rect(0,textPos,150,20), text);
+        if (enableDebuggingBox) { 
+            GUI.Box(new Rect(0,textPos,150,20), text);
+        }
         textPos += 20;
     }
     private void OnGUI()
