@@ -10,6 +10,8 @@ Material:
   m_Name: Bulb Large Base
   m_Shader: {fileID: 4800000, guid: 6e4ae4064600d784cac1e41a9e6f2e59, type: 3}
   m_ValidKeywords:
+  - _BENTNORMALMAP
+  - _DETAIL_MAP
   - _DISABLE_SSR_TRANSPARENT
   - _EMISSIVE_COLOR_MAP
   - _EMISSIVE_MAPPING_BASE
@@ -36,11 +38,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: a030a4621c83a0f448b334abbfe0f706, type: 3}
+        m_Texture: {fileID: 2800000, guid: 654ebef46adbfa040945335dc692871c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 04a6c28848543ac498b59858c62a7dd7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMapOS:
@@ -52,11 +54,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 642dd614e9143d34c8fa5bd3ef000046, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveColorMap:
-        m_Texture: {fileID: 2800000, guid: a030a4621c83a0f448b334abbfe0f706, type: 3}
+        m_Texture: {fileID: 2800000, guid: 287fec42e17ad9245a0a581960e9af50, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -72,15 +74,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a030a4621c83a0f448b334abbfe0f706, type: 3}
+        m_Texture: {fileID: 2800000, guid: 654ebef46adbfa040945335dc692871c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 31d9bf937a9019444abc6283e48bfe35, type: 3}
+        m_Texture: {fileID: 2800000, guid: 68205389ea6b63b43897fd431c049e8a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 9c366ec344e68b1408d6fb9bfe3db1bc, type: 3}
+        m_Texture: {fileID: 2800000, guid: b6a65f6d6e31f394d8ed1fa50d3c126b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMapOS:
@@ -241,8 +243,8 @@ Material:
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissiveColor: {r: 15.623337, g: 0, b: 17.5, a: 17.5}
-    - _EmissiveColorLDR: {r: 0.95129585, g: 0, b: 1, a: 1}
+    - _EmissiveColor: {r: 15.684705, g: 0, b: 17.5, a: 17.5}
+    - _EmissiveColorLDR: {r: 0.95294094, g: 0, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

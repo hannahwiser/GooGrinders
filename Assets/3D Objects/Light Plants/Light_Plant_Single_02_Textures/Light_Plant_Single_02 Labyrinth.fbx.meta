@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b8717e0b7bfea64792dae13b64fd80d
+guid: 0f53a168d1707314fae5008114168029
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,13 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Blub
-    second: {fileID: 2100000, guid: f473d722877cfe545bd99582c775a728, type: 2}
+      name: Body
+    second: {fileID: 2100000, guid: e433f2d03fb5ddb468448fe5841e6114, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Body
-    second: {fileID: 2100000, guid: 64447d4d97e3a9b4e902642531b1a458, type: 2}
+      name: Bulb
+    second: {fileID: 2100000, guid: b0af666d5daf0e246b1208add865029e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
