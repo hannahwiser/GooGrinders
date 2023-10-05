@@ -28,12 +28,12 @@ Material:
     m_Floats:
     - _Amplitude: 0.15
     - _Freq: 15
-    - _Line: 0
-    - _LineSmooth: 0.0255
+    - _Line: 0.0049
+    - _LineSmooth: 0.0179
     - _RimPower: 0.54
     m_Colors:
-    - _FoamColor: {r: 0.3662527, g: 1, b: 0.2422812, a: 1}
-    - _RimColor: {r: 0.023529412, g: 0.25, b: 0, a: 1}
-    - _Tint: {r: 0.04901961, g: 0.5, b: 0, a: 1}
-    - _TopColor: {r: 0.36564916, g: 1, b: 0.24056602, a: 1}
+    - _FoamColor: {r: 0.15555549, g: 1, b: 0, a: 0}
+    - _RimColor: {r: 0.0054884297, g: 0.058543254, b: 0, a: 1}
+    - _Tint: {r: 0.06477335, g: 0.6981132, b: 0, a: 1}
+    - _TopColor: {r: 0.1377714, g: 0.8113208, b: 0, a: 1}
   m_BuildTextureStacks: []
