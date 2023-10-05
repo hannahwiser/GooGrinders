@@ -61,16 +61,30 @@ public class RailMeshGen : MonoBehaviour
             vertsP2.Add(p2);
         }
     }
-    private void OnDrawGizmos() {
-        for(int i = 0; i < vertsP1.Count; i++)
-        {
-            Gizmos.color = Color.white;
-            Gizmos.DrawSphere(vertsP1[i],.1f);
-            Gizmos.color = Color.red;
-            Gizmos.DrawSphere(vertsP2[i],.05f);
-            Debug.DrawRay(vertsP2[i], vertsP1[i] - vertsP2[i] , Color.white);
-        }
 
-        
+    private void OnDrawGizmos()
+    {
+        // Added a checker to make sure vertsP1 is not null - Sagar
+        if (vertsP1 != null)
+        {
+            for (int i = 0; i < vertsP1.Count; i++)
+            {
+                Gizmos.color = Color.white;
+                if (i < vertsP1.Count)
+                    Gizmos.DrawSphere(vertsP1[i], 0.1f);
+
+                Gizmos.color = Color.red;
+                if (i < vertsP2.Count)
+                    Gizmos.DrawSphere(vertsP2[i], 0.05f);
+
+                if (i < vertsP1.Count && i < vertsP2.Count)
+                    Debug.DrawRay(vertsP2[i], vertsP1[i] - vertsP2[i], Color.white);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("vertsP1 is null in RailMeshGen. Make sure it's properly initialized.");
+        }
     }
+
 }
