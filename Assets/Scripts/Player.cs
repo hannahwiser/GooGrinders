@@ -23,8 +23,8 @@ public class Player : MonoBehaviour
     
 
     //Inputs
-    private Vector2 inputVector = Vector2.zero;
-    private bool jumpInput = false;
+    public Vector2 inputVector = Vector2.zero;
+    public bool jumpInput = false;
     private bool gooflingInput = false;
     //rigid body
     public ConfigurableJoint joint;
@@ -77,11 +77,7 @@ public class Player : MonoBehaviour
                         if (Vector3.Distance((Vector3)p,transform.position) < Vector3.Distance(nearest,transform.position) || nearest.magnitude == Mathf.Infinity)
                         {
                             spline = container;
-                            Debug.Log(Vector3.Distance(nearest,transform.position));
                             nearest = p;
-                            Debug.Log( Vector3.Distance(nearest,transform.position));
-                           
-                            
                         }
                     }
                 }
@@ -142,14 +138,15 @@ public class Player : MonoBehaviour
         HandleInput();
         //polish this pls :)
         Debug.DrawRay(transform.position,jumpUpVector * 3,Color.blue);
-        if(jumpInput && OnRail && !BelowRail)
+        if(jumpInput && OnRail)
         {
             jump.time = .1f;
-            jump.Play();
+            jump.PlayOneShot(jump.clip);
             splineCollider.enabled = false;
-            HandleJump(jumpUpVector,2);
+            HandleJump(jumpUpVector,5);
             //HandleJump(Vector3.up,1);
         }
+        /*
         if(gooflingInput && OnRail && !BelowRail && gooflingCharge >0)
         {
             jump.time = .1f;
@@ -158,7 +155,7 @@ public class Player : MonoBehaviour
             HandleJump(jumpUpVector,Mathf.Clamp(gooflingMultiplier * gooflingCharge,2,5));
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
-        }
+        }*/
     }
     private Vector3 jumpUpVector = Vector3.up;
     void FixedUpdate()
@@ -213,7 +210,9 @@ public class Player : MonoBehaviour
         VelocityChange.y = 0;
         lastNearestPoint = (Vector3) point;
         jumpUpVector = upVector;
-        
+        Debug.DrawRay(transform.position,rb.velocity,Color.red);
+
+
         if(!OnRail)
         {
             if(jumpRegroundCooldown >0)
@@ -232,6 +231,8 @@ public class Player : MonoBehaviour
                 fakeObject = Instantiate(fakePrefab,transform.position,transform.rotation);
                 fakeObject.transform.parent = null;
                 fakeRB = fakeObject.AddComponent<Rigidbody>();
+                fakeRB.interpolation = RigidbodyInterpolation.None;
+                fakeRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
                 fakeJoint = fakeObject.AddComponent<ConfigurableJoint>();
                 fakeJoint.xMotion = ConfigurableJointMotion.Free;
                 fakeJoint.yMotion = ConfigurableJointMotion.Locked;
@@ -239,12 +240,13 @@ public class Player : MonoBehaviour
                 fakeJoint.angularXMotion = ConfigurableJointMotion.Locked;
                 fakeJoint.angularYMotion = ConfigurableJointMotion.Locked;
                 fakeJoint.angularZMotion = ConfigurableJointMotion.Locked;
+                
                 fakeJoint.autoConfigureConnectedAnchor = false;
             }
 
             //keep the velocity of the fake rigidbody the same, always
             fakeRB.velocity = rb.velocity;
-            fakeRB.MovePosition(new Vector3(transform.position.x,fakeObject.transform.position.y,transform.position.z));
+            //fakeRB.MovePosition(new Vector3(transform.position.x,fakeObject.transform.position.y,transform.position.z));
             SplineUtility.GetNearestPoint(native, fakeObject.transform.position,out point,out time);
             //time = Mathf.Clamp(time,0,1);
             upVector = spline.EvaluateUpVector(time);
@@ -252,7 +254,7 @@ public class Player : MonoBehaviour
             tangentVector = spline.EvaluateTangent(time);
             tangentVector = tangentVector.normalized;
             
-
+            DisableJoint();
             fakeJoint.connectedAnchor = (Vector3)point;
             fakeJoint.axis = tangentVector;
 
@@ -265,7 +267,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            jumpRegroundCooldown = .15f;
+            jumpRegroundCooldown = .05f;
             if (fakeObject)
             {
                 land.time = .15f;
@@ -275,7 +277,10 @@ public class Player : MonoBehaviour
             //renable the join when you ARE on a rail
             EnableJoint();
             //move the model's position based on if we are hanging on the rail or not
-            model.transform.localPosition = BelowRail?-upVector * .5f:upVector * .5f;
+            model.transform.localPosition = upVector * .5f;
+            //this should be tweaked to allow turning around
+            model.localRotation = Quaternion.LookRotation(tangentVector,upVector);
+            //model.transform.localPosition = BelowRail?-upVector * .5f:upVector * .5f;
 
             joint.connectedAnchor = (Vector3)point;
             joint.axis = tangentVector;
@@ -302,6 +307,7 @@ public class Player : MonoBehaviour
         }
         
         debugTime = time;
+        
         if(time < 0 || time > 1)
         {
             FindNewRailCast();
@@ -311,6 +317,7 @@ public class Player : MonoBehaviour
             if(OnRail)
             {
                 transform.position += model.localPosition;
+                //rb.MovePosition(transform.position);
                 model.localPosition = Vector3.zero;
                 
                 OnRail = false;
@@ -375,8 +382,9 @@ public class Player : MonoBehaviour
     {
         PartiallyDisableJoint();
         rb.AddForce(direction.normalized * (force), ForceMode.Impulse);
-        transform.position += direction.normalized * .5f;
+        transform.position += direction.normalized;
         model.transform.localPosition = Vector3.zero;
+        
         OnRail = false;
         
     }
