@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 140327022}
   - component: {fileID: 140327021}
   - component: {fileID: 140327020}
+  - component: {fileID: 140327023}
   m_Layer: 5
   m_Name: Drink
   m_TagString: Untagged
@@ -391,6 +392,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140327018}
   m_CullTransparentMesh: 1
+--- !u!114 &140327023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140327018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12de5753420b216448735bbd3b1c49d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiHit: {fileID: 140327021}
 --- !u!1 &154887600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5109084865266693834, guid: fc8f3f98b984f5449bdcb6eb4a9a9ff5, type: 3}
