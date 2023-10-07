@@ -13,7 +13,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
 
-public class ScoreManager : MonoBehaviour
+public class LeaderboardManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI inputScore;
     [SerializeField] private TMP_InputField inputName;

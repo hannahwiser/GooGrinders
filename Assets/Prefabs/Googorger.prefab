@@ -257,6 +257,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7240607220785886829}
   - component: {fileID: 7201665487906157232}
+  - component: {fileID: -5556485387557145325}
+  - component: {fileID: 4601016898007056693}
   m_Layer: 0
   m_Name: Googorger
   m_TagString: GooGorger
@@ -294,3 +296,30 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: -1.53, z: 0}
+--- !u!114 &-5556485387557145325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011935945918147799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d57081a50673d4448cb8bd633344ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedX: 0
+  speedY: 0
+  speedZ: 0
+--- !u!114 &4601016898007056693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011935945918147799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936162d4f87041549a5a5029af30a3f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

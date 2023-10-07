@@ -11,15 +11,32 @@ using UnityEngine;
 
 public class ItemCollector : MonoBehaviour
 {
-    int coins = 0;
+    private int playerScore = 0;
+
+    // when the game starts, load the player's score from PlayerPrefs
+    private void Start()
+    {
+        playerScore = PlayerPrefs.GetInt("PlayerScore", 0);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("GooGorger"))
         {
             Destroy(other.gameObject);
-            coins++;
-            Debug.Log("Coins: " + coins);
+            playerScore++;
+            Debug.Log("Score: " + playerScore);
+
+            // update the score in PlayerPrefs
+            PlayerPrefs.SetInt("PlayerScore", playerScore);
+            PlayerPrefs.Save();
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        // when the game is closed, set the score to 0
+        PlayerPrefs.SetInt("PlayerScore", 0);
+        PlayerPrefs.Save();
     }
 }

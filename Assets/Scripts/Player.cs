@@ -408,6 +408,7 @@ public class Player : MonoBehaviour
         DrawText("Inputs: " + inputVector);
         DrawText("TicksWithoutRail: " + ticksWithoutRail);
         DrawText("Time: " + debugTime);
+        DrawText("Score: " + PlayerPrefs.GetInt("PlayerScore") );
     }
 
 
