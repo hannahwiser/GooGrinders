@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Splines;
 using Unity.Mathematics;
+using System;
 public class Player : MonoBehaviour
 {
     //Speed limit
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
     public Transform spawnPoint;
     public GameObject sporetParent;
 
+    //private NativeSpline native;
     void Start()
     {
         if(!rb)
@@ -146,7 +148,7 @@ public class Player : MonoBehaviour
             HandleJump(jumpUpVector,5);
             //HandleJump(Vector3.up,1);
         }
-        /*
+        
         if(gooflingInput && OnRail && !BelowRail && gooflingCharge >0)
         {
             jump.time = .1f;
@@ -155,7 +157,7 @@ public class Player : MonoBehaviour
             HandleJump(jumpUpVector,Mathf.Clamp(gooflingMultiplier * gooflingCharge,2,5));
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
-        }*/
+        }
     }
     private Vector3 jumpUpVector = Vector3.up;
     void FixedUpdate()
@@ -226,23 +228,7 @@ public class Player : MonoBehaviour
             BelowRail = false;
             PartiallyDisableJoint();
             //create the fake rigidbody object
-            if(!fakeObject)
-            {
-                fakeObject = Instantiate(fakePrefab,transform.position,transform.rotation);
-                fakeObject.transform.parent = null;
-                fakeRB = fakeObject.AddComponent<Rigidbody>();
-                fakeRB.interpolation = RigidbodyInterpolation.None;
-                fakeRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
-                fakeJoint = fakeObject.AddComponent<ConfigurableJoint>();
-                fakeJoint.xMotion = ConfigurableJointMotion.Free;
-                fakeJoint.yMotion = ConfigurableJointMotion.Locked;
-                fakeJoint.zMotion = ConfigurableJointMotion.Locked;
-                fakeJoint.angularXMotion = ConfigurableJointMotion.Locked;
-                fakeJoint.angularYMotion = ConfigurableJointMotion.Locked;
-                fakeJoint.angularZMotion = ConfigurableJointMotion.Locked;
-                
-                fakeJoint.autoConfigureConnectedAnchor = false;
-            }
+            CreateFakeObject(time);
 
             //keep the velocity of the fake rigidbody the same, always
             fakeRB.velocity = rb.velocity;
@@ -257,7 +243,7 @@ public class Player : MonoBehaviour
             DisableJoint();
             fakeJoint.connectedAnchor = (Vector3)point;
             fakeJoint.axis = tangentVector;
-
+            
             joint.connectedAnchor = transform.position;
             joint.axis = tangentVector;
             
@@ -327,18 +313,53 @@ public class Player : MonoBehaviour
         //the force for playermovement
         rb.AddForce(VelocityChange * 10,ForceMode.Force);
     }
-
+    private void CreateFakeObject(float time)
+    {
+         if(!fakeObject)
+            {
+                fakeObject = Instantiate(fakePrefab,spline.EvaluatePosition(time),transform.rotation);
+                fakeObject.transform.parent = null;
+                fakeRB = fakeObject.AddComponent<Rigidbody>();
+                fakeRB.interpolation = RigidbodyInterpolation.None;
+                fakeRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                fakeJoint = fakeObject.AddComponent<ConfigurableJoint>();
+                fakeJoint.xMotion = ConfigurableJointMotion.Free;
+                fakeJoint.yMotion = ConfigurableJointMotion.Locked;
+                fakeJoint.zMotion = ConfigurableJointMotion.Locked;
+                fakeJoint.angularXMotion = ConfigurableJointMotion.Locked;
+                fakeJoint.angularYMotion = ConfigurableJointMotion.Locked;
+                fakeJoint.angularZMotion = ConfigurableJointMotion.Locked;
+                
+                fakeJoint.autoConfigureConnectedAnchor = false;
+                FindNewRailCast();
+            }
+    }
     private void FindNewRailCast()
     {
         if(Physics.SphereCast(transform.position,.5f,Vector3.down,out RaycastHit hit))
         {
             if(hit.collider.tag == "Rail" && hit.collider != splineCollider)
             {
-                spline = hit.collider.GetComponent<SplineContainer>();
-                splineCollider.enabled = true;
-                splineCollider = hit.collider;
-                Debug.Log("found a new rail, baby!");
+                var tempSpline = hit.collider.GetComponent<SplineContainer>();
+                using var native = new NativeSpline(tempSpline.Spline, tempSpline.transform.localToWorldMatrix);
+                SplineUtility.GetNearestPoint(native, hit.point,out float3 point,out float time);
+                
+                if(fakeObject){
+                    if(time >= 0 && time <= 1)
+                    {
+                        spline = tempSpline;
+                        splineCollider.enabled = true;
+                        splineCollider = hit.collider;
+                        fakeObject.transform.position = hit.point;
+                        
+                        Debug.Log("found a new rail, baby: " + spline.name) ;
+                        Debug.Log("Time is: " + time + ((time<0 || time>1)?", FUCK":", cool!"));
+                    }
+                    else
+                        Debug.Log("outside range, time is: " + time);
+                }
             }
+        
         }
     }
     private int ticksWithoutRail = 0;
@@ -346,26 +367,26 @@ public class Player : MonoBehaviour
         if(fakeObject && !OnRail)
             transform.position = new Vector3(fakeObject.transform.position.x,transform.position.y,fakeObject.transform.position.z);
         if(fakeObject)
-        if(Vector3.Distance(fakeJoint.connectedAnchor, fakeObject.transform.position) > 3)
-        {
-            var lastSpline = spline;
-            FindNewRailCast();
-            if(spline == lastSpline)
-                ticksWithoutRail++;
+            if(Vector3.Distance(fakeJoint.connectedAnchor, fakeObject.transform.position) > 3)
+            {
+                var lastSpline = spline;
+                FindNewRailCast();
+                if(spline == lastSpline)
+                    ticksWithoutRail++;
+                else
+                    ticksWithoutRail = 0;
+            }
+            else if(Vector3.Distance(joint.connectedAnchor,transform.position) > 3)
+            {
+                var lastSpline = spline;
+                FindNewRailCast();
+                if(spline == lastSpline)
+                    ticksWithoutRail++;
+                else
+                    ticksWithoutRail = 0;
+            }
             else
                 ticksWithoutRail = 0;
-        }
-        else if(Vector3.Distance(joint.connectedAnchor,transform.position) > 3)
-        {
-            var lastSpline = spline;
-            FindNewRailCast();
-            if(spline == lastSpline)
-                ticksWithoutRail++;
-            else
-                ticksWithoutRail = 0;
-        }
-        else
-            ticksWithoutRail = 0;
            
         //fully disable the joint when disconnected for 3 ticks
         if(ticksWithoutRail >3)
@@ -374,8 +395,17 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if(fakeObject)
+        if(fakeObject){
             Gizmos.DrawSphere(fakeObject.transform.position,.5f);
+            Gizmos.DrawSphere(transform.position + Vector3.down,.5f);
+            Gizmos.DrawSphere(transform.position + Vector3.down * 50,.5f);
+            Debug.DrawRay(transform.position + Vector3.forward*.25f,Vector3.down * 50, Color.red);
+            Debug.DrawRay(transform.position + Vector3.right*.25f,Vector3.down * 50, Color.red);
+            Debug.DrawRay(transform.position + Vector3.left*.25f,Vector3.down * 50, Color.red);
+            Debug.DrawRay(transform.position + Vector3.back*.25f,Vector3.down * 50, Color.red);
+            }
+
+        
     }
 
     void HandleJump(Vector3 direction, float force)
