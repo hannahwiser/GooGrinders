@@ -120,9 +120,9 @@
       }
     },
     "com.unity.render-pipelines.high-definition-config": {
-      "version": "12.1.10",
+      "version": "file:com.unity.render-pipelines.high-definition-config",
       "depth": 0,
-      "source": "builtin",
+      "source": "embedded",
       "dependencies": {
         "com.unity.render-pipelines.core": "12.1.10"
       }
