@@ -19,6 +19,11 @@ public class PlayerLife : MonoBehaviour
     public Transform spawnPoint;
     public GameObject sporetParent;
 
+    // reference the ragdoll script attached to the player
+    public RagdollController ragdollController;
+    // reference the Player script
+    private Player playerScript;
+
     void Update()
     {
         if (transform.position.y < deathLevelY && !dead)
@@ -44,13 +49,32 @@ public class PlayerLife : MonoBehaviour
 
     void Die()
     {
-        Invoke(nameof(ReloadLevel), 1.3f);
+        // enable ragdoll physics
+        ragdollController.EnableRagdoll();
+
+        // disable player control 
+        playerScript.SetPlayerControlEnabled(false);
+
+        // respawn after a delay
+        Invoke(nameof(Respawn), 5.0f);
+        //Invoke(nameof(ReloadLevel), 1.3f);
+
         dead = true;
         Debug.Log("The player has died.");
     }
 
-    void ReloadLevel()
+    void Respawn()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // teleport the player to the spawn point
+        transform.position = spawnPoint.position;
+
+        // disable ragdoll mode
+        ragdollController.DisableRagdoll();
+
+        // Re-enable player control 
+        playerScript.SetPlayerControlEnabled(true);
+
+        dead = false;
+        Debug.Log("Player respawned.");
     }
 }

@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     // Toggle GUI Box
     [SerializeField] private bool enableDebuggingBox = false;
 
+    // Toggle player control (true by default)
+    private bool isPlayerControlEnabled = true;
 
     // stored objects
     private SplineContainer spline;
@@ -97,11 +99,22 @@ public class Player : MonoBehaviour
     
     private void HandleInput()
     {
+        // If isPlayerControlEnabled is set to false, we just exit the method. This is so we can enable/disable movement for ragdoll mode
+        if (!isPlayerControlEnabled) {
+            return;
+        }
+
         inputVector.x = Input.GetAxis("Horizontal");
         inputVector.y = Input.GetAxis("Vertical");
         inputVector = inputVector.normalized;
         jumpInput = Input.GetButtonDown("Jump");
         gooflingInput = Input.GetButtonDown("Fire1"); // Changed the button for the goo-fling to the "Shift" key
+    }
+
+    // Public method to enable or disable player control
+    public void SetPlayerControlEnabled(bool enabled)
+    {
+        isPlayerControlEnabled = enabled;
     }
 
     private void DisableJoint()
