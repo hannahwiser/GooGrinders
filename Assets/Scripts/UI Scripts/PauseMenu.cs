@@ -34,5 +34,12 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void BackToGame()
+    {
+        Time.timeScale = 1;
+        currentlyPaused = false;
+        anim.Play("PauseFadeOut");
+    }
+
     
 }
