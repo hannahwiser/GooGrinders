@@ -28,6 +28,16 @@ public class ScoreHUD : MonoBehaviour
         currentString[1] = temp[temp.Length - 3];
         currentString[0] = temp[temp.Length - 4];
 
+        StartCoroutine(blinkHUD());
+    }
+
+    IEnumerator blinkHUD()
+    {
+        numbers[0].SetText("");
+        numbers[1].SetText(""); 
+        numbers[2].SetText("");
+        numbers[3].SetText("");
+        yield return new WaitForSeconds(.1f);
         SetGUI(currentString);
     }
 
