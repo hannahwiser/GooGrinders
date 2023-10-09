@@ -21,11 +21,13 @@ public class PauseMenu : MonoBehaviour
         {
             if (!currentlyPaused)
             {
+                Time.timeScale = 0;
                 currentlyPaused = true;
                 anim.Play("PauseFadeIn");
             }
             else
             {
+                Time.timeScale = 1;
                 currentlyPaused = false;
                 anim.Play("PauseFadeOut");
             }
