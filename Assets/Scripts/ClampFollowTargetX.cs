@@ -17,6 +17,7 @@ public class ClampFollowTargetX : MonoBehaviour
     private Transform playerTransform;
     private Transform followTargetTransform;
     private float minX;
+    private float initialX;
 
     // Offset to prevent immediate clamping when the game starts
     public float minXOffset = 1.0f;
@@ -34,6 +35,8 @@ public class ClampFollowTargetX : MonoBehaviour
 
         // Initialize minX based on the initial player position + an offset
         minX = playerTransform.position.x + minXOffset;
+
+        initialX = transform.position.x;
     }
 
     void Update()
@@ -59,5 +62,10 @@ public class ClampFollowTargetX : MonoBehaviour
         Vector3 newPosition = followTargetTransform.position;
         newPosition.x = newX;
         followTargetTransform.position = newPosition;
+    }
+
+    public void ResetPosition()
+    {
+        minX = initialX + minXOffset;
     }
 }

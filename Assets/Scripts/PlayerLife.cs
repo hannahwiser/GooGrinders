@@ -20,9 +20,19 @@ public class PlayerLife : MonoBehaviour
     public GameObject sporetParent;
 
     // reference the ragdoll script attached to the player
-    public RagdollController ragdollController;
+    //public RagdollController ragdollController;
     // reference the Player script
     private Player playerScript;
+
+    // reference to ClampFollowTargetX script
+    private ClampFollowTargetX clampFollowTargetX;
+
+    void Start()
+    {
+        // get a reference to the Player script on the player GameObject
+        playerScript = GetComponent<Player>();
+        clampFollowTargetX = GetComponentInChildren<ClampFollowTargetX>();
+    }
 
     void Update()
     {
@@ -50,13 +60,13 @@ public class PlayerLife : MonoBehaviour
     void Die()
     {
         // enable ragdoll physics
-        ragdollController.EnableRagdoll();
+        //ragdollController.EnableRagdoll();
 
-        // disable player control 
+        // disable player control
         playerScript.SetPlayerControlEnabled(false);
 
         // respawn after a delay
-        Invoke(nameof(Respawn), 5.0f);
+        Invoke(nameof(Respawn), 1.0f);
         //Invoke(nameof(ReloadLevel), 1.3f);
 
         dead = true;
@@ -65,13 +75,19 @@ public class PlayerLife : MonoBehaviour
 
     void Respawn()
     {
+        // reset ClampFollowTargetX
+        if (clampFollowTargetX != null)
+        {
+            clampFollowTargetX.ResetPosition();
+        }
+
         // teleport the player to the spawn point
         transform.position = spawnPoint.position;
 
         // disable ragdoll mode
-        ragdollController.DisableRagdoll();
+        //ragdollController.DisableRagdoll();
 
-        // Re-enable player control 
+        // Re-enable player control
         playerScript.SetPlayerControlEnabled(true);
 
         dead = false;

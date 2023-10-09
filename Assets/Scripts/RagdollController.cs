@@ -1,7 +1,7 @@
 /**
  * File: RagdollController
  * Programmer: Sagar Patel
- * Description: Simple ragdoll script so the player can go into ragdoll mode when he hits a deadly object. 
+ * Description: Simple ragdoll script so the player can go into ragdoll mode when he hits a deadly object.
  * Make sure to attach all the rigidbodies of Sporet's body to the "bodyParts" array in the RagdollController component
  * Date: Oct 8, 2023
  */
