@@ -29,8 +29,15 @@ public class PlayerLife : MonoBehaviour
     public CinemachineVirtualCamera virtualCamera;
     private Vector3 initialCameraPosition;
 
+    // reference to GoonamiController script
+    public GoonamiController goonamiController;
+    public AudioSource goonamiDeathSound;
+
     void Start()
     {
+        // find the GoonamiController script
+        goonamiController = FindObjectOfType<GoonamiController>();
+
         // get a reference to the Player script on the player GameObject
         playerScript = GetComponent<Player>();
         clampFollowTargetX = GetComponentInChildren<ClampFollowTargetX>();
@@ -48,6 +55,23 @@ public class PlayerLife : MonoBehaviour
         if (Input.GetKey(KeyCode.G))
         {
             SceneManager.LoadScene(0);
+        }
+
+        // check if the Goonami fog's X position > the player's X position
+        if (
+            goonamiController != null
+            && transform.position.x < goonamiController.transform.position.x
+            && !dead
+        )
+        {
+            // play the Goonami death sound
+            if (goonamiDeathSound != null)
+            {
+                goonamiDeathSound.Play();
+            }
+
+            Debug.Log("Player was caught by the goo-nami.");
+            Die();
         }
     }
 
@@ -93,6 +117,12 @@ public class PlayerLife : MonoBehaviour
         if (clampFollowTargetX != null)
         {
             clampFollowTargetX.ResetPosition();
+        }
+
+        // reset the Goo-nami's position
+        if (goonamiController != null)
+        {
+            goonamiController.ResetPositionToStart();
         }
 
         // set the player's position to the spawn point
