@@ -12,7 +12,6 @@ public class RailMeshGen : MonoBehaviour
     private SplineContainer splineContainer;
 
     private int splineIndex = 0;
-    private float time = 0;
     public float width = 1;
     public int resolution = 10;
 

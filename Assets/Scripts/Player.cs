@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     // Toggle GUI Box
     [SerializeField] private bool enableDebuggingBox = false;
 
-    // Toggle player control (true by default)
+// Toggle player control (true by default)
     private bool isPlayerControlEnabled = true;
 
     // stored objects
@@ -19,15 +19,16 @@ public class Player : MonoBehaviour
     private Collider splineCollider;
     public Transform cameraObj;
     public Transform model;
+    private Collider playerCollider;
     public ParticleSystem tempFlingParticle;
     //deprecated
     public Vector3 playerVel = Vector3.zero;
-    private float storedSign = 0;
     
 
     //Inputs
     public Vector2 inputVector = Vector2.zero;
     public bool jumpInput = false;
+    public bool jumpInputRelease = false;
     private bool gooflingInput = false;
     //rigid body
     public ConfigurableJoint joint;
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
     public AudioSource jump;
     public AudioSource land;
 
+
     //
     public Transform spawnPoint;
     public GameObject sporetParent;
@@ -61,6 +63,8 @@ public class Player : MonoBehaviour
     //private NativeSpline native;
     void Start()
     {
+        if(!playerCollider)
+            playerCollider = GetComponent<Collider>();
         if(!rb)
             rb = GetComponent<Rigidbody>();
         //get the camera object pls :)
@@ -95,13 +99,12 @@ public class Player : MonoBehaviour
         transform.position = (Vector3)point;
 
         //replace this when we get proper gravity 
-        storedSign = -1;
     }
 
     
     private void HandleInput()
     {
-        // If isPlayerControlEnabled is set to false, we just exit the method. This is so we can enable/disable movement for ragdoll mode
+// If isPlayerControlEnabled is set to false, we just exit the method. This is so we can enable/disable movement for ragdoll mode
         if (!isPlayerControlEnabled) {
             return;
         }
@@ -109,7 +112,8 @@ public class Player : MonoBehaviour
         inputVector.x = Input.GetAxis("Horizontal");
         inputVector.y = Input.GetAxis("Vertical");
         inputVector = inputVector.normalized;
-        jumpInput = Input.GetButtonDown("Jump");
+        jumpInput = Input.GetButton("Jump");
+        jumpInputRelease = Input.GetButtonUp("Jump");
         gooflingInput = Input.GetButtonDown("Fire1"); // Changed the button for the goo-fling to the "Shift" key
     }
 
@@ -148,21 +152,21 @@ public class Player : MonoBehaviour
     }
     // Update is called once per frame
     Vector3 lastNearestPoint =Vector3.zero;
-    private bool toggledBelowRail = false;
     private void Update() {
         HandleInput();
         //polish this pls :)
         Debug.DrawRay(transform.position,jumpUpVector * 3,Color.blue);
         if(jumpInput && OnRail)
         {
-            jump.time = .1f;
-            jump.PlayOneShot(jump.clip);
-            splineCollider.enabled = false;
-            HandleJump(jumpUpVector,5);
+            
+            //jump.time = .1f;
+            //jump.PlayOneShot(jump.clip);
+            //splineCollider.enabled = false;
+            //HandleJump(jumpUpVector,5);
             //HandleJump(Vector3.up,1);
         }
         
-        if(gooflingInput && OnRail && !BelowRail && gooflingCharge >0)
+        if(jumpInputRelease && OnRail)// gooflingInput && !BelowRail && gooflingCharge >0)
         {
             jump.time = .1f;
             jump.Play();
@@ -178,11 +182,9 @@ public class Player : MonoBehaviour
         //I intended to split it into multiple functions
         //however, its a bit too complex rn, so for the sake of cleaning it up its all one function 
         //HandleInput();
-        toggledBelowRail = false;
         if(inputVector.y < 0)
         {
-            if(!BelowRail)
-            toggledBelowRail = true;
+           
             BelowRail = true;
         }
         if(inputVector.y > 0)
@@ -232,8 +234,7 @@ public class Player : MonoBehaviour
         {
             if(jumpRegroundCooldown >0)
                 jumpRegroundCooldown -= Time.fixedDeltaTime;
-            gooflingCharge = 0;
-            gooflingResetTimer = 0;
+            
             //transform.rotation = Quaternion.LookRotation(rb.velocity,Vector3.up);
             //reset the model's offset when in the air
             model.transform.localPosition = Vector3.zero;
@@ -288,7 +289,7 @@ public class Player : MonoBehaviour
             var prevCharge = gooflingCharge;
 
             //build charge when below the rail
-            if(BelowRail){
+            if(jumpInput){
                 gooflingCharge += Time.fixedDeltaTime ;
                 gooflingResetTimer = 2;
                 }
@@ -303,6 +304,10 @@ public class Player : MonoBehaviour
                 gooflingCharge -= Time.fixedDeltaTime * .9f;
             }
             gooflingCharge = Mathf.Clamp(gooflingCharge,0,1);
+            if(!jumpInput){
+                gooflingCharge = 0;
+                gooflingResetTimer = 0;
+            }
         }
         
         debugTime = time;
@@ -377,8 +382,8 @@ public class Player : MonoBehaviour
     }
     private int ticksWithoutRail = 0;
     private void LateUpdate() {
-        if(fakeObject && !OnRail)
-            transform.position = new Vector3(fakeObject.transform.position.x,transform.position.y,fakeObject.transform.position.z);
+        //if(fakeObject && !OnRail)
+            //transform.position = new Vector3(fakeObject.transform.position.x,transform.position.y,fakeObject.transform.position.z);
         if(fakeObject)
             if(Vector3.Distance(fakeJoint.connectedAnchor, fakeObject.transform.position) > 3)
             {
