@@ -2565,7 +2565,7 @@ Transform:
   - {fileID: 2057083012}
   - {fileID: 1956310815}
   - {fileID: 186936250}
-  - {fileID: 464784399}
+  - {fileID: 954137814}
   - {fileID: 2098356586}
   - {fileID: 222351113}
   - {fileID: 814907137}
@@ -3427,8 +3427,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262733536}
-  m_LocalRotation: {x: 0.019363953, y: 0, z: 0, w: 0.99981254}
-  m_LocalPosition: {x: -568.061, y: 134.37, z: -32.19}
+  m_LocalRotation: {x: 0.10214642, y: 0, z: 0, w: 0.9947694}
+  m_LocalPosition: {x: -568.061, y: 142.47, z: -45.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6251,84 +6251,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 814907137}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &464784396
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 464784399}
-  - component: {fileID: 464784398}
-  - component: {fileID: 464784397}
-  m_Layer: 0
-  m_Name: Gaseous Goo-nami Wave
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!114 &464784397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464784396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7683dd9a51fc49645b1ca6b9d876a9d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fogSpeed: 7
---- !u!114 &464784398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464784396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1fbb15bf92b84f40a1eb030765b5afe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parameters:
-    albedo: {r: 0, g: 1, b: 0.08852029, a: 1}
-    meanFreePath: 6.34
-    anisotropy: 0
-    volumeMask: {fileID: 0}
-    textureScrollingSpeed: {x: 0, y: 0, z: 0}
-    textureTiling: {x: 1, y: 1, z: 1}
-    positiveFade: {x: 0, y: 0, z: 0}
-    negativeFade: {x: 0, y: 0, z: 0}
-    m_EditorUniformFade: 0
-    m_EditorPositiveFade: {x: 0, y: 0, z: 0}
-    m_EditorNegativeFade: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedFade: 0
-    size: {x: 15, y: 400, z: 75}
-    invertFade: 0
-    distanceFadeStart: 10000
-    distanceFadeEnd: 10103.4
-    textureOffset: {x: 0, y: 0, z: 0}
-    falloffMode: 0
-  m_Version: 2
---- !u!4 &464784399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464784396}
-  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 1.7999847, y: -1.6000061, z: 192.04102}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 175279338}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &505429784
 GameObject:
@@ -11115,6 +11037,76 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &954137813
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 175279338}
+    m_Modifications:
+    - target: {fileID: 3031707214710328239, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676212050349319929, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336769, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_Name
+      value: Gaseous Goo-nami Wave
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.7999878
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.6000061
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 192.04102
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+--- !u!4 &954137814 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6623426360067336770, guid: 5cb07ce890c45e84a940d38a0aba13d1, type: 3}
+  m_PrefabInstance: {fileID: 954137813}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &956944090
 GameObject:
   m_ObjectHideFlags: 0
@@ -13069,7 +13061,7 @@ PrefabInstance:
     - target: {fileID: 3169610016060203800, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: goonamiController
       value: 
-      objectReference: {fileID: 464784397}
+      objectReference: {fileID: 0}
     - target: {fileID: 3169610016060203800, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: goonamiDeathSound
       value: 
@@ -13096,7 +13088,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3449293870546182630, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: CameraDistance
-      value: 32
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 3449293870546182630, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: VerticalArmLength
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 3692071820830033436, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13232,7 +13228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4349166327896600591, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: enableDebuggingBox
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4349166327896600591, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: horizontalSpeedLimit
@@ -13260,19 +13256,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5699021488352134533, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.495998
+      value: 3.7360005
       objectReference: {fileID: 0}
     - target: {fileID: 5699021488352134533, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.799999
+      value: -18
       objectReference: {fileID: 0}
     - target: {fileID: 5699021488352134533, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99981254
+      value: 0.9947694
       objectReference: {fileID: 0}
     - target: {fileID: 5699021488352134533, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.019363953
+      value: 0.10214642
       objectReference: {fileID: 0}
     - target: {fileID: 5699021488352134533, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: m_LocalRotation.y
