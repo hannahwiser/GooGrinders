@@ -3,7 +3,7 @@
  * Programmer: Sagar Patel
  * Description: Simple item collection script made using this video guide: https://www.youtube.com/watch?v=YQEq6Lkd69c
  * Date: Sept 19, 2023
- * 
+ *
  * Hi, I am Hannah and I'm gonna modify this script to give more points
  * for every Googorger. Each goo gorger will have a different amount of points.
  * Right now that'll be randomly assigned but we can do merit-based assignments
@@ -34,7 +34,7 @@ public class ItemCollector : MonoBehaviour
         {
             int amountToAdd = other.GetComponent<ItemCollector>().gooScore;
             Destroy(other.gameObject);
-            playerScore+= amountToAdd;
+            playerScore += amountToAdd;
             Debug.Log("Score: " + playerScore);
 
             // update the score in PlayerPrefs
@@ -43,8 +43,6 @@ public class ItemCollector : MonoBehaviour
             scoreHUDScript.SetScore(playerScore);
         }
     }
-
-
 
     private void OnApplicationQuit()
     {

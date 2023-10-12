@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class PlayerLife : MonoBehaviour
 {
@@ -17,21 +18,25 @@ public class PlayerLife : MonoBehaviour
 
     //hannah added this
     public Transform spawnPoint;
-    public GameObject sporetParent;
 
-    // reference the ragdoll script attached to the player
-    //public RagdollController ragdollController;
     // reference the Player script
     private Player playerScript;
 
     // reference to ClampFollowTargetX script
     private ClampFollowTargetX clampFollowTargetX;
 
+    // reference the Cinemachine Cam (so we can teleport it back to spawn)
+    public CinemachineVirtualCamera virtualCamera;
+    private Vector3 initialCameraPosition;
+
     void Start()
     {
         // get a reference to the Player script on the player GameObject
         playerScript = GetComponent<Player>();
         clampFollowTargetX = GetComponentInChildren<ClampFollowTargetX>();
+
+        // get the initial camera position
+        initialCameraPosition = virtualCamera.transform.position;
     }
 
     void Update()
@@ -46,48 +51,63 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Enemy Body"))
-    //    {
-    //        GetComponent<MeshRenderer>().enabled = false;
-    //        GetComponent<Rigidbody>().isKinematic = true;
-    //        GetComponent<PlayerMovement>().enabled = false;
-    //        Die();
-    //    }
-    //}
-
     void Die()
     {
-        // enable ragdoll physics
-        //ragdollController.EnableRagdoll();
-
         // disable player control
         playerScript.SetPlayerControlEnabled(false);
+
+        float decelerationForce = 4.0f;
+
+        // apply the deceleration force in the opposite direction of the player's current velocity
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(-rb.velocity.normalized * decelerationForce, ForceMode.Acceleration);
 
         // respawn after a delay
         Invoke(nameof(Respawn), 1.0f);
         //Invoke(nameof(ReloadLevel), 1.3f);
 
         dead = true;
-        Debug.Log("The player has died.");
+        Debug.Log("Die() method was called");
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Impact_Death") && !dead)
+        {
+            Debug.Log("Player died on impact.");
+            Die();
+        }
+        if (collision.gameObject.CompareTag("Spike_Death") && !dead)
+        {
+            Debug.Log("Player was impaled to death.");
+            Die();
+        }
     }
 
     void Respawn()
     {
+        // Disable Player.cs
+        playerScript.enabled = false;
+
         // reset ClampFollowTargetX
         if (clampFollowTargetX != null)
         {
             clampFollowTargetX.ResetPosition();
         }
 
-        // teleport the player to the spawn point
+        // set the player's position to the spawn point
         transform.position = spawnPoint.position;
 
-        // disable ragdoll mode
-        //ragdollController.DisableRagdoll();
+        // reset the player's velocity
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
 
-        // Re-enable player control
+        virtualCamera.transform.position = initialCameraPosition; // set initialCameraPosition to the original camera position
+
+        // re-enable Player.cs
+        playerScript.enabled = true;
+
+        // re-enable player control
         playerScript.SetPlayerControlEnabled(true);
 
         dead = false;

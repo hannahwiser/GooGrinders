@@ -8,13 +8,13 @@ public class InputDisplay : MonoBehaviour
     public GameObject right;
     public Transform cameraObj;
     private Transform parent;
+
     // Start is called before the first frame update
     void Start()
     {
         cameraObj = Camera.main.transform;
         parent = transform.parent;
         transform.parent = null;
-
     }
 
     // Update is called once per frame
@@ -25,17 +25,18 @@ public class InputDisplay : MonoBehaviour
         inputVector.y = Input.GetAxis("Vertical");
 
         transform.position = parent.position;
-        
-        Vector3 VelocityChange = cameraObj.forward * inputVector.y + cameraObj.right * inputVector.x;
+
+        Vector3 VelocityChange =
+            cameraObj.forward * inputVector.y + cameraObj.right * inputVector.x;
         VelocityChange.z = VelocityChange.y;
         VelocityChange.y = 0;
         left.SetActive(false);
         right.SetActive(false);
-        if(inputVector.x < 0)
+        if (inputVector.x < 0)
         {
             left.SetActive(true);
         }
-        if(inputVector.x > 0)
+        if (inputVector.x > 0)
         {
             right.SetActive(true);
         }
