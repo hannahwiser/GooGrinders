@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.Splines;
 using Unity.Mathematics;
 using System;
@@ -15,7 +16,7 @@ public class Player : MonoBehaviour
     private bool isPlayerControlEnabled = true;
 
     // stored objects
-    private SplineContainer spline;
+    public SplineContainer spline;
     private Collider splineCollider;
     public Transform cameraObj;
     public Transform model;
@@ -48,13 +49,14 @@ public class Player : MonoBehaviour
 
     public bool OnRail = true;
     public bool BelowRail = false;
+    public bool startAttatched = false;
     //HOPEFULLY prevent reattatching to the rail
     private float jumpRegroundCooldown = .2f;
 
     //audio assets
     public AudioSource jump;
     public AudioSource land;
-
+    
 
     //
     public Transform spawnPoint;
@@ -69,8 +71,19 @@ public class Player : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         //get the camera object pls :)
         cameraObj = Camera.main.transform;
-        //find the nearest spline object for a rail
-        if(!spline)
+        if(startAttatched)
+            AttatchToRail();
+        else
+        {
+            FindInitialSpline();
+            OnRail = false;
+        }
+
+    }
+
+    private void FindInitialSpline()
+    {
+          if(!spline)
         {
             GameObject[] m_SplineContainer = GameObject.FindGameObjectsWithTag("Rail");
             Vector3 nearest = Vector3.positiveInfinity;
@@ -92,16 +105,21 @@ public class Player : MonoBehaviour
             }
         splineCollider = spline.GetComponent<Collider>();
         splineCollider.enabled = false;
+    }
+
+
+
+    private void AttatchToRail()
+    {
+        FindInitialSpline();
+        splineCollider = spline.GetComponent<Collider>();
+        splineCollider.enabled = false;
         float outTime = 0;
         float3 point = 0;
         using var gay = new NativeSpline(spline.Spline, spline.transform.localToWorldMatrix);
         float3 balls = SplineUtility.GetNearestPoint(gay, transform.position,out point,out outTime);
         transform.position = (Vector3)point;
-
-        //replace this when we get proper gravity 
     }
-
-    
     private void HandleInput()
     {
 // If isPlayerControlEnabled is set to false, we just exit the method. This is so we can enable/disable movement for ragdoll mode
@@ -413,6 +431,8 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if(jumpInput)
+        Handles.Label(transform.position, "HOLDING SPACEBAR");
         if(fakeObject){
             Gizmos.DrawSphere(fakeObject.transform.position,.5f);
             Gizmos.DrawSphere(transform.position + Vector3.down,.5f);
