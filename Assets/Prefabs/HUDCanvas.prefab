@@ -277,6 +277,7 @@ MonoBehaviour:
   - {fileID: 3690740265490577319}
   - {fileID: 3690740265332558131}
   currentString: 0000000000000000
+  chargeAnim: {fileID: 3690740265385617563}
 --- !u!1 &3690740265417923389
 GameObject:
   m_ObjectHideFlags: 0

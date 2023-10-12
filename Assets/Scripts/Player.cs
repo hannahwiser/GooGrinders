@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEngine.Splines;
 using Unity.Mathematics;
 using System;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
@@ -63,12 +64,16 @@ public class Player : MonoBehaviour
     //audio assets
     public AudioSource jump;
     public AudioSource land;
+    public AudioSource charge;
 
     //
     public Transform spawnPoint;
     public GameObject sporetParent;
 
     //private NativeSpline native;
+
+    public ScoreHUD GUIScript;
+
     void Start()
     {
         if (!playerCollider)
@@ -210,14 +215,31 @@ public class Player : MonoBehaviour
             //HandleJump(Vector3.up,1);
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(ChargingJump());
+        }
+
         if (jumpInputRelease && OnRail) // gooflingInput && !BelowRail && gooflingCharge >0)
         {
+            GUIScript.FinishCharge();
+            charge.Stop();
             jump.time = .1f;
             jump.Play();
             splineCollider.enabled = false;
-            HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 2, 5));
+            HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
+        }
+    }
+
+    IEnumerator ChargingJump()
+    {
+        yield return new WaitForSeconds(.3f);
+        if (Input.GetKey(KeyCode.Space))
+        {
+            GUIScript.ChargeJump();
+            charge.Play();
         }
     }
 

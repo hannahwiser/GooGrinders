@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//this script manages the HUD in general
+//it doesnt just handle score it also plays the jump charge
 public class ScoreHUD : MonoBehaviour
 {
     public TextMeshProUGUI[] numbers = new TextMeshProUGUI[4];
     public char[] currentString = new char[4];
+    public Animator chargeAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -47,5 +50,14 @@ public class ScoreHUD : MonoBehaviour
         {
             numbers[i].SetText(numToDisplay[i].ToString());
         }
+    }
+
+    public void ChargeJump()
+    {
+        chargeAnim.Play("HUDChargeJump");
+    }
+    public void FinishCharge()
+    {
+        chargeAnim.Play("HUDRetractCharge");
     }
 }

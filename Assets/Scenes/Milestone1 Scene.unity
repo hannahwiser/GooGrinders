@@ -13199,9 +13199,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4349166327896600591, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: charge
+      value: 
+      objectReference: {fileID: 1073772693}
+    - target: {fileID: 4349166327896600591, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: BelowRail
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4349166327896600591, guid: b999676de9fb477448074fe1536b2017, type: 3}
+      propertyPath: GUIScript
+      value: 
+      objectReference: {fileID: 1048610263}
     - target: {fileID: 4349166327896600591, guid: b999676de9fb477448074fe1536b2017, type: 3}
       propertyPath: fakePrefab
       value: 
@@ -13371,6 +13379,11 @@ PrefabInstance:
 --- !u!82 &1073772692 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5347973040123408676, guid: b999676de9fb477448074fe1536b2017, type: 3}
+  m_PrefabInstance: {fileID: 1073772691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1073772693 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5957706031680636035, guid: b999676de9fb477448074fe1536b2017, type: 3}
   m_PrefabInstance: {fileID: 1073772691}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1087305946
