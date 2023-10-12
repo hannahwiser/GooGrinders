@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private Collider splineCollider;
     public Transform cameraObj;
     public Transform model;
-    private Collider playerCollider;
+    private SphereCollider playerCollider;
     public ParticleSystem tempFlingParticle;
     //deprecated
     public Vector3 playerVel = Vector3.zero;
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         if(!playerCollider)
-            playerCollider = GetComponent<Collider>();
+            playerCollider = GetComponent<SphereCollider>();
         if(!rb)
             rb = GetComponent<Rigidbody>();
         //get the camera object pls :)
@@ -250,6 +250,8 @@ public class Player : MonoBehaviour
 
         if(!OnRail)
         {
+            //player collider is offs
+            playerCollider.center = model.localPosition;//Vector3.down;
             if(jumpRegroundCooldown >0)
                 jumpRegroundCooldown -= Time.fixedDeltaTime;
             
@@ -298,7 +300,7 @@ public class Player : MonoBehaviour
             model.transform.localPosition = upVector * .5f;
             //this should be tweaked to allow turning around
             model.localRotation = Quaternion.LookRotation(tangentVector,upVector);
-            //model.transform.localPosition = BelowRail?-upVector * .5f:upVector * .5f;
+            playerCollider.center = BelowRail?-upVector * .5f:upVector * .5f;
 
             joint.connectedAnchor = (Vector3)point;
             joint.axis = tangentVector;
