@@ -459,22 +459,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalSpeedLimit: 30
   enableDebuggingBox: 0
+  spline: {fileID: 0}
   cameraObj: {fileID: 0}
   model: {fileID: 6157816382809979098}
   tempFlingParticle: {fileID: 6157816382669349964}
   playerVel: {x: 0, y: 0, z: 0}
   inputVector: {x: 0, y: 0}
   jumpInput: 0
+  jumpInputRelease: 0
   joint: {fileID: 6157816381686486945}
   rb: {fileID: 0}
-  fakePrefab: {fileID: 0}
+  fakePrefab: {fileID: 3259586296112419545, guid: 4c4991e9c4406c945aa22ad4892963f2, type: 3}
   gooflingMultiplier: 5
   OnRail: 1
   BelowRail: 0
+  startAttatched: 0
   jump: {fileID: 0}
   land: {fileID: 0}
+  charge: {fileID: 0}
   spawnPoint: {fileID: 0}
   sporetParent: {fileID: 0}
+  GUIScript: {fileID: 0}
 --- !u!114 &5911124680368291334
 MonoBehaviour:
   m_ObjectHideFlags: 0

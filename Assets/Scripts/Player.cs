@@ -203,6 +203,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if(spline)
+        transform.parent = spline.transform;
         HandleInput();
         //polish this pls :)
         Debug.DrawRay(transform.position, jumpUpVector * 3, Color.blue);
@@ -252,7 +254,10 @@ public class Player : MonoBehaviour
         //HandleInput();
         if (inputVector.y < 0)
         {
+            
+            
             BelowRail = true;
+            
         }
         if (inputVector.y > 0)
         {
@@ -382,7 +387,7 @@ public class Player : MonoBehaviour
 
         debugTime = time;
 
-        if (time < 0 || time > 1)
+        if (time < 0 || time > 1 )
         {
             FindNewRailCast();
             DisableJoint();
@@ -395,8 +400,9 @@ public class Player : MonoBehaviour
                 model.localPosition = Vector3.zero;
 
                 OnRail = false;
+                
+                jumpRegroundCooldown = .05f;
             }
-            jumpRegroundCooldown = .1f;
         }
         //the force for playermovement
         rb.AddForce(VelocityChange * 10, ForceMode.Force);
@@ -462,8 +468,8 @@ public class Player : MonoBehaviour
 
     private void LateUpdate()
     {
-        //if(fakeObject && !OnRail)
-        //transform.position = new Vector3(fakeObject.transform.position.x,transform.position.y,fakeObject.transform.position.z);
+        if(fakeObject && !OnRail)
+            transform.position = new Vector3(transform.position.x,transform.position.y,fakeObject.transform.position.z);
         if (fakeObject)
             if (Vector3.Distance(fakeJoint.connectedAnchor, fakeObject.transform.position) > 3)
             {
@@ -551,16 +557,19 @@ public class Player : MonoBehaviour
     {
         //reattatch the player to the rail
         //also set the spline to the new spline object
+        Debug.Log("COlliderD!" + other.collider.name);
         if (jumpRegroundCooldown <= 0)
             if (other.collider.tag == "Rail")
             {
                 spline = other.gameObject.GetComponent<SplineContainer>();
                 if (spline)
                 {
+                    
                     //renable the previous collider!!!
                     splineCollider.enabled = true;
                     splineCollider = spline.GetComponent<Collider>();
                     splineCollider.enabled = false;
+                    AttatchToRail();
                     EnableJoint();
                     OnRail = true;
                 }
@@ -575,6 +584,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        
         CheckCollider(other);
         if (other.gameObject.tag == "Death")
         {

@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.8603976, g: 0.09459869, b: 0, a: 1}
+    m_Value: {r: 1, g: 0.4245929, b: 0, a: 1}
   maxFogDistance:
     m_OverrideState: 0
     m_Value: 5000
@@ -54,7 +54,7 @@ MonoBehaviour:
     m_Value: 1
   albedo:
     m_OverrideState: 1
-    m_Value: {r: 0.32941175, g: 1, b: 0, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   globalLightProbeDimmer:
     m_OverrideState: 1
     m_Value: 1
@@ -109,7 +109,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.034
   scatter:
     m_OverrideState: 0
     m_Value: 0.558
@@ -148,9 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: 2570739014387599750}
-  - {fileID: 5278163209339315018}
   - {fileID: -6617890714938757896}
   - {fileID: -7885383685348694756}
+  - {fileID: 2994376737713374472}
 --- !u!114 &2570739014387599750
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -166,7 +166,7 @@ MonoBehaviour:
   active: 1
   skyType:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   cloudType:
     m_OverrideState: 0
     m_Value: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   fogType:
     m_OverrideState: 0
     m_Value: 0
---- !u!114 &5278163209339315018
+--- !u!114 &2994376737713374472
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,28 +191,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59b6606ef2548734bb6d11b9d160bc7e, type: 3}
-  m_Name: HDRISky
+  m_Script: {fileID: 11500000, guid: a81bcacc415a1f743bfdf703afc52027, type: 3}
+  m_Name: GradientSky
   m_EditorClassIdentifier: 
   active: 1
   rotation:
     m_OverrideState: 0
     m_Value: 0
   skyIntensityMode:
-    m_OverrideState: 1
-    m_Value: 2
+    m_OverrideState: 0
+    m_Value: 0
   exposure:
     m_OverrideState: 0
     m_Value: 0
   multiplier:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   upperHemisphereLuxValue:
-    m_OverrideState: 1
-    m_Value: 1.1551783
+    m_OverrideState: 0
+    m_Value: 1
   upperHemisphereLuxColor:
-    m_OverrideState: 1
-    m_Value: {x: 0.3696395, y: 0.42004326, z: 0.5}
+    m_OverrideState: 0
+    m_Value: {x: 0, y: 0, z: 0}
   desiredLuxValue:
     m_OverrideState: 0
     m_Value: 20000
@@ -225,81 +225,15 @@ MonoBehaviour:
   includeSunInBaking:
     m_OverrideState: 0
     m_Value: 0
-  hdriSky:
+  top:
     m_OverrideState: 1
-    m_Value: {fileID: 8900000, guid: 967875e44ac0ae14ba7f5a4081b4dce6, type: 3}
-  distortionMode:
-    m_OverrideState: 0
-    m_Value: 0
-  flowmap:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-  upperHemisphereOnly:
-    m_OverrideState: 0
-    m_Value: 1
-  scrollOrientation:
-    m_OverrideState: 0
-    m_Value:
-      mode: 1
-      customValue: 0
-      additiveValue: 0
-      multiplyValue: 1
-  scrollSpeed:
-    m_OverrideState: 0
-    m_Value:
-      mode: 1
-      customValue: 100
-      additiveValue: 0
-      multiplyValue: 1
-  enableBackplate:
-    m_OverrideState: 0
-    m_Value: 0
-  backplateType:
-    m_OverrideState: 0
-    m_Value: 0
-  groundLevel:
-    m_OverrideState: 0
-    m_Value: 0
-  scale:
-    m_OverrideState: 0
-    m_Value: {x: 32, y: 32}
-  projectionDistance:
-    m_OverrideState: 0
-    m_Value: 16
-  plateRotation:
-    m_OverrideState: 0
-    m_Value: 0
-  plateTexRotation:
-    m_OverrideState: 0
-    m_Value: 0
-  plateTexOffset:
-    m_OverrideState: 0
-    m_Value: {x: 0, y: 0}
-  blendAmount:
-    m_OverrideState: 0
-    m_Value: 0
-  shadowTint:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  pointLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
-  dirLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
-  rectLightShadow:
-    m_OverrideState: 0
-    m_Value: 0
-  m_SkyVersion: 1
-  enableDistortion:
-    m_OverrideState: 0
-    m_Value: 0
-  procedural:
-    m_OverrideState: 0
-    m_Value: 1
-  scrollDirection:
-    m_OverrideState: 0
-    m_Value: 0
-  m_ObsoleteScrollSpeed:
+    m_Value: {r: 1, g: 0.029988142, b: 0, a: 1}
+  middle:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0, b: 0.022346497, a: 1}
+  bottom:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  gradientDiffusion:
     m_OverrideState: 0
     m_Value: 1
