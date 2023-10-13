@@ -252,18 +252,19 @@ public class Player : MonoBehaviour
         //I intended to split it into multiple functions
         //however, its a bit too complex rn, so for the sake of cleaning it up its all one function
         //HandleInput();
-        if (inputVector.y < 0)
-        {
-            
-            
-            BelowRail = true;
-            
+        if(OnRail){
+            if (inputVector.y < 0)
+            {
+                if(!Physics.SphereCast(transform.position + jumpUpVector,.3f,Vector3.zero,out RaycastHit hit))
+                    BelowRail = true;
+                
+            }
+            if (inputVector.y > 0)
+            {
+                if(!Physics.SphereCast(transform.position - jumpUpVector,.3f,Vector3.zero,out RaycastHit hit))
+                    BelowRail = false;
+            }
         }
-        if (inputVector.y > 0)
-        {
-            BelowRail = false;
-        }
-
         MainState();
 
         // Limit horizontal movement speed
@@ -401,7 +402,7 @@ public class Player : MonoBehaviour
 
                 OnRail = false;
                 
-                jumpRegroundCooldown = .05f;
+                jumpRegroundCooldown = .2f;
             }
         }
         //the force for playermovement
@@ -558,7 +559,7 @@ public class Player : MonoBehaviour
         //reattatch the player to the rail
         //also set the spline to the new spline object
         Debug.Log("COlliderD!" + other.collider.name);
-        if (jumpRegroundCooldown <= 0)
+        if (jumpRegroundCooldown <= 0 || other.collider != splineCollider)
             if (other.collider.tag == "Rail")
             {
                 spline = other.gameObject.GetComponent<SplineContainer>();
@@ -569,6 +570,7 @@ public class Player : MonoBehaviour
                     splineCollider.enabled = true;
                     splineCollider = spline.GetComponent<Collider>();
                     splineCollider.enabled = false;
+                    transform.position = other.contacts[0].point;
                     AttatchToRail();
                     EnableJoint();
                     OnRail = true;
