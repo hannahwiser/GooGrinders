@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
             jump.time = .1f;
             jump.Play();
             splineCollider.enabled = false;
-            HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
+            HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
         }
@@ -235,7 +235,7 @@ public class Player : MonoBehaviour
 
     IEnumerator ChargingJump()
     {
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.2f);
         if (Input.GetKey(KeyCode.Space))
         {
             GUIScript.ChargeJump();
