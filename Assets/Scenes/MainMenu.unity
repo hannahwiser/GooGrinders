@@ -3139,6 +3139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mini_goo_gorger prefab (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3639515721672090432, guid: 4b22b316685d8b14b8eecf0e50c23b71, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4164133008112531962, guid: 4b22b316685d8b14b8eecf0e50c23b71, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -4444,6 +4448,10 @@ PrefabInstance:
     - target: {fileID: 3639515721672090432, guid: 4b22b316685d8b14b8eecf0e50c23b71, type: 3}
       propertyPath: m_Name
       value: mini_goo_gorger prefab (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639515721672090432, guid: 4b22b316685d8b14b8eecf0e50c23b71, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4164133008112531962, guid: 4b22b316685d8b14b8eecf0e50c23b71, type: 3}
       propertyPath: m_RootOrder
@@ -5895,6 +5903,10 @@ PrefabInstance:
     - target: {fileID: 3639515721672090432, guid: 4b22b316685d8b14b8eecf0e50c23b71, type: 3}
       propertyPath: m_Name
       value: mini_goo_gorger prefab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639515721672090432, guid: 4b22b316685d8b14b8eecf0e50c23b71, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4164133008112531962, guid: 4b22b316685d8b14b8eecf0e50c23b71, type: 3}
       propertyPath: m_RootOrder
