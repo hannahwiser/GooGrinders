@@ -57,7 +57,22 @@ public class ScoreHUD : MonoBehaviour
     {
         check = true;
         chargeAnim.Play("HUDChargeJump");
+        StartCoroutine(AmIStillCharging());
     }
+
+    public IEnumerator AmIStillCharging()
+    {
+        while (!check)
+        {
+            yield return new WaitForEndOfFrame();
+            if (!Input.GetKey(KeyCode.Space))
+            {
+                FinishCharge();
+                break;
+            }
+        }
+    }
+
     public void FinishCharge()
     {
         if (check)

@@ -444,10 +444,10 @@ public class Player : MonoBehaviour
                         splineCollider = hit.collider;
                         fakeObject.transform.position = hit.point;
 
-                        Debug.Log("found a new rail, baby: " + spline.name);
-                        Debug.Log(
-                            "Time is: " + time + ((time < 0 || time > 1) ? ", FUCK" : ", cool!")
-                        );
+                        //Debug.Log("found a new rail, baby: " + spline.name);
+                        //Debug.Log(
+                           // "Time is: " + time + ((time < 0 || time > 1) ? ", FUCK" : ", cool!")
+                        //);
                     }
                     else
                         Debug.Log("outside range, time is: " + time);
