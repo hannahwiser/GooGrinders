@@ -7,10 +7,9 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    //Speed limit
-    public float horizontalSpeedLimit = 30.0f;
 
     //Adjustable acceleration
+    public float acceleration = 10.0f;
 
     // Toggle GUI Box
     [SerializeField]
@@ -168,6 +167,12 @@ public class Player : MonoBehaviour
         isPlayerControlEnabled = enabled;
     }
 
+    // Public method to set OnRail status (for PlayerLife so that we don't spawn detatched)
+    public void SetPlayeOnRail(bool value)
+    {
+        OnRail = value;
+    }
+
     private void DisableJoint()
     {
         joint.xMotion = ConfigurableJointMotion.Free;
@@ -261,13 +266,6 @@ public class Player : MonoBehaviour
 
         MainState();
 
-        // Limit horizontal movement speed
-        Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-        if (horizontalVelocity.magnitude > horizontalSpeedLimit)
-        {
-            Vector3 clampedVelocity = horizontalVelocity.normalized * horizontalSpeedLimit;
-            rb.velocity = new Vector3(clampedVelocity.x, rb.velocity.y, clampedVelocity.z);
-        }
     }
 
     private float debugTime = 0;
