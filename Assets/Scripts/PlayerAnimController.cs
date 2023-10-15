@@ -13,7 +13,12 @@ public class PlayerAnimController : MonoBehaviour
     {
         animator.SetBool("OnRail", player.OnRail);
         if (player.BelowRail != prevBelowRail)
-            animator.SetTrigger("ToggleRail");
+        {
+            if(prevBelowRail)
+            animator.Play("BottomToTop");
+            else
+            animator.Play("TopToBottom");
+        }
 
         if (player.jumpInput)
             animator.SetTrigger("Jumpped");

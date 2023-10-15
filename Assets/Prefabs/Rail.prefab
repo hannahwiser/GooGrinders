@@ -337,8 +337,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splineContainer: {fileID: 3551661481823403230}
-  width: 1
+  radius: 1
   resolution: 10
+  pointDisplayCount: 10
+  pointDisplayScale: 0.5
+  filter: {fileID: 0}
   displayPoint1: {fileID: 0}
   displayPoint2: {fileID: 0}
   vertsP1:

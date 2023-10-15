@@ -7,9 +7,10 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    //Speed limit
+    public float horizontalSpeedLimit = 30.0f;
 
     //Adjustable acceleration
-    public float acceleration = 10.0f;
 
     // Toggle GUI Box
     [SerializeField]
@@ -167,12 +168,6 @@ public class Player : MonoBehaviour
         isPlayerControlEnabled = enabled;
     }
 
-    // Public method to set OnRail status (for PlayerLife so that we don't spawn detatched)
-    public void SetPlayeOnRail(bool value)
-    {
-        OnRail = value;
-    }
-
     private void DisableJoint()
     {
         joint.xMotion = ConfigurableJointMotion.Free;
@@ -208,6 +203,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if(spline)
+        transform.parent = spline.transform;
         HandleInput();
         //polish this pls :)
         Debug.DrawRay(transform.position, jumpUpVector * 3, Color.blue);
@@ -232,8 +229,7 @@ public class Player : MonoBehaviour
             jump.time = .1f;
             jump.Play();
             splineCollider.enabled = false;
-            //HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
-            HandleJump(new Vector3(2,5,0), Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
+            HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
         }
@@ -241,7 +237,7 @@ public class Player : MonoBehaviour
 
     IEnumerator ChargingJump()
     {
-        yield return new WaitForSeconds(.2f);
+        yield return new WaitForSeconds(.3f);
         if (Input.GetKey(KeyCode.Space))
         {
             GUIScript.ChargeJump();
@@ -256,17 +252,28 @@ public class Player : MonoBehaviour
         //I intended to split it into multiple functions
         //however, its a bit too complex rn, so for the sake of cleaning it up its all one function
         //HandleInput();
-        if (inputVector.y < 0)
-        {
-            BelowRail = true;
+        if(OnRail){
+            if (inputVector.y < 0)
+            {
+                if(!Physics.SphereCast(transform.position + jumpUpVector,.3f,Vector3.zero,out RaycastHit hit))
+                    BelowRail = true;
+                
+            }
+            if (inputVector.y > 0)
+            {
+                if(!Physics.SphereCast(transform.position - jumpUpVector,.3f,Vector3.zero,out RaycastHit hit))
+                    BelowRail = false;
+            }
         }
-        if (inputVector.y > 0)
-        {
-            BelowRail = false;
-        }
-
         MainState();
 
+        // Limit horizontal movement speed
+        Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        if (horizontalVelocity.magnitude > horizontalSpeedLimit)
+        {
+            Vector3 clampedVelocity = horizontalVelocity.normalized * horizontalSpeedLimit;
+            rb.velocity = new Vector3(clampedVelocity.x, rb.velocity.y, clampedVelocity.z);
+        }
     }
 
     private float debugTime = 0;
@@ -381,7 +388,7 @@ public class Player : MonoBehaviour
 
         debugTime = time;
 
-        if (time < 0 || time > 1)
+        if (time < 0 || time > 1 )
         {
             FindNewRailCast();
             DisableJoint();
@@ -394,8 +401,9 @@ public class Player : MonoBehaviour
                 model.localPosition = Vector3.zero;
 
                 OnRail = false;
+                
+                jumpRegroundCooldown = .2f;
             }
-            jumpRegroundCooldown = .1f;
         }
         //the force for playermovement
         rb.AddForce(VelocityChange * 10, ForceMode.Force);
@@ -445,13 +453,13 @@ public class Player : MonoBehaviour
                         splineCollider = hit.collider;
                         fakeObject.transform.position = hit.point;
 
-                        //Debug.Log("found a new rail, baby: " + spline.name);
-                        //Debug.Log(
-                           // "Time is: " + time + ((time < 0 || time > 1) ? ", FUCK" : ", cool!")
-                        //);
+                        Debug.Log("found a new rail, baby: " + spline.name);
+                        Debug.Log(
+                            "Time is: " + time + ((time < 0 || time > 1) ? ", FUCK" : ", cool!")
+                        );
                     }
-                    //else
-                        //Debug.Log("outside range, time is: " + time);
+                    else
+                        Debug.Log("outside range, time is: " + time);
                 }
             }
         }
@@ -461,8 +469,8 @@ public class Player : MonoBehaviour
 
     private void LateUpdate()
     {
-        //if(fakeObject && !OnRail)
-        //transform.position = new Vector3(fakeObject.transform.position.x,transform.position.y,fakeObject.transform.position.z);
+        if(fakeObject && !OnRail)
+            transform.position = new Vector3(transform.position.x,transform.position.y,fakeObject.transform.position.z);
         if (fakeObject)
             if (Vector3.Distance(fakeJoint.connectedAnchor, fakeObject.transform.position) > 3)
             {
@@ -550,16 +558,20 @@ public class Player : MonoBehaviour
     {
         //reattatch the player to the rail
         //also set the spline to the new spline object
-        if (jumpRegroundCooldown <= 0)
+        Debug.Log("COlliderD!" + other.collider.name);
+        if (jumpRegroundCooldown <= 0 || other.collider != splineCollider)
             if (other.collider.tag == "Rail")
             {
                 spline = other.gameObject.GetComponent<SplineContainer>();
                 if (spline)
                 {
+                    
                     //renable the previous collider!!!
                     splineCollider.enabled = true;
                     splineCollider = spline.GetComponent<Collider>();
                     splineCollider.enabled = false;
+                    transform.position = other.contacts[0].point;
+                    AttatchToRail();
                     EnableJoint();
                     OnRail = true;
                 }
@@ -574,6 +586,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
+        
         CheckCollider(other);
         if (other.gameObject.tag == "Death")
         {
