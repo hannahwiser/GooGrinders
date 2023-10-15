@@ -232,7 +232,8 @@ public class Player : MonoBehaviour
             jump.time = .1f;
             jump.Play();
             splineCollider.enabled = false;
-            HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
+            //HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
+            HandleJump(new Vector3(2,5,0), Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
         }
