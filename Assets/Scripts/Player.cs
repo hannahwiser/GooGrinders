@@ -449,7 +449,7 @@ public class Player : MonoBehaviour
                         //Debug.Log("found a new rail, baby: " + spline.name);
                         //Debug.Log(
                            // "Time is: " + time + ((time < 0 || time > 1) ? ", FUCK" : ", cool!")
-                        );
+                        //);
                     }
                     else
                         Debug.Log("outside range, time is: " + time);
