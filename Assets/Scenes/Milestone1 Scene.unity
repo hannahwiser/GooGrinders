@@ -24112,6 +24112,7 @@ GameObject:
   - component: {fileID: 1637732311}
   - component: {fileID: 1637732310}
   - component: {fileID: 1637732309}
+  - component: {fileID: 1637732314}
   m_Layer: 0
   m_Name: Spline C
   m_TagString: Rail
@@ -24907,6 +24908,34 @@ MonoBehaviour:
       m_Data: []
   m_Knots:
     m_KnotsLink: []
+--- !u!114 &1637732314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637732307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3ebf594fef9504fa20b3c3ce255d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splineContainer: {fileID: 1637732313}
+  width: 1
+  resolution: 10
+  displayPoint1: {fileID: 0}
+  displayPoint2: {fileID: 0}
+  vertsP1:
+  - {x: -197.5, y: 51.64778, z: 0}
+  - {x: -179.86533, y: 45.065895, z: 0.00000046709152}
+  - {x: -161.42456, y: 41.83806, z: -0.538433}
+  - {x: -142.6658, y: 42.43759, z: -1.1620358}
+  - {x: -127.430695, y: 42.04808, z: 8.931499}
+  - {x: -113.47473, y: 43.713608, z: 17.054495}
+  - {x: -105.70654, y: 50.250847, z: 1.2892876}
+  - {x: -87.70221, y: 50.177505, z: -0.045098722}
+  - {x: -68.91113, y: 49.061653, z: -0.0043898346}
+  - {x: -50.10791, y: 49.511482, z: -0.0000019213453}
 --- !u!1 &1642455040
 GameObject:
   m_ObjectHideFlags: 0
