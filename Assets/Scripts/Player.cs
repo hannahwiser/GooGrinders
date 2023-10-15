@@ -449,8 +449,8 @@ public class Player : MonoBehaviour
                            // "Time is: " + time + ((time < 0 || time > 1) ? ", FUCK" : ", cool!")
                         //);
                     }
-                    else
-                        Debug.Log("outside range, time is: " + time);
+                    //else
+                        //Debug.Log("outside range, time is: " + time);
                 }
             }
         }
