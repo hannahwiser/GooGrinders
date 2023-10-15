@@ -10,7 +10,6 @@ public class ScoreHUD : MonoBehaviour
     public TextMeshProUGUI[] numbers = new TextMeshProUGUI[4];
     public char[] currentString = new char[4];
     public Animator chargeAnim;
-    public bool check;
 
     // Start is called before the first frame update
     void Start()
@@ -55,30 +54,10 @@ public class ScoreHUD : MonoBehaviour
 
     public void ChargeJump()
     {
-        check = true;
         chargeAnim.Play("HUDChargeJump");
-        StartCoroutine(AmIStillCharging());
     }
-
-    public IEnumerator AmIStillCharging()
-    {
-        while (!check)
-        {
-            yield return new WaitForEndOfFrame();
-            if (!Input.GetKey(KeyCode.Space))
-            {
-                FinishCharge();
-                break;
-            }
-        }
-    }
-
     public void FinishCharge()
     {
-        if (check)
-        {
-            check = false;
-            chargeAnim.Play("HUDRetractCharge");
-        }
+        chargeAnim.Play("HUDRetractCharge");
     }
 }

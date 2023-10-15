@@ -140,8 +140,6 @@ public class PlayerLife : MonoBehaviour
         // re-enable player control
         playerScript.SetPlayerControlEnabled(true);
 
-        playerScript.SetPlayeOnRail(true);
-
         dead = false;
         Debug.Log("Player respawned.");
     }
