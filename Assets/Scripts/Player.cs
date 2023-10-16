@@ -203,8 +203,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(spline)
-        transform.parent = spline.transform;
+        if (spline)
+            transform.parent = spline.transform;
         HandleInput();
         //polish this pls :)
         Debug.DrawRay(transform.position, jumpUpVector * 3, Color.blue);
@@ -252,16 +252,30 @@ public class Player : MonoBehaviour
         //I intended to split it into multiple functions
         //however, its a bit too complex rn, so for the sake of cleaning it up its all one function
         //HandleInput();
-        if(OnRail){
+        if (OnRail)
+        {
             if (inputVector.y < 0)
             {
-                if(!Physics.SphereCast(transform.position + jumpUpVector,.3f,Vector3.zero,out RaycastHit hit))
+                if (
+                    !Physics.SphereCast(
+                        transform.position + jumpUpVector,
+                        .3f,
+                        Vector3.zero,
+                        out RaycastHit hit
+                    )
+                )
                     BelowRail = true;
-                
             }
             if (inputVector.y > 0)
             {
-                if(!Physics.SphereCast(transform.position - jumpUpVector,.3f,Vector3.zero,out RaycastHit hit))
+                if (
+                    !Physics.SphereCast(
+                        transform.position - jumpUpVector,
+                        .3f,
+                        Vector3.zero,
+                        out RaycastHit hit
+                    )
+                )
                     BelowRail = false;
             }
         }
@@ -388,7 +402,7 @@ public class Player : MonoBehaviour
 
         debugTime = time;
 
-        if (time < 0 || time > 1 )
+        if (time < 0 || time > 1)
         {
             FindNewRailCast();
             DisableJoint();
@@ -401,7 +415,7 @@ public class Player : MonoBehaviour
                 model.localPosition = Vector3.zero;
 
                 OnRail = false;
-                
+
                 jumpRegroundCooldown = .2f;
             }
         }
@@ -469,8 +483,12 @@ public class Player : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(fakeObject && !OnRail)
-            transform.position = new Vector3(transform.position.x,transform.position.y,fakeObject.transform.position.z);
+        if (fakeObject && !OnRail)
+            transform.position = new Vector3(
+                transform.position.x,
+                transform.position.y,
+                fakeObject.transform.position.z
+            );
         if (fakeObject)
             if (Vector3.Distance(fakeJoint.connectedAnchor, fakeObject.transform.position) > 3)
             {
@@ -500,8 +518,11 @@ public class Player : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        // I had to add this if/endif to fix build errors - Sagar
+#if UNITY_EDITOR
         if (jumpInput)
             Handles.Label(transform.position, "HOLDING SPACEBAR");
+#endif
         if (fakeObject)
         {
             Gizmos.DrawSphere(fakeObject.transform.position, .5f);
@@ -565,7 +586,6 @@ public class Player : MonoBehaviour
                 spline = other.gameObject.GetComponent<SplineContainer>();
                 if (spline)
                 {
-                    
                     //renable the previous collider!!!
                     splineCollider.enabled = true;
                     splineCollider = spline.GetComponent<Collider>();
@@ -586,7 +606,6 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        
         CheckCollider(other);
         if (other.gameObject.tag == "Death")
         {
