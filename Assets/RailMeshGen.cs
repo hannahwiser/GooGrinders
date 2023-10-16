@@ -66,8 +66,23 @@ public class RailMeshGen : MonoBehaviour
 
     private void OnEnable()
     {
-        filter.sharedMesh = new Mesh();
-        UpdateMesh();
+        // if the filter is null, attempt to get the MeshFilter component from this GameObject - Sagar
+        if (filter == null)
+        {
+            filter = GetComponent<MeshFilter>();
+        }
+        if (filter != null)
+        {
+            filter.sharedMesh = new Mesh();
+            UpdateMesh();
+        }
+        else
+        {
+            // MeshFilter component is not found.
+            Debug.LogError(
+                "The MeshFilter component could not be found. Make sure it's attached to this GameObject."
+            );
+        }
         Spline.Changed += CheckChange;
     }
 
