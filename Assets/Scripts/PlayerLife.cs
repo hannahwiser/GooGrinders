@@ -32,7 +32,7 @@ public class PlayerLife : MonoBehaviour
     // reference to GoonamiController script
     public GoonamiController goonamiController;
     public AudioSource goonamiDeathSound;
-    public float goonamiDeadzoneOffset = 5.0f;
+    public float goonamiDeadzoneOffset = 7.5f; // determines where the Goonami's deadzone is. It's sortof a barbaric quick and dirty way of doing this
 
     void Start()
     {

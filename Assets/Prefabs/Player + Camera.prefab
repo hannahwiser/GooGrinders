@@ -1333,6 +1333,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 6974848261172546046}
   goonamiController: {fileID: 0}
   goonamiDeathSound: {fileID: 5347973040123408676}
+  goonamiDeadzoneOffset: 7.5
 --- !u!114 &8964883977644907199
 MonoBehaviour:
   m_ObjectHideFlags: 0
