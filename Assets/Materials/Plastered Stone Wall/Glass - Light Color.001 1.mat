@@ -30,12 +30,13 @@ Material:
   - _DOUBLESIDED_ON
   - _ENABLE_FOG_ON_TRANSPARENT
   - _MASKMAP
+  - _MATERIAL_FEATURE_CLEAR_COAT
   - _NORMALMAP
   - _NORMALMAP_TANGENT_SPACE
   - _REFRACTION_SPHERE
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 1
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
@@ -161,7 +162,7 @@ Material:
     - _Anisotropy: 0
     - _BlendMode: 0
     - _BumpScale: 1
-    - _CoatMask: 0
+    - _CoatMask: 0.304
     - _CullMode: 0
     - _CullModeForward: 0
     - _Cutoff: 0.5
@@ -200,7 +201,7 @@ Material:
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
     - _InvTilingScale: 1
-    - _Ior: 1.03
+    - _Ior: 1.047
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
@@ -224,8 +225,8 @@ Material:
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 2
     - _Smoothness: 0.95
-    - _SmoothnessRemapMax: 0.90041137
-    - _SmoothnessRemapMin: 0
+    - _SmoothnessRemapMax: 0.9629801
+    - _SmoothnessRemapMin: 0.03701991
     - _SmoothnessTextureChannel: 0
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
@@ -243,7 +244,7 @@ Material:
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 1
-    - _TexWorldScale: 1
+    - _TexWorldScale: 3.8
     - _TexWorldScaleEmissive: 1
     - _Thickness: 0.689
     - _TransmissionEnable: 1

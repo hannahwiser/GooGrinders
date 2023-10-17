@@ -11,18 +11,34 @@ using UnityEngine;
 
 public class GoonamiController : MonoBehaviour
 {
-    public float fogSpeed = 1.0f;
+    // adjust the follow speed. The lower the number, the faster the goonami will follow (you want it to be a bit slow so that it feels more like a wave
+    public float followSpeed = 2.0f;
+    // The distance that the goonami will stay behind before it stops moving
+    public float xOffset = -18.0f;
 
     private Vector3 startPosition;
+    private Transform followTarget;
+    private Vector3 targetPosition;
+    private Vector3 velocity = Vector3.zero;
 
     void Start()
     {
         startPosition = transform.position;
+        // automatically find the object named "FollowTarget"
+        followTarget = GameObject.Find("FollowTarget").transform; 
     }
 
     void Update()
     {
-        transform.Translate(Vector3.right * fogSpeed * Time.deltaTime);
+        // calculate the target position behind the FollowTarget
+        targetPosition = new Vector3(followTarget.position.x + xOffset, transform.position.y, transform.position.z);
+
+        transform.position = Vector3.SmoothDamp(
+            transform.position,
+            targetPosition,
+            ref velocity,
+            followSpeed
+        );
     }
 
     public void ResetPositionToStart()

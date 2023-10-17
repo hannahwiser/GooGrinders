@@ -10,8 +10,6 @@ public class Player : MonoBehaviour
     //Speed limit
     public float horizontalSpeedLimit = 30.0f;
 
-    //Adjustable acceleration
-
     // Toggle GUI Box
     [SerializeField]
     private bool enableDebuggingBox = false;
@@ -166,6 +164,12 @@ public class Player : MonoBehaviour
     public void SetPlayerControlEnabled(bool enabled)
     {
         isPlayerControlEnabled = enabled;
+    }
+
+    // Public method to set OnRail status (for PlayerLife so that we don't spawn detatched)
+    public void SetPlayeOnRail(bool value)
+    {
+        OnRail = value;
     }
 
     private void DisableJoint()
