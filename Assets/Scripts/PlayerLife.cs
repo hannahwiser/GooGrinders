@@ -32,6 +32,7 @@ public class PlayerLife : MonoBehaviour
     // reference to GoonamiController script
     public GoonamiController goonamiController;
     public AudioSource goonamiDeathSound;
+    public float goonamiDeadzoneOffset = 5.0f;
 
     void Start()
     {
@@ -60,7 +61,7 @@ public class PlayerLife : MonoBehaviour
         // check if the Goonami fog's X position > the player's X position
         if (
             goonamiController != null
-            && transform.position.x < goonamiController.transform.position.x
+            && transform.position.x < goonamiController.transform.position.x + goonamiDeadzoneOffset
             && !dead
         )
         {
