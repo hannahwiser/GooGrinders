@@ -233,7 +233,8 @@ public class Player : MonoBehaviour
             jump.time = .1f;
             jump.Play();
             splineCollider.enabled = false;
-            HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
+            //HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
+            HandleJump(new Vector3(2, 5, 0), Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
         }
@@ -471,13 +472,13 @@ public class Player : MonoBehaviour
                         splineCollider = hit.collider;
                         fakeObject.transform.position = hit.point;
 
-                        Debug.Log("found a new rail, baby: " + spline.name);
-                        Debug.Log(
+                        /* Debug.Log("found a new rail, baby: " + spline.name); 
+                         Debug.Log(
                             "Time is: " + time + ((time < 0 || time > 1) ? ", FUCK" : ", cool!")
-                        );
+                        ); */
                     }
-                    else
-                        Debug.Log("outside range, time is: " + time);
+                    /*else
+                        Debug.Log("outside range, time is: " + time);*/
                 }
             }
         }
@@ -583,8 +584,8 @@ public class Player : MonoBehaviour
     {
         //reattatch the player to the rail
         //also set the spline to the new spline object
-        Debug.Log("COlliderD!" + other.collider.name);
-        if (jumpRegroundCooldown <= 0 || other.collider != splineCollider)
+        /* Debug.Log("COlliderD!" + other.collider.name);*/
+                    if (jumpRegroundCooldown <= 0 || other.collider != splineCollider)
             if (other.collider.tag == "Rail")
             {
                 spline = other.gameObject.GetComponent<SplineContainer>();

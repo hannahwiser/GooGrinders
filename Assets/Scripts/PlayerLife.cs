@@ -92,7 +92,7 @@ public class PlayerLife : MonoBehaviour
         //Invoke(nameof(ReloadLevel), 1.3f);
 
         dead = true;
-        Debug.Log("Die() method was called");
+        /* Debug.Log("Die() method was called"); */
     }
 
     void OnCollisionEnter(Collision collision)
