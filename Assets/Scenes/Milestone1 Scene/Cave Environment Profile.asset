@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   quality:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   enabled:
     m_OverrideState: 1
     m_Value: 1
@@ -23,14 +23,14 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   color:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  tint:
     m_OverrideState: 1
-    m_Value: {r: 0.8603976, g: 0.09459869, b: 0, a: 1}
-  maxFogDistance:
+    m_Value: {r: 0.3185749, g: 0, b: 1, a: 1}
+  tint:
     m_OverrideState: 0
-    m_Value: 5000
+    m_Value: {r: 0.0025007725, g: 1, b: 0, a: 1}
+  maxFogDistance:
+    m_OverrideState: 1
+    m_Value: 25000
   mipFogMaxMip:
     m_OverrideState: 0
     m_Value: 0.5
@@ -42,19 +42,19 @@ MonoBehaviour:
     m_Value: 1000
   baseHeight:
     m_OverrideState: 1
-    m_Value: 160
+    m_Value: 1800
   maximumHeight:
     m_OverrideState: 0
-    m_Value: 242.5
+    m_Value: 1800
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 700
+    m_Value: 1300
   enableVolumetricFog:
     m_OverrideState: 1
     m_Value: 1
   albedo:
     m_OverrideState: 1
-    m_Value: {r: 0.32941175, g: 1, b: 0, a: 1}
+    m_Value: {r: 0.8225136, g: 0, b: 1, a: 1}
   globalLightProbeDimmer:
     m_OverrideState: 1
     m_Value: 1
@@ -81,7 +81,7 @@ MonoBehaviour:
     m_Value: 64
   m_VolumetricFogBudget:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.25
   m_ResolutionDepthRatio:
     m_OverrideState: 1
     m_Value: 0.5
@@ -103,13 +103,13 @@ MonoBehaviour:
   active: 1
   quality:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
   threshold:
     m_OverrideState: 1
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.47
   scatter:
     m_OverrideState: 0
     m_Value: 0.558
@@ -130,7 +130,7 @@ MonoBehaviour:
     m_Value: 2
   m_HighQualityPrefiltering:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   m_HighQualityFiltering:
     m_OverrideState: 1
     m_Value: 1
@@ -196,14 +196,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   rotation:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 180
   skyIntensityMode:
     m_OverrideState: 1
-    m_Value: 2
-  exposure:
-    m_OverrideState: 0
     m_Value: 0
+  exposure:
+    m_OverrideState: 1
+    m_Value: -1.25
   multiplier:
     m_OverrideState: 1
     m_Value: 1
