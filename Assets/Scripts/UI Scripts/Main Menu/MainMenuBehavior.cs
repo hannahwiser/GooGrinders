@@ -19,11 +19,28 @@ public class MainMenuBehavior : MonoBehaviour
     public GameObject textObject;
     public AudioSource backgroundAudio;
 
+    public GameObject currentVial;
+
 
     void Start()
     {
         startButton.enabled = false;
         textObject.SetActive(false);
+    }
+
+    public void SetCurrentVial(GameObject vial)
+    {
+        currentVial = vial;
+    }
+
+    public void NullifyVial()
+    {
+        currentVial = null;
+    }
+
+    public GameObject CheckIfNull()
+    {
+        return currentVial;
     }
 
     void Update()
@@ -84,9 +101,10 @@ public class MainMenuBehavior : MonoBehaviour
         {
             Debug.Log("RUN");
             backgroundAudio.volume = timeCrunch;
-            timeCrunch-=.01f;
+            timeCrunch -= .01f;
             yield return new WaitForSeconds(.01f);
         }
         SceneManager.LoadScene(1);
     }
 }
+
