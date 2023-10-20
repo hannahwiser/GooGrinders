@@ -1737,6 +1737,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayObjects: []
   startButton: {fileID: 140327020}
+--- !u!4 &649153229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+  m_PrefabInstance: {fileID: 1200094701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &666290038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2266,6 +2271,7 @@ Transform:
   - {fileID: 1025053900}
   - {fileID: 1609877857}
   - {fileID: 144810660}
+  - {fileID: 649153229}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2517,6 +2523,75 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
   m_PrefabInstance: {fileID: 1197897347}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1200094701
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1133047101}
+    m_Modifications:
+    - target: {fileID: 202404059260452227, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310963036932828020, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_RootOrder
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.53693277
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.2017255
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7668193
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.288094
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -166.985
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 74.681
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987363475232244612, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 140.575
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760769388536502590, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_Name
+      value: Vial End Point
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607103365135830107, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
 --- !u!1001 &1208098331
 PrefabInstance:
   m_ObjectHideFlags: 0

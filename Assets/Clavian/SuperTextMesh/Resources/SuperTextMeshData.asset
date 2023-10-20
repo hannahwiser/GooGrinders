@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SuperTextMeshData
   m_EditorClassIdentifier: 
   textDataEditMode: 0
-  showEffectsFoldout: 0
+  showEffectsFoldout: 1
   showWavesFoldout: 0
   showJittersFoldout: 0
-  showDrawAnimsFoldout: 0
+  showDrawAnimsFoldout: 1
   showTextColorFoldout: 0
   showColorsFoldout: 0
   showGradientsFoldout: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
   showInlineFoldout: 1
   showDelaysFoldout: 0
   showVoicesFoldout: 0
-  showFontsFoldout: 1
+  showFontsFoldout: 0
   showSoundClipsFoldout: 0
   showAudioClipsFoldout: 0
   showQuadsFoldout: 0
