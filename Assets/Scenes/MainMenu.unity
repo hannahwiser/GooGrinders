@@ -20774,7 +20774,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 674215192021645760, guid: c72ed8071c231db45a6dd8ad91194702, type: 3}
       propertyPath: CompensateShapeAmount
-      value: 0.033
+      value: 0.684
       objectReference: {fileID: 0}
     - target: {fileID: 706251684195263393, guid: c72ed8071c231db45a6dd8ad91194702, type: 3}
       propertyPath: m_IsActive
