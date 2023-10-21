@@ -2065,10 +2065,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Science vial edit v3 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 7760769388536502590, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8582209558536589720, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2005381139}
+    - target: {fileID: 8715941163097710717, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_text
+      value: Antonina or Sanat
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
 --- !u!4 &144810660 stripped
@@ -9585,7 +9593,7 @@ PrefabInstance:
       objectReference: {fileID: 2005381139}
     - target: {fileID: 8715941163097710717, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
       propertyPath: m_text
-      value: Hannah L
+      value: Hannah L.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
@@ -10043,12 +10051,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7760769388536502590, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
       propertyPath: m_Name
-      value: Science vial edit v3 (24)
+      value: Hannah W Vial
       objectReference: {fileID: 0}
     - target: {fileID: 8582209558536589720, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2005381139}
+    - target: {fileID: 8715941163097710717, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_text
+      value: Hannah W.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
 --- !u!4 &1025053900 stripped
@@ -17614,6 +17626,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2005381139}
+    - target: {fileID: 8715941163097710717, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_text
+      value: Sagar
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
 --- !u!4 &1609877857 stripped
