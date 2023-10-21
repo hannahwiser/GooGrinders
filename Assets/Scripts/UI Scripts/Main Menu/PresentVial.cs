@@ -5,6 +5,7 @@ using UnityEngine;
 public class PresentVial : MonoBehaviour
 {
     public GameObject nameText;
+    public GameObject thisModel;
 
     public float lerpDuration;
 
@@ -17,6 +18,8 @@ public class PresentVial : MonoBehaviour
     public MainMenuBehavior mainScript;
 
     public float timeElapsed;
+
+    public Coroutine spinCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +44,7 @@ public class PresentVial : MonoBehaviour
             isRaised = true;
             nameText.SetActive(true);
             StartCoroutine(Lerp(myStartPos, endPoint.position, myStartRot, endPoint.rotation));
+            spinCoroutine = StartCoroutine(Spin());
         }
         else if (isRaised)
         {
@@ -50,10 +54,21 @@ public class PresentVial : MonoBehaviour
 
     public void ForceDown()
     {
+        StopCoroutine(spinCoroutine);
         isRaised = false;
         mainScript.NullifyVial();
         nameText.SetActive(false);
         StartCoroutine(Lerp(endPoint.position, myStartPos, endPoint.rotation, myStartRot));
+    }
+
+    public IEnumerator Spin()
+    {
+        while (true)
+        {
+            Debug.Log("Spinnin");
+            thisModel.transform.Rotate(new Vector3(0,1,0), 2f * Time.deltaTime / 1f);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public IEnumerator Lerp(Vector3 startPos, Vector3 endPos, Quaternion startRot, Quaternion endRot)
