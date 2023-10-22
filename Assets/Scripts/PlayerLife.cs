@@ -36,6 +36,8 @@ public class PlayerLife : MonoBehaviour
 
     // checkbox for if the level starts with a cutscene
     public bool levelStartsWithCutscene = true;
+    // store drag value of the player's Rigidbody
+    private float originalDrag;
 
     void Start()
     {
@@ -53,9 +55,12 @@ public class PlayerLife : MonoBehaviour
         {
             // disable player.cs so the player can't move
             playerScript.SetPlayerControlEnabled(false);
+            // save the original drag value and temporarily set it to 0.1 so we don't fall too fast, otherwise you can see outside the map
+            originalDrag = playerScript.GetComponent<Rigidbody>().drag;
+            playerScript.GetComponent<Rigidbody>().drag = 0.13f;
 
-            // enable controls after X seconds
-            StartCoroutine(EnablePlayerControlsAfterDelay(6.0f));
+            // enable controls after X seconds NOTE: If the game is paused or if the computer lags, the player will potentially be able to get out of the map, so fix this later
+            StartCoroutine(EnablePlayerControlsAfterDelay(7.0f));
         }
     }
 
@@ -165,7 +170,8 @@ public class PlayerLife : MonoBehaviour
         // Wait for the specified delay
         yield return new WaitForSeconds(delay);
         playerScript.SetPlayerControlEnabled(true);
-        
+        playerScript.GetComponent<Rigidbody>().drag = originalDrag;
+
         // set levelStartsWithCutscene to false after the first time
         levelStartsWithCutscene = false;
     }
