@@ -34,6 +34,9 @@ public class PlayerLife : MonoBehaviour
     public AudioSource goonamiDeathSound;
     public float goonamiDeadzoneOffset = 7.5f; // determines where the Goonami's deadzone is. It's sortof a barbaric quick and dirty way of doing this
 
+    // checkbox for if the level starts with a cutscene
+    public bool levelStartsWithCutscene = true;
+
     void Start()
     {
         // find the GoonamiController script
@@ -45,6 +48,15 @@ public class PlayerLife : MonoBehaviour
 
         // get the initial camera position
         initialCameraPosition = virtualCamera.transform.position;
+
+        if (levelStartsWithCutscene)
+        {
+            // disable player.cs so the player can't move
+            playerScript.SetPlayerControlEnabled(false);
+
+            // enable controls after X seconds
+            StartCoroutine(EnablePlayerControlsAfterDelay(6.0f));
+        }
     }
 
     void Update()
@@ -145,5 +157,16 @@ public class PlayerLife : MonoBehaviour
 
         dead = false;
         Debug.Log("Player respawned.");
+    }
+
+    // enable player controls after a delay
+    IEnumerator EnablePlayerControlsAfterDelay(float delay)
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
+        playerScript.SetPlayerControlEnabled(true);
+        
+        // set levelStartsWithCutscene to false after the first time
+        levelStartsWithCutscene = false;
     }
 }
