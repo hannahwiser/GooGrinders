@@ -4,6 +4,7 @@ using UnityEngine.Splines;
 using Unity.Mathematics;
 using System;
 using System.Collections;
+using Unity.Burst.Intrinsics;
 
 public class Player : MonoBehaviour
 {
@@ -274,12 +275,9 @@ public class Player : MonoBehaviour
             jump.time = .1f;
             jump.Play();
             splineCollider.enabled = false;
+            
             //HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
-<<<<<<< Updated upstream
-            HandleJump(new Vector3(2, 5, 0), Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 100));
-=======
-            HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
->>>>>>> Stashed changes
+            HandleJump((Vector3.up + jumpUpVector.normalized).normalized, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 8));
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
         }
@@ -595,6 +593,8 @@ public class Player : MonoBehaviour
     void HandleJump(Vector3 direction, float force)
     {
         PartiallyDisableJoint();
+        if(rb.velocity.y < 0)
+            rb.velocity = new Vector3(rb.velocity.x,0,rb.velocity.z);
         rb.AddForce(direction.normalized * (force), ForceMode.Impulse);
         transform.position += direction.normalized;
         model.transform.localPosition = Vector3.zero;
