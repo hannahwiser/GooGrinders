@@ -20,7 +20,6 @@ public class PulseGlow : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(interiorLight.intensity);
             if (currentTarget == highTarget)
             {
                 interiorLight.intensity+= .1f;
