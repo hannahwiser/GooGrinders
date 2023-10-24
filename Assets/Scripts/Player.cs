@@ -47,7 +47,8 @@ public class Player : MonoBehaviour
     private GameObject fakePrefab;
 
     private float gooflingCharge = 0;
-
+    // flag to track if goofling is charging
+    private bool isChargingGoofling = false;
     //time before the goofling starts to decay
     private float gooflingResetTimer = 0;
     public float gooflingMultiplier = 5;
@@ -212,42 +213,77 @@ public class Player : MonoBehaviour
         HandleInput();
         //polish this pls :)
         Debug.DrawRay(transform.position, jumpUpVector * 3, Color.blue);
-        if (jumpInput && OnRail)
-        {
-            //jump.time = .1f;
-            //jump.PlayOneShot(jump.clip);
-            //splineCollider.enabled = false;
-            //HandleJump(jumpUpVector,5);
-            //HandleJump(Vector3.up,1);
-        }
+        //if (jumpInput && OnRail)
+        //{
+        //jump.time = .1f;
+        //jump.PlayOneShot(jump.clip);
+        //splineCollider.enabled = false;
+        //HandleJump(jumpUpVector,5);
+        //HandleJump(Vector3.up,1);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isPlayerControlEnabled)
         {
-            StartCoroutine(ChargingJump());
-        }
+            if (OnRail)
+            {
+                if (inputVector.y < 0)
+                {
+                    if (
+                        !Physics.SphereCast(
+                            transform.position + jumpUpVector,
+                            .3f,
+                            Vector3.zero,
+                            out RaycastHit hit
+                        )
+                    )
+                        BelowRail = true;
+                }
+                if (inputVector.y > 0)
+                {
+                    if (
+                        !Physics.SphereCast(
+                            transform.position - jumpUpVector,
+                            .3f,
+                            Vector3.zero,
+                            out RaycastHit hit
+                        )
+                    )
+                        BelowRail = false;
+                }
+            }
 
-        if (jumpInputRelease && OnRail) // gooflingInput && !BelowRail && gooflingCharge >0)
-        {
-            GUIScript.FinishCharge();
-            charge.Stop();
-            jump.time = .1f;
-            jump.Play();
-            splineCollider.enabled = false;
-            //HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
-            HandleJump(new Vector3(2, 5, 0), Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
-            //HandleJump(Vector3.up,1);
-            tempFlingParticle.Play();
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isChargingGoofling = true;
+                StartCoroutine(ChargingJump());
+            }
+
+            if (jumpInputRelease && OnRail) // gooflingInput && !BelowRail && gooflingCharge >0)
+            {
+                isChargingGoofling = false;
+                GUIScript.FinishCharge();
+                charge.Stop();
+                jump.time = .1f;
+                jump.Play();
+                splineCollider.enabled = false;
+                //HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
+                HandleJump(new Vector3(2, 5, 0), Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 6));
+                //HandleJump(Vector3.up,1);
+                tempFlingParticle.Play();
+            }
         }
     }
 
     IEnumerator ChargingJump()
     {
         yield return new WaitForSeconds(.3f);
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && OnRail)
         {
             GUIScript.ChargeJump();
             charge.Play();
         }
+        isChargingGoofling = false;
     }
 
     private Vector3 jumpUpVector = Vector3.up;
