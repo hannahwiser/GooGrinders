@@ -2029,6 +2029,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Science vial edit v3 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 7760769388536502590, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8582209558536589720, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -9899,6 +9903,10 @@ PrefabInstance:
     - target: {fileID: 7760769388536502590, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
       propertyPath: m_Name
       value: Science vial edit v3 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760769388536502590, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8582209558536589720, guid: 6edd69fbb4e9e20438efb344d7a3b361, type: 3}
       propertyPath: m_Materials.Array.data[0]
