@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6157816381686486944, guid: 3699ef670f0e9ce41a0b313f60527003, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6157816381686486944, guid: 3699ef670f0e9ce41a0b313f60527003, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6774,6 +6774,11 @@ CapsuleCollider:
   m_Height: 0.19705653
   m_Direction: 1
   m_Center: {x: 0.02, y: 0.08636564, z: 0.053589117}
+--- !u!4 &380103284 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1754611878057632740, guid: f355da60777d10946920a8b633e6b316, type: 3}
+  m_PrefabInstance: {fileID: 971507208}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &383213735
 Mesh:
   m_ObjectHideFlags: 0
@@ -10473,7 +10478,7 @@ RectTransform:
   - {fileID: 1968471266}
   - {fileID: 1147348963}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -13671,7 +13676,7 @@ Transform:
   - {fileID: 1659079475}
   - {fileID: 482844852}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &893948573
 PrefabInstance:
@@ -14655,7 +14660,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1133047101}
     m_Modifications:
     - target: {fileID: 1037895263864156806, guid: f355da60777d10946920a8b633e6b316, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -14667,7 +14672,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fc3c627eff8d23143b8ee1d1bc24a3b1, type: 2}
     - target: {fileID: 1754611878057632740, guid: f355da60777d10946920a8b633e6b316, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1754611878057632740, guid: f355da60777d10946920a8b633e6b316, type: 3}
       propertyPath: m_LocalScale.x
@@ -14683,15 +14688,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1754611878057632740, guid: f355da60777d10946920a8b633e6b316, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.21
+      value: -1.2626858
       objectReference: {fileID: 0}
     - target: {fileID: 1754611878057632740, guid: f355da60777d10946920a8b633e6b316, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000047683716
+      value: 1.1913772
       objectReference: {fileID: 0}
     - target: {fileID: 1754611878057632740, guid: f355da60777d10946920a8b633e6b316, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.79
+      value: 0.8932686
       objectReference: {fileID: 0}
     - target: {fileID: 1754611878057632740, guid: f355da60777d10946920a8b633e6b316, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17123,8 +17128,9 @@ Transform:
   - {fileID: 46850947}
   - {fileID: 1173560855}
   - {fileID: 1858528441}
+  - {fileID: 380103284}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1136539143
 PrefabInstance:
@@ -23410,7 +23416,7 @@ Transform:
   - {fileID: 316829951}
   - {fileID: 393181399}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1285284620
 GameObject:
@@ -31245,7 +31251,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3502155044246794516, guid: 11e2a067e422d3645abd612fad963b6a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3502155044246794516, guid: 11e2a067e422d3645abd612fad963b6a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35328,7 +35334,7 @@ Transform:
   - {fileID: 317720417}
   - {fileID: 897485174}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2045297714
 PrefabInstance:
