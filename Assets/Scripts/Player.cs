@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
     //HOPEFULLY prevent reattatching to the rail
     private float jumpRegroundCooldown = .2f;
     public bool ForceEnablePlayerControl = false;
+
     //audio assets
     public AudioSource jump;
     public AudioSource land;
@@ -142,29 +143,33 @@ public class Player : MonoBehaviour
             out point,
             out outTime
         );
-        //model.localPosition = 
+        //model.localPosition =
         Vector3 upVector = spline.EvaluateUpVector(outTime);
         Vector3 tangent = spline.EvaluateTangent(outTime);
         playerCollider.center = BelowRail ? -upVector * .5f : upVector * .5f;
         model.localPosition = BelowRail ? -upVector * .5f : upVector * .5f;
-        
-        float _dot = Vector3.Dot(storedVelocity.normalized,tangent.normalized);
-        float _angle = Vector3.Angle(Vector3.right,tangent.normalized);
-        float _signedAngle = Vector3.SignedAngle(Vector3.right,tangent.normalized,Vector3.forward);
 
-        Vector3 flatVelocity = new Vector3(storedVelocity.x,0,storedVelocity.z);
+        float _dot = Vector3.Dot(storedVelocity.normalized, tangent.normalized);
+        float _angle = Vector3.Angle(Vector3.right, tangent.normalized);
+        float _signedAngle = Vector3.SignedAngle(
+            Vector3.right,
+            tangent.normalized,
+            Vector3.forward
+        );
+
+        Vector3 flatVelocity = new Vector3(storedVelocity.x, 0, storedVelocity.z);
         //this is just. taken from the sonic physics guide because i liked the way it worked
         //it feels good overall
-        switch(_angle)
+        switch (_angle)
         {
             case < 23f:
                 rb.velocity = flatVelocity.magnitude * tangent.normalized * Mathf.Sign(_dot);
                 Debug.Log("flat angle: " + _angle);
-            break;
+                break;
             //disabled for the time being. everything still works this code specifically just had lots of inconsistencies
             /*case < 45f:
                 
-                rb.velocity = (tangent.normalized * (storedVelocity.y * .5f * -Mathf.Sign(MathF.Sin(_signedAngle + 180))) * Mathf.Sign(_dot)) 
+                rb.velocity = (tangent.normalized * (storedVelocity.y * .5f * -Mathf.Sign(MathF.Sin(_signedAngle + 180))) * Mathf.Sign(_dot))
                 + flatVelocity * Mathf.Abs(_dot);
                 
                 Debug.Log("medium angle: " + _signedAngle);
@@ -172,16 +177,15 @@ public class Player : MonoBehaviour
             case < 360f:
                 rb.velocity = storedVelocity.magnitude * tangent.normalized * Mathf.Sign(_dot);
                 Debug.Log("big angle: " + _angle);
-            break;
-
+                break;
         }
 
         //rb.velocity = storedVelocity.magnitude * tangent.normalized * Mathf.Sign(_dot);
 
         //Debug.Log("landing dot product: " + _dot);
         //Debug.Log("landing angle: " + _angle);
-        Debug.DrawRay(transform.position,storedVelocity.normalized,Color.red,5f);
-        Debug.DrawRay(transform.position,tangent.normalized,Color.blue,5f);
+        Debug.DrawRay(transform.position, storedVelocity.normalized, Color.red, 5f);
+        Debug.DrawRay(transform.position, tangent.normalized, Color.blue, 5f);
 
         transform.position = (Vector3)point;
     }
@@ -375,7 +379,7 @@ public class Player : MonoBehaviour
             //transform.rotation = Quaternion.LookRotation(rb.velocity,Vector3.up);
             //reset the model's offset when in the air
             model.transform.localPosition = Vector3.zero;
-            
+
             splineCollider.enabled = true;
             BelowRail = false;
             PartiallyDisableJoint();
@@ -518,10 +522,10 @@ public class Player : MonoBehaviour
                         splineCollider = hit.collider;
                         fakeObject.transform.position = hit.point;
 
-                        // Debug.Log("found a new rail, baby: " + spline.name); 
+                        // Debug.Log("found a new rail, baby: " + spline.name);
                         // Debug.Log(
                         //    "Time is: " + time + ((time < 0 || time > 1) ? ", FUCK" : ", cool!")
-                        //); 
+                        //);
                     }
                     //else
                        // Debug.Log("outside range, time is: " + time);
@@ -625,12 +629,11 @@ public class Player : MonoBehaviour
         DrawText("Inputs: " + inputVector);
         DrawText("TicksWithoutRail: " + ticksWithoutRail);
         DrawText("Time: " + debugTime);
-        DrawText("Score: " + PlayerPrefs.GetInt("PlayerScore" ));
+        DrawText("Score: " + PlayerPrefs.GetInt("PlayerScore"));
     }
 
     private void CheckCollider(Collision other)
     {
-        
         //reattatch the player to the rail
         //also set the spline to the new spline object
         /* Debug.Log("COlliderD!" + other.collider.name);*/
@@ -649,7 +652,6 @@ public class Player : MonoBehaviour
                     AttatchToRail();
                     EnableJoint();
                     OnRail = true;
-                    
                 }
                 else
                 {
@@ -663,7 +665,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         CheckCollider(other);
-        
+
         if (other.gameObject.tag == "Death")
         {
             sporetParent.transform.position = spawnPoint.position;

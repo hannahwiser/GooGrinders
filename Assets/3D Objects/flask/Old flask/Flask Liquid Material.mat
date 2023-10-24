@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Flask Liquid Material
+  m_Shader: {fileID: 4800000, guid: 9fbe32b7f5f675b4a9fdf39b7d2a1b83, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Amplitude: 0.15
+    - _Freq: 15
+    - _Line: 0.0049
+    - _LineSmooth: 0.0179
+    - _RimPower: 0.54
+    m_Colors:
+    - _FoamColor: {r: 0.15555549, g: 1, b: 0, a: 0}
+    - _RimColor: {r: 0.0054884297, g: 0.058543254, b: 0, a: 1}
+    - _Tint: {r: 0.06477335, g: 0.6981132, b: 0, a: 1}
+    - _TopColor: {r: 0.22287232, g: 0.9150943, b: 0.082013145, a: 1}
+  m_BuildTextureStacks: []
