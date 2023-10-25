@@ -61,15 +61,7 @@ public class PlayerLife : MonoBehaviour
             // save the original drag value and temporarily set it to 0.1 so we don't fall too fast, otherwise you can see outside the map
             originalDrag = playerScript.GetComponent<Rigidbody>().drag;
             playerScript.GetComponent<Rigidbody>().drag = 0.13f;
-
-            if (cutsceneAudioSource != null)
-            {
-                AudioSource audioSource = cutsceneAudioSource.GetComponent<AudioSource>();
-                if (audioSource != null)
-                {
-                    audioSource.Play();
-                }
-            }
+            cutsceneAudioSource.GetComponent<AudioSource>().Play();
 
             // enable controls after X seconds NOTE: If the game is paused or if the computer lags, the player will potentially be able to get out of the map, so fix this later
             StartCoroutine(EnablePlayerControlsAfterDelay(7.0f));
