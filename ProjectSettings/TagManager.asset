@@ -9,6 +9,7 @@ TagManager:
   - Raycast Target
   - Impact_Death
   - Spike_Death
+  - HUD
   layers:
   - Default
   - TransparentFX

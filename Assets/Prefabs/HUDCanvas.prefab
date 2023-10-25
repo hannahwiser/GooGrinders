@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 3690740265385617562}
   m_Layer: 5
   m_Name: HUDCanvas
-  m_TagString: Untagged
+  m_TagString: HUD
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -278,6 +278,7 @@ MonoBehaviour:
   - {fileID: 3690740265332558131}
   currentString: 0000000000000000
   chargeAnim: {fileID: 3690740265385617563}
+  check: 0
 --- !u!1 &3690740265417923389
 GameObject:
   m_ObjectHideFlags: 0
