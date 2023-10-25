@@ -26,6 +26,7 @@ public class ItemCollector : MonoBehaviour
     {
         gooScore = Random.Range(100, 500);
         playerScore = PlayerPrefs.GetInt("PlayerScore", 0);
+        scoreHUDScript = GameObject.FindGameObjectWithTag("HUD").GetComponent<ScoreHUD>();
     }
 
     private void OnTriggerEnter(Collider other)
