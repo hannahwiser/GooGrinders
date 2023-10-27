@@ -89,8 +89,7 @@ public class MainMenuBehavior : MonoBehaviour
     public void NextLevel()
     {
         anim.Play("MainMenuFadeOut");
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
-        asyncLoad.allowSceneActivation = false;
+        
         StartCoroutine(WaitForAnimation());
     }
 
