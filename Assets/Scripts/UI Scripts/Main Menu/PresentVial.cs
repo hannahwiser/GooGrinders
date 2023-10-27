@@ -81,5 +81,7 @@ public class PresentVial : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+        gameObject.transform.position = endPos;
+        gameObject.transform.rotation = endRot;
     }
 }
