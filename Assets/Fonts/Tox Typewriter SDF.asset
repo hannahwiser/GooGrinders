@@ -2692,6 +2692,7 @@ Material:
   m_Name: Tox Typewriter SDF Material
   m_Shader: {fileID: 4800000, guid: 68e6db2ebdc24f95958faec2be5558d6, type: 3}
   m_ValidKeywords:
+  - BEVEL_ON
   - GLOW_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -2744,7 +2745,7 @@ Material:
     - _GlowOuter: 0.266
     - _GlowPower: 0.431
     - _GradientScale: 6
-    - _LightAngle: 6.23
+    - _LightAngle: 6.28
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
     - _OutlineSoftness: 0

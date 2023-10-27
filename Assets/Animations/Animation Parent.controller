@@ -125,7 +125,7 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: Flask pickup time
 --- !u!1102 &1511048263300825774
 AnimatorState:
   serializedVersion: 6
@@ -151,7 +151,7 @@ AnimatorState:
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: Flask pickup time
 --- !u!1107 &3822915809753471335
 AnimatorStateMachine:
   serializedVersion: 6
@@ -166,7 +166,7 @@ AnimatorStateMachine:
     m_Position: {x: 200, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1511048263300825774}
-    m_Position: {x: 235, y: 65, z: 0}
+    m_Position: {x: 240, y: 60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2244161032898262847}
     m_Position: {x: 270, y: 130, z: 0}

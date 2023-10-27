@@ -26,10 +26,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Amplitude: 0.15
+    - _Amplitude: 0.029
     - _Freq: 15
     - _Line: 0.0049
-    - _LineSmooth: 0.0179
+    - _LineSmooth: 0.1
     - _RimPower: 0.54
     m_Colors:
     - _FoamColor: {r: 0.15555549, g: 1, b: 0, a: 0}
