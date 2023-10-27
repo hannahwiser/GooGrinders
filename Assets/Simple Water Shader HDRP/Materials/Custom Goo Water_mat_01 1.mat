@@ -146,13 +146,13 @@ Material:
     m_Floats:
     - Boolean_ebdbf4f311404f5fb2cd2b6927a304c1: 0
     - Vector1_07c93c7e34df4237b5dd57255d7f857a: 0.02
-    - Vector1_3849afd7c2eb484893a68ec694cc75b3: 6.28
+    - Vector1_3849afd7c2eb484893a68ec694cc75b3: 13
     - Vector1_4fa7de5de5304ba799341f5b9bbbf2c0: 0.5
     - Vector1_6f56a0970372485390c6587863c2374e: 10.5
-    - Vector1_7ab1e13367ff4c17b0a4403edd3d9450: 0.1
+    - Vector1_7ab1e13367ff4c17b0a4403edd3d9450: 0.25
     - Vector1_a3027f23b37c4da89592d406468d7aa8: 1
     - Vector1_c0da6a80189144e5a45df6c62b281d57: 1
-    - Vector1_d70d07d7ef17405a961168abe8e24a3a: 3.3
+    - Vector1_d70d07d7ef17405a961168abe8e24a3a: 30
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
