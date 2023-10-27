@@ -73,7 +73,6 @@ public class Player : MonoBehaviour
     //private NativeSpline native;
     private Vector3 storedVelocity = Vector3.zero;
     public ScoreHUD GUIScript;
-
     void Start()
     {
         if (!playerCollider)

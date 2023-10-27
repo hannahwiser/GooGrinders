@@ -10,6 +10,12 @@ public class PlayerAnimController : MonoBehaviour
     private bool prevBelowRail = false;
     private bool isCharging = false;
     private float chargeStartTime = 0.0f;
+    private PlayerLife playerLife;
+
+    private void Awake() {
+        if(!playerLife)
+            playerLife= GetComponent<PlayerLife>();
+    }
 
     void Update()
     {
@@ -61,5 +67,12 @@ public class PlayerAnimController : MonoBehaviour
         }
         animator.SetFloat("MovementInput", player.inputVector.x + .5f);
         prevBelowRail = player.BelowRail;
+
+        if(playerLife.dead)
+        {
+            animator.Play("Landing");
+            animator.speed = 0;
+        }
+        
     }
 }

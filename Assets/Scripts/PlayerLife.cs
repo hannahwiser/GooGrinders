@@ -13,8 +13,9 @@ using Cinemachine;
 
 public class PlayerLife : MonoBehaviour
 {
-    bool dead = false;
+    public bool dead = false;
     public float deathLevelY = -7.5f;
+    public PlayerAnimController animController;
 
     //hannah added this
     public Transform spawnPoint;
@@ -46,7 +47,8 @@ public class PlayerLife : MonoBehaviour
     {
         // find the GoonamiController script
         goonamiController = FindObjectOfType<GoonamiController>();
-
+        if(!animController)
+            animController = GetComponent<PlayerAnimController>();
         // get a reference to the Player script on the player GameObject
         playerScript = GetComponent<Player>();
         clampFollowTargetX = GetComponentInChildren<ClampFollowTargetX>();
@@ -155,7 +157,7 @@ public class PlayerLife : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         virtualCamera.transform.position = initialCameraPosition; // set initialCameraPosition to the original camera position
-
+        animController.animator.speed = 1;
         // re-enable Player.cs
         playerScript.enabled = true;
 
