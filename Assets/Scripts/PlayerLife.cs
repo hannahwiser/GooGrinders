@@ -137,34 +137,38 @@ public class PlayerLife : MonoBehaviour
         // Disable Player.cs
         playerScript.enabled = false;
 
-        // reset ClampFollowTargetX
-        if (clampFollowTargetX != null)
-        {
-            clampFollowTargetX.ResetPosition();
-        }
-
         // reset the Goo-nami's position
         if (goonamiController != null)
         {
             goonamiController.ResetPositionToStart();
         }
 
-        // set the player's position to the spawn point
-        transform.position = spawnPoint.position;
+        // destroy the player gameobject
+        Destroy(gameObject);
+        // create a new player GameObject at the spawn point
+        GameObject newPlayer = Instantiate(gameObject, spawnPoint.position, Quaternion.identity);
+        Player newPlayerScript = newPlayer.GetComponent<Player>();
 
-        // reset the player's velocity
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.velocity = Vector3.zero;
+        Rigidbody newRB = newPlayer.GetComponent<Rigidbody>();
+        newRB.velocity = Vector3.zero;
 
-        virtualCamera.transform.position = initialCameraPosition; // set initialCameraPosition to the original camera position
+        // reset ClampFollowTargetX
+        if (clampFollowTargetX != null)
+        {
+            clampFollowTargetX.ResetPosition();
+        }
+
+        CinemachineVirtualCamera newVirtualCamera = newPlayer.GetComponent<CinemachineVirtualCamera>();
+        if (newVirtualCamera != null)
+        {
+            newVirtualCamera.transform.position = initialCameraPosition;
+        }
         animController.animator.speed = 1;
+
         // re-enable Player.cs
-        playerScript.enabled = true;
-
-        // re-enable player control
-        playerScript.SetPlayerControlEnabled(true);
-
-        playerScript.SetPlayeOnRail(true);
+        newPlayerScript.enabled = true;
+        newPlayerScript.SetPlayerControlEnabled(true);
+        newPlayerScript.SetPlayeOnRail(true);
 
         dead = false;
         Debug.Log("Player respawned.");
