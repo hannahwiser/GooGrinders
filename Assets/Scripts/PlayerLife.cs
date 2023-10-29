@@ -38,17 +38,18 @@ public class PlayerLife : MonoBehaviour
 
     // checkbox for if the level starts with a cutscene
     public bool levelStartsWithCutscene = true;
+
     // store drag value of the player's Rigidbody
     private float originalDrag;
+
     // The sound effect for falling down the hole
     public GameObject cutsceneAudioSource;
-
 
     void Start()
     {
         // find the GoonamiController script
         goonamiController = FindObjectOfType<GoonamiController>();
-        if(!animController)
+        if (!animController)
             animController = GetComponent<PlayerAnimController>();
         // get a reference to the Player script on the player GameObject
         playerScript = GetComponent<Player>();
@@ -87,10 +88,11 @@ public class PlayerLife : MonoBehaviour
         {
             // check if the Goonami fog's X position > the player's X position
             if (
-            goonamiController != null
-            && transform.position.x < goonamiController.transform.position.x + goonamiDeadzoneOffset
-            && !dead
-        )
+                goonamiController != null
+                && transform.position.x
+                    < goonamiController.transform.position.x + goonamiDeadzoneOffset
+                && !dead
+            )
             {
                 // play the Goonami death sound
                 if (goonamiDeathSound != null)
@@ -164,6 +166,16 @@ public class PlayerLife : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
 
+        float currentDampingX = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_XDamping;
+        float currentDampingY = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_YDamping;
+        float currentDampingZ = virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_ZDamping;
+
+
+        virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_XDamping = 0f;
+        virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_YDamping = 0f;
+        virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_ZDamping = 0f;
+
+        // IMPORTANT: Because we save the initialCameraPosition based on where the camera was when this script was first loaded in, the camera will be sent there. But spawns change, so there's an issue
         virtualCamera.transform.position = initialCameraPosition; // set initialCameraPosition to the original camera position
         animController.animator.speed = 1;
 
@@ -177,6 +189,9 @@ public class PlayerLife : MonoBehaviour
         //playerScript.SetPlayerStartAttached(true);
         playerScript.OnRail = true;
         playerScript.startAttached = true;
+
+        // wait for 0.5 seconds before restoring the original damping values
+        //StartCoroutine(RestoreCameraDamping(currentDampingX, currentDampingY, currentDampingZ, 0.5f));
 
         dead = false;
         Debug.Log("Player respawned.");
@@ -196,9 +211,20 @@ public class PlayerLife : MonoBehaviour
         levelStartsWithCutscene = false;
     }
 
-    IEnumerator EnableGoonamiKillAfterDelay(float delay) {
+    IEnumerator EnableGoonamiKillAfterDelay(float delay)
+    {
         yield return new WaitForSeconds(delay);
 
         goonamiCanKill = true;
+    }
+
+    IEnumerator RestoreCameraDamping(float dampingX, float dampingY, float dampingZ, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // set the damping values back to their original values
+        virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_XDamping = dampingX;
+        virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_YDamping = dampingY;
+        virtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_ZDamping = dampingZ;
     }
 }
