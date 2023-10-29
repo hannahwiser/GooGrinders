@@ -55,9 +55,9 @@ public class Player : MonoBehaviour
 
     public bool OnRail = true;
     public bool BelowRail = false;
-    public bool startAttatched = false;
+    public bool startAttached = false;
 
-    //HOPEFULLY prevent reattatching to the rail
+    //HOPEFULLY prevent reattaching to the rail
     private float jumpRegroundCooldown = .2f;
     public bool ForceEnablePlayerControl = false;
 
@@ -81,8 +81,8 @@ public class Player : MonoBehaviour
             rb = GetComponent<Rigidbody>();
         //get the camera object pls :)
         cameraObj = Camera.main.transform;
-        if (startAttatched)
-            AttatchToRail();
+        if (startAttached)
+            AttachToRail();
         else
         {
             FindInitialSpline();
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
         splineCollider.enabled = false;
     }
 
-    private void AttatchToRail()
+    private void AttachToRail()
     {
         FindInitialSpline();
         splineCollider = spline.GetComponent<Collider>();
@@ -212,10 +212,15 @@ public class Player : MonoBehaviour
     }
 
     // Public method to set OnRail status (for PlayerLife so that we don't spawn detatched)
-    public void SetPlayeOnRail(bool value)
-    {
-        OnRail = value;
-    }
+    //public void SetPlayerOnRail(bool value)
+    //{
+    //    OnRail = value;
+    //}
+
+    //public void SetPlayerStartAttached(bool value)
+    //{
+    //    startAttached = value;
+    //}
 
     private void DisableJoint()
     {
@@ -633,7 +638,7 @@ public class Player : MonoBehaviour
 
     private void CheckCollider(Collision other)
     {
-        //reattatch the player to the rail
+        //reattach the player to the rail
         //also set the spline to the new spline object
         /* Debug.Log("COlliderD!" + other.collider.name);*/
         if (jumpRegroundCooldown <= 0 || other.collider != splineCollider)
@@ -648,7 +653,7 @@ public class Player : MonoBehaviour
                     splineCollider = spline.GetComponent<Collider>();
                     splineCollider.enabled = false;
                     transform.position = other.contacts[0].point;
-                    AttatchToRail();
+                    AttachToRail();
                     EnableJoint();
                     OnRail = true;
                 }

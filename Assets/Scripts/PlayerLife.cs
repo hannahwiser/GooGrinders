@@ -34,6 +34,7 @@ public class PlayerLife : MonoBehaviour
     public GoonamiController goonamiController;
     public AudioSource goonamiDeathSound;
     public float goonamiDeadzoneOffset = 7.5f; // determines where the Goonami's deadzone is. It's sortof a barbaric quick and dirty way of doing this
+    private bool goonamiCanKill = true; // Prevent the Goonami from killing the player at a bad time, like immediately after respawning
 
     // checkbox for if the level starts with a cutscene
     public bool levelStartsWithCutscene = true;
@@ -81,21 +82,25 @@ public class PlayerLife : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
-        // check if the Goonami fog's X position > the player's X position
-        if (
+        // check if it makes sense for the Goonami to kill the player
+        if (goonamiCanKill)
+        {
+            // check if the Goonami fog's X position > the player's X position
+            if (
             goonamiController != null
             && transform.position.x < goonamiController.transform.position.x + goonamiDeadzoneOffset
             && !dead
         )
-        {
-            // play the Goonami death sound
-            if (goonamiDeathSound != null)
             {
-                goonamiDeathSound.Play();
-            }
+                // play the Goonami death sound
+                if (goonamiDeathSound != null)
+                {
+                    goonamiDeathSound.Play();
+                }
 
-            Debug.Log("Player was caught by the goo-nami.");
-            Die();
+                Debug.Log("Player was caught by the goo-nami.");
+                Die();
+            }
         }
     }
 
@@ -111,7 +116,7 @@ public class PlayerLife : MonoBehaviour
         rb.AddForce(-rb.velocity.normalized * decelerationForce, ForceMode.Acceleration);
 
         // respawn after a delay
-        Invoke(nameof(Respawn), 1.0f);
+        Invoke(nameof(Respawn), 0.0f);
         //Invoke(nameof(ReloadLevel), 1.3f);
 
         dead = true;
@@ -135,7 +140,10 @@ public class PlayerLife : MonoBehaviour
     void Respawn()
     {
         // Disable Player.cs
-        playerScript.enabled = false;
+        //playerScript.enabled = false;
+
+        // prevent the Goonami from killing the player while we respawn them
+        goonamiCanKill = false;
 
         // reset ClampFollowTargetX
         if (clampFollowTargetX != null)
@@ -158,27 +166,39 @@ public class PlayerLife : MonoBehaviour
 
         virtualCamera.transform.position = initialCameraPosition; // set initialCameraPosition to the original camera position
         animController.animator.speed = 1;
+
         // re-enable Player.cs
-        playerScript.enabled = true;
+        //playerScript.enabled = true;
 
         // re-enable player control
         playerScript.SetPlayerControlEnabled(true);
 
-        playerScript.SetPlayeOnRail(true);
+        //playerScript.SetPlayerOnRail(true);
+        //playerScript.SetPlayerStartAttached(true);
+        playerScript.OnRail = true;
+        playerScript.startAttached = true;
 
         dead = false;
         Debug.Log("Player respawned.");
+
+        // set goonamiCanKill to true after 4 seconds
+        StartCoroutine(EnableGoonamiKillAfterDelay(4.0f));
     }
 
     // enable player controls after a delay
     IEnumerator EnablePlayerControlsAfterDelay(float delay)
     {
-        // Wait for the specified delay
         yield return new WaitForSeconds(delay);
         playerScript.SetPlayerControlEnabled(true);
         playerScript.GetComponent<Rigidbody>().drag = originalDrag;
 
         // set levelStartsWithCutscene to false after the first time
         levelStartsWithCutscene = false;
+    }
+
+    IEnumerator EnableGoonamiKillAfterDelay(float delay) {
+        yield return new WaitForSeconds(delay);
+
+        goonamiCanKill = true;
     }
 }
