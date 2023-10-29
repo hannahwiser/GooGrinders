@@ -111,7 +111,7 @@ public class PlayerLife : MonoBehaviour
         rb.AddForce(-rb.velocity.normalized * decelerationForce, ForceMode.Acceleration);
 
         // respawn after a delay
-        Invoke(nameof(Respawn), 1.0f);
+        Invoke(nameof(Respawn), 0.0f);
         //Invoke(nameof(ReloadLevel), 1.3f);
 
         dead = true;
@@ -135,22 +135,7 @@ public class PlayerLife : MonoBehaviour
     void Respawn()
     {
         // Disable Player.cs
-        playerScript.enabled = false;
-
-        // reset the Goo-nami's position
-        if (goonamiController != null)
-        {
-            goonamiController.ResetPositionToStart();
-        }
-
-        // destroy the player gameobject
-        Destroy(gameObject);
-        // create a new player GameObject at the spawn point
-        GameObject newPlayer = Instantiate(gameObject, spawnPoint.position, Quaternion.identity);
-        Player newPlayerScript = newPlayer.GetComponent<Player>();
-
-        Rigidbody newRB = newPlayer.GetComponent<Rigidbody>();
-        newRB.velocity = Vector3.zero;
+        //playerScript.enabled = false;
 
         // reset ClampFollowTargetX
         if (clampFollowTargetX != null)
@@ -158,17 +143,29 @@ public class PlayerLife : MonoBehaviour
             clampFollowTargetX.ResetPosition();
         }
 
-        CinemachineVirtualCamera newVirtualCamera = newPlayer.GetComponent<CinemachineVirtualCamera>();
-        if (newVirtualCamera != null)
+        // reset the Goo-nami's position
+        if (goonamiController != null)
         {
-            newVirtualCamera.transform.position = initialCameraPosition;
+            goonamiController.ResetPositionToStart();
         }
+
+        // set the player's position to the spawn point
+        transform.position = spawnPoint.position;
+
+        // reset the player's velocity
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+
+        virtualCamera.transform.position = initialCameraPosition; // set initialCameraPosition to the original camera position
         animController.animator.speed = 1;
 
         // re-enable Player.cs
-        newPlayerScript.enabled = true;
-        newPlayerScript.SetPlayerControlEnabled(true);
-        newPlayerScript.SetPlayeOnRail(true);
+        //playerScript.enabled = true;
+
+        // re-enable player control
+        playerScript.SetPlayerControlEnabled(true);
+
+        //playerScript.SetPlayeOnRail(true);
 
         dead = false;
         Debug.Log("Player respawned.");
