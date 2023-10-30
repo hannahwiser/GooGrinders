@@ -23,6 +23,25 @@ Goo Grinder is a wild 2.5D Unity game that'll take you on a goo-tastic ride thro
 https://github.com/hannahwiser/GooGrinders/assets/47337405/9e6ca98c-d4c5-475e-be38-281c5f0539eb
 
 <a name="genre--perspective"></a>
+
+# <a href="https://github.com/hannahwiser/GooGrinders/releases">Releases</a>
+### <a href="https://github.com/hannahwiser/GooGrinders/releases/tag/Milestone2">Milestone 2 - Release Date: October 27, 2023</a>
+<table style="margin: 0 auto; text-align: center;">
+	<tr>
+		<td><strong>Main Menu</strong><br><img src="https://raw.githubusercontent.com/hannahwiser/GooGrinders/main/README/m2_menu.gif"></td>
+		<td><strong>Level 1</strong><br><img src="https://raw.githubusercontent.com/hannahwiser/GooGrinders/main/README/m2_level1.gif"></td>
+	</tr>
+</table>
+
+### <a href="https://github.com/hannahwiser/GooGrinders/releases/tag/Milestone1">Milestone 1 - Release Date: October 2, 2023</a>
+<table style="margin: 0 auto; text-align: center;">
+	<tr>
+		<td><strong>Main Menu</strong><br><img src="https://raw.githubusercontent.com/hannahwiser/GooGrinders/main/README/m1_menu.gif"></td>
+		<td><strong>Level 1</strong><br><img src="https://raw.githubusercontent.com/hannahwiser/GooGrinders/main/README/m1_level1.gif"></td>
+	</tr>
+</table>
+
+
 ## Genre & Perspective 🎯
 
 - **Genre:** Slime-tastic Movement, Rail Grinding, 3D, Side Scroller
