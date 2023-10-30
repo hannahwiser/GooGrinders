@@ -29,6 +29,7 @@ public class PlayerLife : MonoBehaviour
     // reference the Cinemachine Cam (so we can teleport it back to spawn)
     public CinemachineVirtualCamera virtualCamera;
     private Vector3 initialCameraPosition;
+    private Vector3 originalDamping;
 
     // reference to GoonamiController script
     public GoonamiController goonamiController;
@@ -47,6 +48,13 @@ public class PlayerLife : MonoBehaviour
 
     void Start()
     {
+        Cinemachine3rdPersonFollow thirdPersonFollow =
+            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        if (thirdPersonFollow != null)
+        {
+            originalDamping = thirdPersonFollow.Damping;
+        }
+
         // find the GoonamiController script
         goonamiController = FindObjectOfType<GoonamiController>();
         if (!animController)
@@ -141,9 +149,6 @@ public class PlayerLife : MonoBehaviour
 
     void Respawn()
     {
-        // Disable Player.cs
-        //playerScript.enabled = false;
-
         // prevent the Goonami from killing the player while we respawn them
         goonamiCanKill = false;
 
@@ -166,39 +171,26 @@ public class PlayerLife : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
 
-
         // IMPORTANT: Because we save the initialCameraPosition based on where the camera was when this script was first loaded in, the camera will be sent there. But spawns change, so there's an issue
         virtualCamera.transform.position = initialCameraPosition; // set initialCameraPosition to the original camera position
         animController.animator.speed = 1;
 
-        // re-enable Player.cs
-        //playerScript.enabled = true;
-
         // re-enable player control
         playerScript.SetPlayerControlEnabled(true);
 
-        //playerScript.SetPlayerOnRail(true);
-        //playerScript.SetPlayerStartAttached(true);
         playerScript.OnRail = true;
         playerScript.startAttached = true;
 
-        // try to access CinemachineTransposer or CinemachineComposer 
-        CinemachineTransposer transposer = virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
-        if (transposer != null)
+        // set the damping values to 0 when you first respawn
+        Cinemachine3rdPersonFollow thirdPersonFollow =
+            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        if (thirdPersonFollow != null)
         {
-            // store the current damping values
-            Vector3 originalDamping = transposer.m_BindingMode == CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp ?
-                new Vector3(0, transposer.m_YDamping, transposer.m_ZDamping) :
-                new Vector3(transposer.m_XDamping, transposer.m_YDamping, transposer.m_ZDamping);
-
-            // set damping values to 0
-            transposer.m_XDamping = 0;
-            transposer.m_YDamping = 0;
-            transposer.m_ZDamping = 0;
-
-            // set the damping values back to their original values after 0.5 seconds
-            StartCoroutine(ResetDampingValues(transposer, originalDamping, 3.0f));
+            thirdPersonFollow.Damping = Vector3.zero;
         }
+
+        // restore original damping values after 0.5 seconds
+        StartCoroutine(RestoreDampingValues(thirdPersonFollow, originalDamping, 0.5f));
 
         dead = false;
         Debug.Log("Player respawned.");
@@ -225,11 +217,16 @@ public class PlayerLife : MonoBehaviour
         goonamiCanKill = true;
     }
 
-    IEnumerator ResetDampingValues(CinemachineTransposer transposer, Vector3 originalDamping, float delay)
+    IEnumerator RestoreDampingValues(
+        Cinemachine3rdPersonFollow follow,
+        Vector3 original,
+        float delay
+    )
     {
         yield return new WaitForSeconds(delay);
-        transposer.m_XDamping = originalDamping.x;
-        transposer.m_YDamping = originalDamping.y;
-        transposer.m_ZDamping = originalDamping.z;
+        if (follow != null)
+        {
+            follow.Damping = original;
+        }
     }
 }
