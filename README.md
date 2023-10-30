@@ -1,5 +1,9 @@
 ![Goo Grinder Title3](https://github.com/hannahwiser/GooGrinders/assets/47337405/af77ed31-386d-4f31-a410-456f145ee754)
 
+## 🔽 Download
+
+### To download the latest version of Goo Grinder, go [**here**](https://github.com/hannahwiser/GooGrinders/releases/latest) and unzip the folder after downloading.
+
 ### 🦠🌳🌳🌄🌌🪐🚀🌠🌍🌊 PantherDev Fall 2023 🌿🌵🪐🌴🦠🌴🌳🌴🐉🌲🦠
 
 ***
