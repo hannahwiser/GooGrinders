@@ -126,7 +126,7 @@ public class PlayerLife : MonoBehaviour
         rb.AddForce(-rb.velocity.normalized * decelerationForce, ForceMode.Acceleration);
 
         // respawn after a delay
-        Invoke(nameof(Respawn), 0.0f);
+        Invoke(nameof(Respawn), 1.0f);
         //Invoke(nameof(ReloadLevel), 1.3f);
 
         dead = true;
