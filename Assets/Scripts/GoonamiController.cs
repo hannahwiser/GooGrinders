@@ -17,12 +17,13 @@ public class GoonamiController : MonoBehaviour
     // The distance that the goonami will stay behind before it stops moving
     public float xOffset = -45.0f;
     private float savexOffset;
+
     // offset for the very first few seconds of the game
     public float initialXOffset = -70.0f;
+
     // number of seconds to apply the initial offset
     public float xOffsetTransitionTime = 9.0f;
     private float xOffsetTimer = 0.0f;
-
 
     private Vector3 startPosition;
     private Transform followTarget;
@@ -80,5 +81,4 @@ public class GoonamiController : MonoBehaviour
         }
         xOffset = savexOffset;
     }
-
 }

@@ -29,6 +29,7 @@ public class PlayerLife : MonoBehaviour
     // reference the Cinemachine Cam (so we can teleport it back to spawn)
     public CinemachineVirtualCamera virtualCamera;
     private Vector3 initialCameraPosition;
+    private Vector3 originalDamping;
 
     // reference to GoonamiController script
     public GoonamiController goonamiController;
@@ -38,17 +39,25 @@ public class PlayerLife : MonoBehaviour
 
     // checkbox for if the level starts with a cutscene
     public bool levelStartsWithCutscene = true;
+
     // store drag value of the player's Rigidbody
     private float originalDrag;
+
     // The sound effect for falling down the hole
     public GameObject cutsceneAudioSource;
 
-
     void Start()
     {
+        Cinemachine3rdPersonFollow thirdPersonFollow =
+            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        if (thirdPersonFollow != null)
+        {
+            originalDamping = thirdPersonFollow.Damping;
+        }
+
         // find the GoonamiController script
         goonamiController = FindObjectOfType<GoonamiController>();
-        if(!animController)
+        if (!animController)
             animController = GetComponent<PlayerAnimController>();
         // get a reference to the Player script on the player GameObject
         playerScript = GetComponent<Player>();
@@ -87,10 +96,11 @@ public class PlayerLife : MonoBehaviour
         {
             // check if the Goonami fog's X position > the player's X position
             if (
-            goonamiController != null
-            && transform.position.x < goonamiController.transform.position.x + goonamiDeadzoneOffset
-            && !dead
-        )
+                goonamiController != null
+                && transform.position.x
+                    < goonamiController.transform.position.x + goonamiDeadzoneOffset
+                && !dead
+            )
             {
                 // play the Goonami death sound
                 if (goonamiDeathSound != null)
@@ -139,9 +149,6 @@ public class PlayerLife : MonoBehaviour
 
     void Respawn()
     {
-        // Disable Player.cs
-        //playerScript.enabled = false;
-
         // prevent the Goonami from killing the player while we respawn them
         goonamiCanKill = false;
 
@@ -164,19 +171,26 @@ public class PlayerLife : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
 
+        // IMPORTANT: Because we save the initialCameraPosition based on where the camera was when this script was first loaded in, the camera will be sent there. But spawns change, so there's an issue
         virtualCamera.transform.position = initialCameraPosition; // set initialCameraPosition to the original camera position
         animController.animator.speed = 1;
-
-        // re-enable Player.cs
-        //playerScript.enabled = true;
 
         // re-enable player control
         playerScript.SetPlayerControlEnabled(true);
 
-        //playerScript.SetPlayerOnRail(true);
-        //playerScript.SetPlayerStartAttached(true);
         playerScript.OnRail = true;
         playerScript.startAttached = true;
+
+        // set the damping values to 0 when you first respawn
+        Cinemachine3rdPersonFollow thirdPersonFollow =
+            virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        if (thirdPersonFollow != null)
+        {
+            thirdPersonFollow.Damping = Vector3.zero;
+        }
+
+        // restore original damping values after 0.5 seconds
+        StartCoroutine(RestoreDampingValues(thirdPersonFollow, originalDamping, 0.5f));
 
         dead = false;
         Debug.Log("Player respawned.");
@@ -196,9 +210,23 @@ public class PlayerLife : MonoBehaviour
         levelStartsWithCutscene = false;
     }
 
-    IEnumerator EnableGoonamiKillAfterDelay(float delay) {
+    IEnumerator EnableGoonamiKillAfterDelay(float delay)
+    {
         yield return new WaitForSeconds(delay);
 
         goonamiCanKill = true;
+    }
+
+    IEnumerator RestoreDampingValues(
+        Cinemachine3rdPersonFollow follow,
+        Vector3 original,
+        float delay
+    )
+    {
+        yield return new WaitForSeconds(delay);
+        if (follow != null)
+        {
+            follow.Damping = original;
+        }
     }
 }
