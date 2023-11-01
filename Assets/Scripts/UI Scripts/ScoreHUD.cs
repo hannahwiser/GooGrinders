@@ -17,7 +17,7 @@ public class ScoreHUD : MonoBehaviour
     {
         //setting everything to 0 when game starts
         numbers[0].SetText("0");
-        numbers[1].SetText("0"); 
+        numbers[1].SetText("0");
         numbers[2].SetText("0");
         numbers[3].SetText("0");
     }
@@ -38,7 +38,7 @@ public class ScoreHUD : MonoBehaviour
     IEnumerator blinkHUD()
     {
         numbers[0].SetText("");
-        numbers[1].SetText(""); 
+        numbers[1].SetText("");
         numbers[2].SetText("");
         numbers[3].SetText("");
         yield return new WaitForSeconds(.1f);
@@ -57,7 +57,22 @@ public class ScoreHUD : MonoBehaviour
     {
         check = true;
         chargeAnim.Play("HUDChargeJump");
+        StartCoroutine(AmIStillCharging());
     }
+
+    public IEnumerator AmIStillCharging()
+    {
+        while (!check)
+        {
+            yield return new WaitForEndOfFrame();
+            if (!Input.GetKey(KeyCode.Space))
+            {
+                FinishCharge();
+                break;
+            }
+        }
+    }
+
     public void FinishCharge()
     {
         if (check)

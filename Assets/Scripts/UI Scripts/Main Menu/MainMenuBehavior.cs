@@ -89,8 +89,6 @@ public class MainMenuBehavior : MonoBehaviour
     public void NextLevel()
     {
         anim.Play("MainMenuFadeOut");
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1);
-        asyncLoad.allowSceneActivation = false;
         StartCoroutine(WaitForAnimation());
     }
 
@@ -101,9 +99,10 @@ public class MainMenuBehavior : MonoBehaviour
         {
             Debug.Log("RUN");
             backgroundAudio.volume = timeCrunch;
-            timeCrunch-=.01f;
+            timeCrunch -= .001f;
             yield return new WaitForSeconds(.01f);
         }
         SceneManager.LoadScene(1);
     }
 }
+
