@@ -7,12 +7,13 @@ TagManager:
   - Rail
   - GooGorger
   - Raycast Target
-  - Death
+  - Impact_Death
+  - Spike_Death
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Particles
   - Water
   - UI
   - 
@@ -44,4 +45,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2220850937
     locked: 0

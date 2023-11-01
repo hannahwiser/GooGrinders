@@ -19,11 +19,28 @@ public class MainMenuBehavior : MonoBehaviour
     public GameObject textObject;
     public AudioSource backgroundAudio;
 
+    public GameObject currentVial;
+
 
     void Start()
     {
         startButton.enabled = false;
         textObject.SetActive(false);
+    }
+
+    public void SetCurrentVial(GameObject vial)
+    {
+        currentVial = vial;
+    }
+
+    public void NullifyVial()
+    {
+        currentVial = null;
+    }
+
+    public GameObject CheckIfNull()
+    {
+        return currentVial;
     }
 
     void Update()

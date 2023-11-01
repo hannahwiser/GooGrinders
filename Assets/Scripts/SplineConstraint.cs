@@ -37,7 +37,7 @@
 // 			Vector3 v0 = spline.transform.TransformPoint (spline.vertexes[i-1]);
 // 			Vector3 v1 = spline.transform.TransformPoint (spline.vertexes[i]);
 // 			float seg_len_sq = (v1 - v0).sqrMagnitude;
-			
+
 // 			// If the segment has no length, return the position and distance
 // 			// to the first vertex.
 // 			if (seg_len_sq == 0.0f) {
@@ -49,7 +49,7 @@
 // 				}
 // 			} else {
 // 				float t = Vector3.Dot (transform.position - v0, v1 - v0) / seg_len_sq;
-				
+
 // 				// If we are past the first vertex, return the position and
 // 				// distance to the first vertex.
 // 				if (t < 0.0f) {
@@ -59,7 +59,7 @@
 // 						vertex_id = i-1;
 // 						vertex_position = 0.0f;
 // 					}
-					
+
 // 				// If we are past the last vertex, same deal.
 // 				} else if (t > 1.0f) {
 // 					dist = Vector3.Distance (transform.position, v1);
@@ -68,7 +68,7 @@
 // 						vertex_id = i-1;
 // 						vertex_position = 1.0f;
 // 					}
-					
+
 // 				// We're right in the sweet spot.
 // 				// Project the position onto the segment.
 // 				} else {

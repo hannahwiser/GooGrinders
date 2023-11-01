@@ -11,15 +11,14 @@ public class PlayerAnimController : MonoBehaviour
 
     void Update()
     {
-        animator.SetBool("OnRail",player.OnRail);
-        if(player.BelowRail != prevBelowRail)
+        animator.SetBool("OnRail", player.OnRail);
+        if (player.BelowRail != prevBelowRail)
             animator.SetTrigger("ToggleRail");
 
-
-        if(player.jumpInput)
+        if (player.jumpInput)
             animator.SetTrigger("Jumpped");
-        
-        animator.SetFloat("MovementInput",player.inputVector.x + .5f);
+
+        animator.SetFloat("MovementInput", player.inputVector.x + .5f);
         prevBelowRail = player.BelowRail;
     }
 }
