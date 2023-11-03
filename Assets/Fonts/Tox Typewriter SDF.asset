@@ -2751,10 +2751,10 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.259
+    - _OutlineWidth: 0.587
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 12.5
-    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioA: 0.7978299
     - _ScaleRatioB: 0.45208332
     - _ScaleRatioC: 0.45208332
     - _ScaleX: 1
