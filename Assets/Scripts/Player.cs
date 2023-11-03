@@ -279,10 +279,12 @@ public class Player : MonoBehaviour
 
         if (jumpInputRelease && OnRail) // gooflingInput && !BelowRail && gooflingCharge >0)
         {
-            GUIScript.FinishCharge();
-            charge.Stop();
-            jump.time = .1f;
-            jump.Play();
+            if(GUIScript){
+                GUIScript.FinishCharge();
+                charge.Stop();
+                jump.time = .1f;
+                jump.Play();
+            }
             splineCollider.enabled = false;
 
             //HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
@@ -300,6 +302,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         if (Input.GetKey(KeyCode.Space))
         {
+            if(GUIScript)
             GUIScript.ChargeJump();
             charge.Play();
         }
