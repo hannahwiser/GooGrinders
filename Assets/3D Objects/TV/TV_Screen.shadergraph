@@ -868,9 +868,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -457.0,
+            "x": -456.0,
             "y": 200.0,
-            "width": 208.00001525878907,
+            "width": 208.0,
             "height": 361.0
         }
     },
@@ -916,7 +916,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_BlendMode": 15
+    "m_BlendMode": 4
 }
 
 {
