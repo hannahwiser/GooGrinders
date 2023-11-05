@@ -51,5 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "GooGrinders.sln"
+    "dotnet.defaultSolution": "GooGrinders.sln",
+    "dotnet.preferCSharpExtension": true
 }
