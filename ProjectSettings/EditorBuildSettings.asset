@@ -9,6 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 9f2b598eb11f05246b501121b83b321d
   - enabled: 1
-    path: Assets/Scenes/Hannah's Decoration Station AKA M2 COPY.unity
-    guid: 107a58e053cf5be46933d53672aa0f91
-  m_configObjects: {}
+    path: Assets/Scenes/Hannah's Decoration Station AKA M2.unity
+    guid: 5da0e9326f915634ea7eb19dd8239c59
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 014bdf8ba9550c74a86df7ec336bc87a, type: 2}
