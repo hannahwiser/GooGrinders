@@ -338,8 +338,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: rig.002|Death
-      takeName: rig.002|spline = tempSpline;
+      name: rig.002|Death (1)
+      takeName: rig.002|Death
       internalID: 1598997962087107047
       firstFrame: 0
       lastFrame: 13
@@ -349,7 +349,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

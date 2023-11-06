@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     //time before the goofling starts to decay
     private float gooflingResetTimer = 0;
-    public float gooflingMultiplier = 5;
+    public float gooflingMultiplier = 6;
 
     public bool OnRail = true;
     public bool BelowRail = false;
@@ -291,8 +291,9 @@ public class Player : MonoBehaviour
 
             //HandleJump(jumpUpVector, Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 8));
             HandleJump(
-                (Vector3.up + jumpUpVector.normalized).normalized,
-                Mathf.Clamp(gooflingMultiplier * gooflingCharge, 3, 8)
+                Vector3.up.normalized,
+                Mathf.Lerp(1,gooflingMultiplier,gooflingCharge ) * 3 
+                //Mathf.Clamp(gooflingMultiplier * gooflingCharge, 4, 12)
             );
             //HandleJump(Vector3.up,1);
             tempFlingParticle.Play();
@@ -477,7 +478,7 @@ public class Player : MonoBehaviour
             //build charge when below the rail
             if (jumpInput)
             {
-                gooflingCharge += Time.fixedDeltaTime * 3f;
+                gooflingCharge += Time.fixedDeltaTime * 0.333f;
                 gooflingResetTimer = 2;
             }
 
@@ -624,7 +625,7 @@ public class Player : MonoBehaviour
     void HandleJump(Vector3 direction, float force)
     {
         PartiallyDisableJoint();
-        if (rb.velocity.y < 0)
+        //if (rb.velocity.y < 0)
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         rb.AddForce(direction.normalized * (force), ForceMode.Impulse);
         transform.position += direction.normalized;
