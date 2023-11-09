@@ -18,32 +18,32 @@ public class ItemCollector : MonoBehaviour
 {
     private int playerScore = 0;
     public int gooScore;
+    public GorgerDeath deathScript;
 
-    public ScoreHUD scoreHUDScript;
+   //public ScoreHUD scoreHUDScript;
 
     // when the game starts, load the player's score from PlayerPrefs
     private void Start()
     {
         gooScore = Random.Range(100, 500);
         playerScore = PlayerPrefs.GetInt("PlayerScore", 0);
-        scoreHUDScript = GameObject.FindGameObjectWithTag("HUD").GetComponent<ScoreHUD>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("GooGorger"))
         {
-            int amountToAdd = other.GetComponent<ItemCollector>().gooScore;
-            Destroy(other.gameObject);
-            playerScore += amountToAdd;
-            Debug.Log("Score: " + playerScore);
+            int amountToAdd = other.GetComponent<GorgerDeath>().pointsToAward; //saving the amount of points googorger is worth
+            other.GetComponent<GorgerDeath>().KillTheBug(); //does the visuals for googorger death
+            playerScore += amountToAdd; //adds to the playerscore variable
 
             // update the score in PlayerPrefs
             PlayerPrefs.SetInt("PlayerScore", playerScore);
             PlayerPrefs.Save();
-            scoreHUDScript.SetScore(playerScore);
+            //scoreHUDScript.SetScore(playerScore);
         }
     }
+
 
     private void OnApplicationQuit()
     {
