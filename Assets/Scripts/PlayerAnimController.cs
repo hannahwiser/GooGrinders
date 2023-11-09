@@ -8,6 +8,7 @@ public class PlayerAnimController : MonoBehaviour
     public Animator animator;
     public AudioSource railSwitchSFX;
     private bool prevBelowRail = false;
+    private bool prevOnRail = false;
     private bool isCharging = false;
     private float chargeStartTime = 0.0f;
     private PlayerLife playerLife;
@@ -63,6 +64,14 @@ public class PlayerAnimController : MonoBehaviour
             }
             
         }
+        else
+        {
+            if(prevOnRail)
+            {
+                player.jump.Play();
+            }
+        }
+        
         if (player.jumpInputRelease)
         {
             animator.Play("Jump");
@@ -75,7 +84,7 @@ public class PlayerAnimController : MonoBehaviour
             animator.Play("Death");
             animator.speed = 0;
         }
-        
-        
+
+        prevOnRail = player.OnRail;
     }
 }

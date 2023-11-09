@@ -225,7 +225,16 @@ public class Player : MonoBehaviour
     //    startAttached = value;
     //}
 
-    private void DisableJoint()
+    public void LockRigidbody()
+    {
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
+    public void UnlockRigidbody()
+    {
+        rb.constraints = RigidbodyConstraints.None;
+    }
+
+    public void DisableJoint()
     {
         joint.xMotion = ConfigurableJointMotion.Free;
         joint.yMotion = ConfigurableJointMotion.Free;
@@ -235,7 +244,7 @@ public class Player : MonoBehaviour
         joint.angularZMotion = ConfigurableJointMotion.Free;
     }
 
-    private void PartiallyDisableJoint()
+    public void PartiallyDisableJoint()
     {
         joint.xMotion = ConfigurableJointMotion.Free;
         joint.yMotion = ConfigurableJointMotion.Free;
@@ -245,7 +254,7 @@ public class Player : MonoBehaviour
         joint.angularZMotion = ConfigurableJointMotion.Locked;
     }
 
-    private void EnableJoint()
+    public void EnableJoint()
     {
         joint.xMotion = ConfigurableJointMotion.Free;
         joint.yMotion = ConfigurableJointMotion.Locked;
@@ -311,7 +320,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private Vector3 jumpUpVector = Vector3.up;
+    public Vector3 jumpUpVector = Vector3.up;
 
     void FixedUpdate()
     {
