@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4703410868251638986}
   - component: {fileID: 1741409164947507127}
   - component: {fileID: 8211130524541166607}
+  - component: {fileID: 3486159806165673961}
   m_Layer: 0
   m_Name: Landscape.001
   m_TagString: Untagged
@@ -85,6 +86,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3486159806165673961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178576056613191748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d57081a50673d4448cb8bd633344ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedX: 0
+  speedY: 0.005
+  speedZ: 0
 --- !u!1 &2644085185780888200
 GameObject:
   m_ObjectHideFlags: 0
