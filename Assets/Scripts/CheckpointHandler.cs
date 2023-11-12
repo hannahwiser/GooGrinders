@@ -10,6 +10,7 @@ public class CheckpointHandler : MonoBehaviour
     public Animator anim;
     public GameObject deathCanvas;
     public int gorgerCost;
+    public int lastCheckpoint;
 
     private void Awake()
     {
@@ -26,11 +27,16 @@ public class CheckpointHandler : MonoBehaviour
     {
     }
 
+    public void SetCheckPoint(int theNumber)
+    {
+        lastCheckpoint = theNumber;
+    }
+
     public void DeathPopup()
     {
         Time.timeScale = 0;
 
-        promptText.SetText("Would you like to spend " + gorgerCost + " googorger points to continue?");
+        promptText.SetText("Would you like to spend " + gorgerCost + " googorger points to respawn at the most recent checkpoint?");
         currentText.SetText(FunnyTexts[Random.Range(0, FunnyTexts.Length-1)]);
         balanceText.SetText("current balance: " + PlayerPrefs.GetInt("PlayerScore") + " points");
 
