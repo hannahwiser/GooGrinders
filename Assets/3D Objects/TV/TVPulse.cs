@@ -9,8 +9,6 @@ public class TVPulse : MonoBehaviour
     public float maxIntensity = 2.0f;
     public float pulseSpeed = 1.0f;
 
-    private float currentIntensity;
-    private float targetIntensity;
     private bool increasing = true;
 
     void Start()
@@ -22,8 +20,8 @@ public class TVPulse : MonoBehaviour
 
         if (tvSpotlight != null)
         {
-            currentIntensity = minIntensity;
-            targetIntensity = maxIntensity;
+            // Set the initial intensity
+            tvSpotlight.intensity = minIntensity;
         }
         else
         {
@@ -38,19 +36,12 @@ public class TVPulse : MonoBehaviour
 
     void UpdateIntensity()
     {
-        currentIntensity = Mathf.Lerp(
-            currentIntensity,
-            targetIntensity,
-            pulseSpeed * Time.deltaTime
-        );
-        if (Mathf.Approximately(currentIntensity, targetIntensity))
-        {
-            increasing = !increasing;
-            targetIntensity = increasing ? maxIntensity : minIntensity;
-        }
+        float t = Mathf.PingPong(Time.time * pulseSpeed, 1.0f);
+        float targetIntensity = Mathf.Lerp(minIntensity, maxIntensity, t);
+
         if (tvSpotlight != null)
         {
-            tvSpotlight.intensity = currentIntensity;
+            tvSpotlight.intensity = targetIntensity;
         }
     }
 }
