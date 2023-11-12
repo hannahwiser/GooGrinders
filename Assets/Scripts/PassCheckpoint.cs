@@ -6,7 +6,7 @@ public class PassCheckpoint : MonoBehaviour
 {
     public Animator anim;
     public AudioSource flashAudio;
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
