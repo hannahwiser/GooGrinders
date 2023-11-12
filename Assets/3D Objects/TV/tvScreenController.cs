@@ -11,6 +11,37 @@ public class tvScreenController : MonoBehaviour
     public float movementSpeed = 5.0f;
     public float rotationSpeed = 2.0f;
 
+    private int currentWinningScreenIndex = 0;
+    private int currentLosingScreenIndex = 0;
+
+    public void MoveToNextScreen()
+    {
+        if (currentWinningScreenIndex < winningScreens.Length - 1)
+        {
+            currentWinningScreenIndex++;
+            MoveToWinningScreen(currentWinningScreenIndex);
+        }
+        else if (currentLosingScreenIndex < losingScreens.Length - 1)
+        {
+            currentLosingScreenIndex++;
+            MoveToLosingScreen(currentLosingScreenIndex);
+        }
+    }
+
+    public void MoveToPreviousScreen()
+    {
+        if (currentWinningScreenIndex > 0)
+        {
+            currentWinningScreenIndex--;
+            MoveToWinningScreen(currentWinningScreenIndex);
+        }
+        else if (currentLosingScreenIndex > 0)
+        {
+            currentLosingScreenIndex--;
+            MoveToLosingScreen(currentLosingScreenIndex);
+        }
+    }
+
     private void Start()
     {
         MoveToScreen(winningScreens[0]);

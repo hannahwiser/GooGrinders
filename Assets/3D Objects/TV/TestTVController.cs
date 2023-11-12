@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TestTVController : MonoBehaviour
 {
     public tvScreenController screenController;
+    public Button leftArrowButton;
+    public Button rightArrowButton;
 
     private void Start()
     {
@@ -14,24 +17,23 @@ public class TestTVController : MonoBehaviour
             enabled = false;
         }
 
-        StartCoroutine(CycleScreens());
+        leftArrowButton.onClick.AddListener(MoveToPreviousScreen);
+        rightArrowButton.onClick.AddListener(MoveToNextScreen);
     }
 
-    private IEnumerator CycleScreens()
+    private void OnDestroy()
     {
-        while (true)
-        {
-            for (int i = 0; i < screenController.winningScreens.Length; i++)
-            {
-                screenController.MoveToWinningScreen(i);
-                yield return new WaitForSeconds(3.0f);
-            }
+        leftArrowButton.onClick.RemoveAllListeners();
+        rightArrowButton.onClick.RemoveAllListeners();
+    }
 
-            for (int i = 0; i < screenController.losingScreens.Length; i++)
-            {
-                screenController.MoveToLosingScreen(i);
-                yield return new WaitForSeconds(3.0f);
-            }
-        }
+    private void MoveToPreviousScreen()
+    {
+        screenController.MoveToPreviousScreen();
+    }
+
+    private void MoveToNextScreen()
+    {
+        screenController.MoveToNextScreen();
     }
 }

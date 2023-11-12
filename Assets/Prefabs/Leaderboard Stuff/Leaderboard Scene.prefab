@@ -282,7 +282,7 @@ Transform:
   - {fileID: 5049186820963478860}
   - {fileID: 1976797209330165048}
   m_Father: {fileID: 9145083283121849135}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1645686219687392001
 GameObject:
@@ -315,7 +315,7 @@ Transform:
   m_Children:
   - {fileID: 6973242096340207808}
   m_Father: {fileID: 9145083283121849135}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2401022678589598391
 MonoBehaviour:
@@ -1159,7 +1159,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9145083283121849135}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!108 &6342761924642221489
 Light:
@@ -1982,11 +1982,43 @@ Transform:
   - {fileID: 6768131768215013078}
   - {fileID: 7588787925063263703}
   - {fileID: 7757044742906400225}
+  - {fileID: 1132995429249689681}
   - {fileID: 1444890235368397406}
   - {fileID: 5583144559247815296}
   - {fileID: 6935690110846497324}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &8648275211316961024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1132995429249689681}
+  m_Layer: 0
+  m_Name: Leaderboard Camera Target 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1132995429249689681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8648275211316961024}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 4.1, y: 8.5, z: 7.76}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9145083283121849135}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &8835226182879314955
 GameObject:
