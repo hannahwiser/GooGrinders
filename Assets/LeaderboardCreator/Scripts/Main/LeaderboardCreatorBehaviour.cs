@@ -17,12 +17,15 @@ namespace Dan.Main
         {
             public Entry[] entries;
         }
+
+        private static string GetError(UnityWebRequest request) =>
+            request.responseCode + ": " + request.downloadHandler.text;
         
         internal void Authorize(Action<string> callback)
         {
-            if (!string.IsNullOrEmpty(PlayerPrefs.GetString(PlayerPrefsGuidKey, "")))
+            if (!string.IsNullOrEmpty(PlayerPrefs.GetString(GUID_KEY, "")))
             {
-                callback?.Invoke(PlayerPrefs.GetString(PlayerPrefsGuidKey));
+                callback?.Invoke(PlayerPrefs.GetString(GUID_KEY));
                 return;
             }
             
@@ -37,7 +40,7 @@ namespace Dan.Main
                 }
 
                 var guid = request.downloadHandler.text;
-                PlayerPrefs.SetString(PlayerPrefsGuidKey, guid);
+                PlayerPrefs.SetString(GUID_KEY, guid);
                 callback?.Invoke(guid);
             }));
         }
@@ -49,11 +52,11 @@ namespace Dan.Main
                 if (string.IsNullOrEmpty(guid)) return;
                 onFinish?.Invoke();
             };
-            PlayerPrefs.DeleteKey(PlayerPrefsGuidKey);
+            PlayerPrefs.DeleteKey(GUID_KEY);
             Authorize(callback);
         }
         
-        internal void SendGetRequest(string url, Action<bool> callback = null)
+        internal void SendGetRequest(string url, Action<bool> callback, Action<string> errorCallback)
         {
             var request = UnityWebRequest.Get(url);
             StartCoroutine(HandleRequest(request, isSuccessful =>
@@ -62,6 +65,7 @@ namespace Dan.Main
                 {
                     HandleError(request);
                     callback?.Invoke(false);
+                    errorCallback?.Invoke(GetError(request));
                     return;
                 }
                 callback?.Invoke(true);
@@ -69,7 +73,7 @@ namespace Dan.Main
             }));
         }
         
-        internal void SendGetRequest(string url, Action<Entry> callback = null)
+        internal void SendGetRequest(string url, Action<Entry> callback, Action<string> errorCallback)
         {
             var request = UnityWebRequest.Get(url);
             StartCoroutine(HandleRequest(request, isSuccessful =>
@@ -78,6 +82,7 @@ namespace Dan.Main
                 {
                     HandleError(request);
                     callback?.Invoke(new Entry());
+                    errorCallback?.Invoke(GetError(request));
                     return;
                 }
                 var response = JsonUtility.FromJson<Entry>(request.downloadHandler.text);
@@ -86,7 +91,7 @@ namespace Dan.Main
             }));
         }
         
-        internal void SendGetRequest(string url, Action<Entry[]> callback = null)
+        internal void SendGetRequest(string url, Action<Entry[]> callback, Action<string> errorCallback)
         {
             var request = UnityWebRequest.Get(url);
             StartCoroutine(HandleRequest(request, isSuccessful =>
@@ -95,6 +100,7 @@ namespace Dan.Main
                 {
                     HandleError(request);
                     callback?.Invoke(Array.Empty<Entry>());
+                    errorCallback?.Invoke(GetError(request));
                     return;
                 }
                 var tmp = "{\"entries\":" + request.downloadHandler.text + "}";
@@ -126,7 +132,7 @@ namespace Dan.Main
             if (request.responseCode != 200)
             {
                 onComplete.Invoke(false);
-                errorCallback?.Invoke(request.responseCode + ": " + request.downloadHandler.text);
+                errorCallback?.Invoke(GetError(request));
                 request.downloadHandler.Dispose();
                 request.Dispose();
                 yield break;
@@ -139,7 +145,8 @@ namespace Dan.Main
         
         private static void HandleError(UnityWebRequest request)
         {
-            var message = Enum.GetName(typeof(StatusCode), (StatusCode)request.responseCode).SplitByUppercase();
+            var message = Enum.GetName(typeof(StatusCode), (StatusCode) request.responseCode);
+            message = string.IsNullOrEmpty(message) ? "Unknown" : message.SplitByUppercase();
                 
             var downloadHandler = request.downloadHandler;
             var text = downloadHandler.text;

@@ -1,4 +1,4 @@
-﻿namespace Dan.Models
+﻿namespace Dan.Enums
 {
     public enum TimePeriodType
     {

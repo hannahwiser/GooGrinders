@@ -1,4 +1,6 @@
-﻿namespace Dan.Models
+﻿using Dan.Enums;
+
+namespace Dan.Models
 {
     public struct LeaderboardSearchQuery
     {

@@ -8,6 +8,7 @@
  * 
  * Note to self: Apparently there's been an update to the package, so make sure to update it based on this vid, and then
  * delete this message once it's been updated according to this video: https://youtu.be/v0aWwSkC-4o?si=o8Gf7jKUQD9ykQrb
+ * Example code from the original dev of this leaderboard system is here: https://gist.github.com/danqzq/f464dd89581f2e26cd02dedd4d33d7a2
  */
 
 //using System.Collections;
