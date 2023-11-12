@@ -5,6 +5,9 @@
  * I also implemented custom NSFW word and offensive slur word filters which I got from here: https://github.com/abstraq/chat_filters
  * The two TXT files of bad words will be in Assets > Resources
  * Date: Sept 19, 2023
+ * 
+ * Note to self: Apparently there's been an update to the package, so make sure to update it based on this vid, and then
+ * delete this message once it's been updated according to this video: https://youtu.be/v0aWwSkC-4o?si=o8Gf7jKUQD9ykQrb
  */
 
 //using System.Collections;
