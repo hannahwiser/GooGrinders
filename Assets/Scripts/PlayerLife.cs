@@ -34,6 +34,7 @@ public class PlayerLife : MonoBehaviour
     // reference to GoonamiController script
     public GoonamiController goonamiController;
     public AudioSource goonamiDeathSound;
+    public AudioSource gooTrapDeathSound;
     public float goonamiDeadzoneOffset = 7.5f; // determines where the Goonami's deadzone is. It's sortof a barbaric quick and dirty way of doing this
     private bool goonamiCanKill = true; // Prevent the Goonami from killing the player at a bad time, like immediately after respawning
 
@@ -130,6 +131,13 @@ public class PlayerLife : MonoBehaviour
         //Invoke(nameof(ReloadLevel), 1.3f);
 
         dead = true;
+        playerScript.DisableJoint();
+        if(playerScript.BelowRail)
+        {
+            playerScript.transform.position -= playerScript.jumpUpVector;
+        }
+        playerScript.UnlockRigidbody();
+        Debug.Log("PISS SHITTY");
         /* Debug.Log("Die() method was called"); */
     }
 
@@ -142,6 +150,8 @@ public class PlayerLife : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Spike_Death") && !dead)
         {
+            if(!dead)
+            gooTrapDeathSound.Play();
             Debug.Log("Player was impaled to death.");
             Die();
         }
@@ -177,7 +187,8 @@ public class PlayerLife : MonoBehaviour
 
         // re-enable player control
         playerScript.SetPlayerControlEnabled(true);
-
+        playerScript.EnableJoint();
+        playerScript.LockRigidbody();
         playerScript.OnRail = true;
         playerScript.startAttached = true;
 

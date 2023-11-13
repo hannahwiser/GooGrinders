@@ -25,7 +25,7 @@ public class ScoreHUD : MonoBehaviour
     //set the score by breaking score input down to char array
     public void SetScore(int score)
     {
-        string temp = "0" + score.ToString();
+        string temp = "00" + score.ToString();
 
         currentString[3] = temp[temp.Length - 1];
         currentString[2] = temp[temp.Length - 2];

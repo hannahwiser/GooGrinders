@@ -8,6 +8,7 @@ public class PlayerAnimController : MonoBehaviour
     public Animator animator;
     public AudioSource railSwitchSFX;
     private bool prevBelowRail = false;
+    private bool prevOnRail = false;
     private bool isCharging = false;
     private float chargeStartTime = 0.0f;
     private PlayerLife playerLife;
@@ -20,6 +21,8 @@ public class PlayerAnimController : MonoBehaviour
     void Update()
     {
         animator.SetBool("OnRail", player.OnRail);
+        animator.SetBool("Alive", !playerLife.dead);
+        animator.SetBool("OnBottom", player.BelowRail);
         if(player.OnRail){
             if (player.BelowRail != prevBelowRail)
             {
@@ -61,6 +64,14 @@ public class PlayerAnimController : MonoBehaviour
             }
             
         }
+        else
+        {
+            if(prevOnRail)
+            {
+                player.jump.Play();
+            }
+        }
+        
         if (player.jumpInputRelease)
         {
             animator.Play("Jump");
@@ -70,9 +81,10 @@ public class PlayerAnimController : MonoBehaviour
 
         if(playerLife.dead)
         {
-            animator.Play("Landing");
+            animator.Play("Death");
             animator.speed = 0;
         }
-        
+
+        prevOnRail = player.OnRail;
     }
 }
