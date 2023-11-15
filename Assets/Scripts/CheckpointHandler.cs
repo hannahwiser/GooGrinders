@@ -16,7 +16,7 @@ public class CheckpointHandler : MonoBehaviour
     public AudioSource spendPointsAudio;
     public ScoreHUD scoreHUDscript;
     public Button spendPointsButton;
-
+    public GameObject cam1, cam2;
     private void Awake()
     {
         deathCanvas.SetActive(false);
@@ -74,7 +74,10 @@ public class CheckpointHandler : MonoBehaviour
 
     public void LetMeDie()
     {
-        //the player accepts death
+        cam1.SetActive(false);
+        cam2.SetActive(true);
+        deathCanvas.GetComponent<Animator>().Play("DeathPopIn");
+        Time.timeScale = 1;
     }
 
 }
