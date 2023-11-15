@@ -76,6 +76,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int railDistanceCastPoints = 15;
 
+    public CheckpointHandler checkpointScript;
+
     void Start()
     {
         if (!playerCollider)
