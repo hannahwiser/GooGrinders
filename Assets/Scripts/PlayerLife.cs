@@ -47,6 +47,8 @@ public class PlayerLife : MonoBehaviour
     // The sound effect for falling down the hole
     public GameObject cutsceneAudioSource;
 
+    public CheckpointHandler checkpointScript;
+
     void Start()
     {
         Cinemachine3rdPersonFollow thirdPersonFollow =
@@ -127,7 +129,11 @@ public class PlayerLife : MonoBehaviour
         rb.AddForce(-rb.velocity.normalized * decelerationForce, ForceMode.Acceleration);
 
         // respawn after a delay
-        Invoke(nameof(Respawn), 1.0f);
+
+        //Invoke(nameof(Respawn), 1.0f); (THIS IS THE CODE, HANNAH)
+
+        checkpointScript.DeathPopup();
+
         //Invoke(nameof(ReloadLevel), 1.3f);
 
         dead = true;
