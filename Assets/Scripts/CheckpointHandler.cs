@@ -36,13 +36,15 @@ public class CheckpointHandler : MonoBehaviour
     {
         Time.timeScale = 0;
 
+        gorgerCost = (int)(PlayerPrefs.GetInt("PlayerScore") * .1f);
+
         promptText.SetText("Would you like to spend " + gorgerCost + " googorger points to respawn at the most recent checkpoint?");
         currentText.SetText(FunnyTexts[Random.Range(0, FunnyTexts.Length-1)]);
         balanceText.SetText("current balance: " + PlayerPrefs.GetInt("PlayerScore") + " points");
 
         if (PlayerPrefs.GetInt("PlayerScore") < gorgerCost)
         {
-            confirmSpendText.SetText("Not Enough Points");
+            confirmSpendText.SetText("Outta Points");
         }
         else
         {
