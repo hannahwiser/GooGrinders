@@ -137,7 +137,6 @@ public class PlayerLife : MonoBehaviour
             playerScript.transform.position -= playerScript.jumpUpVector;
         }
         playerScript.UnlockRigidbody();
-        Debug.Log("PISS SHITTY");
         /* Debug.Log("Die() method was called"); */
     }
 

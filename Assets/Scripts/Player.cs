@@ -166,7 +166,7 @@ public class Player : MonoBehaviour
         {
             case < 23f:
                 rb.velocity = flatVelocity.magnitude * tangent.normalized * Mathf.Sign(_dot);
-                Debug.Log("flat angle: " + _angle);
+               
                 break;
             //disabled for the time being. everything still works this code specifically just had lots of inconsistencies
             /*case < 45f:
@@ -178,7 +178,6 @@ public class Player : MonoBehaviour
             break;*/
             case < 360f:
                 rb.velocity = storedVelocity.magnitude * tangent.normalized * Mathf.Sign(_dot);
-                Debug.Log("big angle: " + _angle);
                 break;
         }
 
@@ -519,7 +518,6 @@ public class Player : MonoBehaviour
                 //transform.position += model.localPosition;
                 rb.MovePosition(model.position);
                 model.localPosition = Vector3.zero;
-                Debug.Log("Disconnect rail");
                 OnRail = false;
 
                 jumpRegroundCooldown = .2f;
@@ -677,7 +675,7 @@ public class Player : MonoBehaviour
         if (jumpRegroundCooldown <= 0 || other.collider != splineCollider)
             if (other.collider.tag == "Rail")
             {
-                Debug.Log(splineCollider.name);
+                //Debug.Log(splineCollider.name);
                 spline = other.gameObject.GetComponent<SplineContainer>();
                 if (spline)
                 {
