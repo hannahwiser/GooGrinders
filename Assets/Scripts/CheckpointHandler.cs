@@ -41,7 +41,7 @@ public class CheckpointHandler : MonoBehaviour
     {
         Time.timeScale = 0;
 
-        gorgerCost = (int)(PlayerPrefs.GetInt("PlayerScore") * .1f);
+        gorgerCost = 100;
 
         promptText.SetText("Would you like to spend " + gorgerCost + " googorger points to respawn at the most recent checkpoint?");
         currentText.SetText(FunnyTexts[Random.Range(0, FunnyTexts.Length-1)]);
