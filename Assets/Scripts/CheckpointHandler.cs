@@ -74,10 +74,10 @@ public class CheckpointHandler : MonoBehaviour
 
     public void LetMeDie()
     {
+        Time.timeScale = 1;
         cam1.SetActive(false);
         cam2.SetActive(true);
         deathCanvas.GetComponent<Animator>().Play("DeathPopIn");
-        Time.timeScale = 1;
     }
 
 }
