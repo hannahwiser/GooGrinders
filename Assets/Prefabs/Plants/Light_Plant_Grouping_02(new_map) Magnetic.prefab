@@ -15182,9 +15182,9 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 388e1b3230cf1c94fa8399c2d92a7352, type: 2}
-  - {fileID: 2100000, guid: d852ba78fa2d0974bb6eedcc2a2af06d, type: 2}
+  - {fileID: 2100000, guid: fd1a840d1cc910046b4adff2c8ba46e8, type: 2}
   - {fileID: 2100000, guid: f654527068baf8a45b19bd7e0c3752ac, type: 2}
-  - {fileID: 2100000, guid: 854cc75bff5d6a1439d57d3130d685c4, type: 2}
+  - {fileID: 2100000, guid: fd1a840d1cc910046b4adff2c8ba46e8, type: 2}
   - {fileID: 2100000, guid: d7534881485a8d647a376aed7cc40135, type: 2}
   - {fileID: 2100000, guid: 793f36fc6db422b4f9953d23874bd7c5, type: 2}
   m_StaticBatchInfo:
