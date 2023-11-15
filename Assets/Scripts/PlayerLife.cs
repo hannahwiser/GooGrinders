@@ -162,7 +162,7 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
-    void Respawn(Transform targetSpawn)
+    public void Respawn(Transform targetSpawn)
     {
         // prevent the Goonami from killing the player while we respawn them
         goonamiCanKill = false;

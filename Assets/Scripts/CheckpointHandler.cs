@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class CheckpointHandler : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class CheckpointHandler : MonoBehaviour
     public int gorgerCost;
     public Transform lastCheckpoint;
     public PlayerLife playerScript;
+    public AudioSource spendPointsAudio;
+    public ScoreHUD scoreHUDscript;
+    public Button spendPointsButton;
 
     private void Awake()
     {
@@ -43,12 +47,15 @@ public class CheckpointHandler : MonoBehaviour
         currentText.SetText(FunnyTexts[Random.Range(0, FunnyTexts.Length-1)]);
         balanceText.SetText("current balance: " + PlayerPrefs.GetInt("PlayerScore") + " points");
 
-        if (PlayerPrefs.GetInt("PlayerScore") < gorgerCost)
+        //making sure the player cant even press the button if they don't have enough $$
+        if (PlayerPrefs.GetInt("PlayerScore") <= 0)
         {
             confirmSpendText.SetText("Outta Points");
+            spendPointsButton.enabled = false;
         }
         else
         {
+            spendPointsButton.enabled = true;
             confirmSpendText.SetText("Spend Points");
         }
 
@@ -57,7 +64,17 @@ public class CheckpointHandler : MonoBehaviour
 
     public void SpendPoints()
     {
-        PlayerPrefs.SetInt("PlayerScore", PlayerPrefs.GetInt("PlayerScore") - gorgerCost);
+        Time.timeScale = 1;
+        deathCanvas.GetComponent<Animator>().Play("DeathPopIn");
+        PlayerPrefs.SetInt("PlayerScore", PlayerPrefs.GetInt("PlayerScore") - gorgerCost); //subtracta da pointsa
+        scoreHUDscript.SetScore(PlayerPrefs.GetInt("PlayerScore"));
+        spendPointsAudio.Play(); //play the audio
+        playerScript.Respawn(lastCheckpoint); //do the respawn legwork from another script i didnt write <3
+    }
+
+    public void LetMeDie()
+    {
+        //the player accepts death
     }
 
 }

@@ -11,11 +11,11 @@ public class PassCheckpoint : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player") //if the player passes the checkpoint
         {
-            checkPointScript.SetCheckPoint(myLocation);
-            anim.Play("CameraFlash");
-            flashAudio.Play();
+            checkPointScript.SetCheckPoint(myLocation);//set the spawn point as the correct spawn point
+            anim.Play("CameraFlash");//flash people
+            flashAudio.Play();//music !
         }
     }
 }
