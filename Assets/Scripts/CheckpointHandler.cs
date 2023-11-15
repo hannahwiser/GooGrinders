@@ -10,6 +10,7 @@ public class CheckpointHandler : MonoBehaviour
     public TextMeshProUGUI currentText, balanceText, promptText, confirmSpendText;
     public Animator anim;
     public GameObject deathCanvas;
+    public GameObject HUDCanvas;
     public int gorgerCost;
     public Transform lastCheckpoint;
     public PlayerLife playerScript;
@@ -75,6 +76,7 @@ public class CheckpointHandler : MonoBehaviour
 
     public void LetMeDie()
     {
+        HUDCanvas.SetActive(false);
         Time.timeScale = 1;
         cam1.SetActive(false);
         cam2.SetActive(true);
