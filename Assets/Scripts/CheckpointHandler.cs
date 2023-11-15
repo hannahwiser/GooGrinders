@@ -11,6 +11,7 @@ public class CheckpointHandler : MonoBehaviour
     public GameObject deathCanvas;
     public int gorgerCost;
     public Transform lastCheckpoint;
+    public PlayerLife playerScript;
 
     private void Awake()
     {

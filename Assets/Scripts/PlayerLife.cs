@@ -162,7 +162,7 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
-    void Respawn()
+    void Respawn(Transform targetSpawn)
     {
         // prevent the Goonami from killing the player while we respawn them
         goonamiCanKill = false;
@@ -180,7 +180,7 @@ public class PlayerLife : MonoBehaviour
         }
 
         // set the player's position to the spawn point
-        transform.position = spawnPoint.position;
+        transform.position = targetSpawn.position;
 
         // reset the player's velocity
         Rigidbody rb = GetComponent<Rigidbody>();
