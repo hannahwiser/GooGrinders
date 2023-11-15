@@ -7,13 +7,13 @@ public class PassCheckpoint : MonoBehaviour
     public Animator anim;
     public AudioSource flashAudio;
     public CheckpointHandler checkPointScript;
-    public int myNumber = 1;
+    public Transform myLocation;
 
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            checkPointScript.SetCheckPoint(myNumber);
+            checkPointScript.SetCheckPoint(myLocation);
             anim.Play("CameraFlash");
             flashAudio.Play();
         }

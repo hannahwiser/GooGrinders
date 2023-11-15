@@ -10,7 +10,7 @@ public class CheckpointHandler : MonoBehaviour
     public Animator anim;
     public GameObject deathCanvas;
     public int gorgerCost;
-    public int lastCheckpoint;
+    public Transform lastCheckpoint;
 
     private void Awake()
     {
@@ -27,9 +27,9 @@ public class CheckpointHandler : MonoBehaviour
     {
     }
 
-    public void SetCheckPoint(int theNumber)
+    public void SetCheckPoint(Transform theLocation)
     {
-        lastCheckpoint = theNumber;
+        lastCheckpoint = theLocation;
     }
 
     public void DeathPopup()
@@ -52,6 +52,11 @@ public class CheckpointHandler : MonoBehaviour
         }
 
         deathCanvas.SetActive(true);
+    }
+
+    public void SpendPoints()
+    {
+        PlayerPrefs.SetInt("PlayerScore", PlayerPrefs.GetInt("PlayerScore") - gorgerCost);
     }
 
 }
