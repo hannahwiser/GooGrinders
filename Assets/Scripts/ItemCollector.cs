@@ -23,7 +23,7 @@ public class ItemCollector : MonoBehaviour
    //public ScoreHUD scoreHUDScript;
 
     // when the game starts, load the player's score from PlayerPrefs
-    private void Start()
+    void Start()
     {
         gooScore = Random.Range(100, 500);
         playerScore = PlayerPrefs.GetInt("PlayerScore", 0);

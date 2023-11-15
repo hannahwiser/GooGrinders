@@ -11,6 +11,7 @@ public class ScoreHUD : MonoBehaviour
     public char[] currentString = new char[4];
     public Animator chargeAnim;
     public bool check;
+    public int playerScore;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,21 @@ public class ScoreHUD : MonoBehaviour
     //set the score by breaking score input down to char array
     public void SetScore(int score)
     {
-        string temp = "0000" + score.ToString();
+        playerScore += score;
+        string temp = "0000" + playerScore.ToString();
+
+        currentString[3] = temp[temp.Length - 1];
+        currentString[2] = temp[temp.Length - 2];
+        currentString[1] = temp[temp.Length - 3];
+        currentString[0] = temp[temp.Length - 4];
+
+        StartCoroutine(blinkHUD());
+    }
+
+    public void SetSpend(int score)
+    {
+        playerScore = PlayerPrefs.GetInt("PlayerScore");
+        string temp = "0000" + playerScore.ToString();
 
         currentString[3] = temp[temp.Length - 1];
         currentString[2] = temp[temp.Length - 2];

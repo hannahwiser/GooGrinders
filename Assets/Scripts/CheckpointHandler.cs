@@ -66,8 +66,9 @@ public class CheckpointHandler : MonoBehaviour
     {
         Time.timeScale = 1;
         deathCanvas.GetComponent<Animator>().Play("DeathPopIn");
-        PlayerPrefs.SetInt("PlayerScore", PlayerPrefs.GetInt("PlayerScore") - gorgerCost); //subtracta da pointsa
-        scoreHUDscript.SetScore(PlayerPrefs.GetInt("PlayerScore"));
+        int temp = PlayerPrefs.GetInt("PlayerScore");
+        PlayerPrefs.SetInt("PlayerScore", temp - gorgerCost); //subtracta da pointsa
+        scoreHUDscript.SetSpend(PlayerPrefs.GetInt("PlayerScore"));
         spendPointsAudio.Play(); //play the audio
         playerScript.Respawn(lastCheckpoint); //do the respawn legwork from another script i didnt write <3
     }

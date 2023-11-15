@@ -281,6 +281,7 @@ MonoBehaviour:
   currentString: 0000000000000000
   chargeAnim: {fileID: 3690740265385617563}
   check: 0
+  playerScore: 0
 --- !u!114 &105797409701530115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,8 +294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7f69bb425c5b7240b669f54e6414904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: -1243
-  end: 1350
   current: 0
   player: {fileID: 0}
   currentPercentage: 0
@@ -1325,8 +1324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -625, y: 0}
-  m_SizeDelta: {x: 1078.613, y: 196.416}
+  m_AnchoredPosition: {x: -558.2266, y: 0}
+  m_SizeDelta: {x: 945.066, y: 196.416}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &8628917253698240007
 MonoBehaviour:
