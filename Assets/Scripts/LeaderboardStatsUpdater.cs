@@ -6,6 +6,7 @@ using TMPro;
 public class LeaderboardStatsUpdater : MonoBehaviour
 {
     public TextMeshProUGUI finalScoreText;
+    public TextMeshProUGUI finalScoreText2;
     public TextMeshProUGUI googorgersPoppedText;
     public TextMeshProUGUI totalTimeGrindedText;
     public TextMeshProUGUI totalAttemptsText;
@@ -14,6 +15,7 @@ public class LeaderboardStatsUpdater : MonoBehaviour
     public void UpdateLeaderboardStats(int finalScore, int googorgersPopped, float totalTimeGrinded, int totalAttempts)
     {
         finalScoreText.text = finalScore.ToString();
+        finalScoreText2.text = finalScore.ToString();
         googorgersPoppedText.text = googorgersPopped.ToString();
         totalTimeGrindedText.text = ConvertToTimeFormat(totalTimeGrinded);
         totalAttemptsText.text = totalAttempts.ToString();
