@@ -1,35 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeaderboardSequence : MonoBehaviour
 {
     public tvScreenController screenController;
 
+    private int currentScreen = 1;
+
     public void StartLeaderboardSequence()
     {
         // Set the TV screen to screen 1
         screenController.MoveToLosingScreen(1);
-
-        // Start a coroutine to wait for user input before moving to screen 2
-        StartCoroutine(WaitForButtonClick());
+        currentScreen = 1;
     }
 
-    IEnumerator WaitForButtonClick()
+    public void MoveToNextScreen()
     {
-        // wait until the button is clicked
-        while (!ButtonClicked())
+        if (currentScreen < 5)
         {
-            yield return null;
+            currentScreen++;
+            screenController.MoveToLosingScreen(currentScreen);
         }
-
-        // move to screen 2
-        screenController.MoveToLosingScreen(2);
     }
 
-    bool ButtonClicked()
+    public void MoveToPreviousScreen()
     {
-
-        return Input.GetMouseButtonDown(0); 
+        if (currentScreen > 1)
+        {
+            currentScreen--;
+            screenController.MoveToLosingScreen(currentScreen);
+        }
     }
 }
