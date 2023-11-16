@@ -10,6 +10,7 @@ public class GorgerDeath : MonoBehaviour
     public TextMeshPro textObject;
     float currentOpacity = 1;
     public GameObject myMesh;
+    public AudioSource ambient, slurp;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,8 @@ public class GorgerDeath : MonoBehaviour
 
     public IEnumerator KillMe()
     {
+        slurp.Play();
+        ambient.Stop();
         textObject.SetText("+" + pointsToAward.ToString());
         myMesh.SetActive(false);
         this.GetComponent<SphereCollider>().enabled = false;
