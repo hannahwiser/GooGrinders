@@ -1990,7 +1990,7 @@ AudioSource:
   Priority: 240
   DopplerLevel: 1
   MinDistance: 10
-  MaxDistance: 150
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -2040,7 +2040,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.6944444
+      value: 0.5555556
       inSlope: 0
       outSlope: 0
       tangentMode: 0
