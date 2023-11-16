@@ -76,6 +76,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int railDistanceCastPoints = 15;
 
+    // Track the total time grinded for Erriks leaderboard stuff
+    public float totalTimeOnRail = 0f;
+
     void Start()
     {
         if (!playerCollider)
@@ -329,6 +332,8 @@ public class Player : MonoBehaviour
         //HandleInput();
         if (OnRail)
         {
+            // Track the total time for the stats screen
+            totalTimeOnRail += Time.fixedDeltaTime;
             if (inputVector.y < 0)
             {
                 if (
@@ -354,6 +359,7 @@ public class Player : MonoBehaviour
                     BelowRail = false;
             }
         }
+
         MainState();
 
         // Limit horizontal movement speed

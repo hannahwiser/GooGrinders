@@ -19,8 +19,9 @@ public class ItemCollector : MonoBehaviour
     private int playerScore = 0;
     public int gooScore;
     public GorgerDeath deathScript;
+    public int googorgersPopped = 0;
 
-   //public ScoreHUD scoreHUDScript;
+    //public ScoreHUD scoreHUDScript;
 
     // when the game starts, load the player's score from PlayerPrefs
     void Start()
@@ -36,6 +37,7 @@ public class ItemCollector : MonoBehaviour
             int amountToAdd = other.GetComponent<GorgerDeath>().pointsToAward; //saving the amount of points googorger is worth
             other.GetComponent<GorgerDeath>().KillTheBug(); //does the visuals for googorger death
             playerScore += amountToAdd; //adds to the playerscore variable
+            googorgersPopped++;
 
             // update the score in PlayerPrefs
             PlayerPrefs.SetInt("PlayerScore", playerScore);

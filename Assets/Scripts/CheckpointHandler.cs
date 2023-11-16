@@ -18,19 +18,15 @@ public class CheckpointHandler : MonoBehaviour
     public ScoreHUD scoreHUDscript;
     public Button spendPointsButton;
     public GameObject cam1, cam2;
+
+    public LeaderboardStatsUpdater leaderboardUpdater;
+    public ItemCollector itemCollector;
+    public Player player;
+    int totalAttempts = 1;
+
     private void Awake()
     {
         deathCanvas.SetActive(false);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     public void SetCheckPoint(Transform theLocation)
@@ -65,6 +61,7 @@ public class CheckpointHandler : MonoBehaviour
 
     public void SpendPoints()
     {
+        totalAttempts++;
         Time.timeScale = 1;
         deathCanvas.GetComponent<Animator>().Play("DeathPopIn");
         int temp = PlayerPrefs.GetInt("PlayerScore");
@@ -76,6 +73,22 @@ public class CheckpointHandler : MonoBehaviour
 
     public void LetMeDie()
     {
+        // get the stats for the leaderboard 
+        int googorgersPopped = 0;
+        float totalTimeGrinded = 0;
+
+        if (itemCollector != null)
+        {
+            googorgersPopped = itemCollector.googorgersPopped;
+        }
+        if (playerScript != null)
+        {
+            totalTimeGrinded = player.totalTimeOnRail;
+        }
+
+        // update the leaderboard stats
+        leaderboardUpdater.UpdateLeaderboardStats(PlayerPrefs.GetInt("PlayerScore"), googorgersPopped, totalTimeGrinded, totalAttempts);
+
         HUDCanvas.SetActive(false);
         Time.timeScale = 1;
         cam1.SetActive(false);
