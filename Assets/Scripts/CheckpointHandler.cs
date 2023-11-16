@@ -23,6 +23,7 @@ public class CheckpointHandler : MonoBehaviour
     public ItemCollector itemCollector;
     public Player player;
     int totalAttempts = 1;
+    public LeaderboardSequence leaderboardSequence;
 
     private void Awake()
     {
@@ -94,6 +95,8 @@ public class CheckpointHandler : MonoBehaviour
         cam1.SetActive(false);
         cam2.SetActive(true);
         deathCanvas.GetComponent<Animator>().Play("DeathPopIn");
+
+        leaderboardSequence.StartLeaderboardSequence();
     }
 
 }
