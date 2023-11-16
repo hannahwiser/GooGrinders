@@ -9,6 +9,7 @@ public class TypeText : MonoBehaviour
     public TextMeshProUGUI thisText;
     public string targetText;
     public string currentText;
+    public GameObject PlayerObject;
 
     IEnumerator TypeThisText()
     {
@@ -23,5 +24,10 @@ public class TypeText : MonoBehaviour
             thisText.SetText(currentText);
             yield return new WaitForSeconds(timeBetweenLetters);
         }
+    }
+
+    public void EnablePlayerScript()
+    {
+        PlayerObject.GetComponent<Player>().enabled = true;
     }
 }
