@@ -102,6 +102,7 @@ public class MainMenuBehavior : MonoBehaviour
             timeCrunch -= .001f;
             yield return new WaitForSeconds(.01f);
         }
+        yield return new WaitForSeconds(4.5f);
         SceneManager.LoadScene(1);
     }
 }

@@ -8,6 +8,7 @@ public class BlockRaycasts : MonoBehaviour
 {
     public GameObject[] rayObjects;
     public Button startButton;
+    public AudioSource glug, alarm, squish, thud;
 
     void Start()
     {
@@ -21,6 +22,27 @@ public class BlockRaycasts : MonoBehaviour
         {
             rayObjects[i].GetComponent<Collider>().enabled = false;
         }
+    }
+
+    public void PlayGlug()
+    {
+        glug.Play();
+    }
+
+    public void PlayAlarm()
+    {
+        alarm.time = 1;
+        alarm.Play();
+    }
+
+    public void PlaySquish()
+    {
+        squish.Play();
+    }
+    public void PlayThud()
+    {
+        thud.time = .5f;
+        thud.Play();
     }
 
     public void EnableButton()
