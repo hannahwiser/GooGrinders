@@ -362,6 +362,7 @@ MonoBehaviour:
   checkPointScript: {fileID: 0}
   myLocation: {fileID: 0}
   hasThisCheckPointPassed: 0
+  cameraFlashAnimation: {fileID: 2322311217227150174}
 --- !u!1 &1792101288034266976
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,11 +826,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838ba2a6b562c9346a50ed36a45103d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tvSpotlight: {fileID: 0}
-  flashIntensity: 22.15
-  flashDuration: 0.1
-  flashInterval: 10
+  cameraFlashSpotlight: {fileID: 3110671162741036112}
+  flashIntensity: 388319500
+  flashDuration: 0.05
+  flashInterval: 5
   initialBrightness: 0
+  fadeOutDuration: 0.2
+  flashDebugging: 0
 --- !u!1001 &1312118373485147178
 PrefabInstance:
   m_ObjectHideFlags: 0

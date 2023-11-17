@@ -1,3 +1,10 @@
+/**
+ * File: CameraFlashAnimation
+ * Programmer: Sagar Patel
+ * Description: Script for handling the camera flash animation. Based on this video of a camera flash: https://www.youtube.com/watch?v=SNCASMUKpBY
+ * Date: Nov 16, 2023
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,28 +12,30 @@ using UnityEngine;
 public class CameraFlashAnimation : MonoBehaviour
 {
     public Light cameraFlashSpotlight;
-    public float flashIntensity = 22.15f;
+    public float flashIntensity = 3366151f;
+    public float flashDuration = 0.05f;
+    public float flashInterval = 5f;
+    public float initialBrightness = 0f;
+    public float fadeOutDuration = 0.2f; // Duration for exponential fade-out
 
-    // Adjust as needed for the duration of the flash
-    public float flashDuration = 0.1f;
-    
-    // Interval between flashes
-    public float flashInterval = 10f;
-
-    // Initial brightness
-    public float initialBrightness = 0f; 
+    public bool flashDebugging = true; // Toggle to control flash interval
 
     private bool isFlashing = false;
     private float timer = 0f;
+    private float flashTimer = 0f;
+    private float originalIntensity;
 
     void Start()
     {
         if (cameraFlashSpotlight == null)
         {
             cameraFlashSpotlight = GetComponent<Light>();
+        }
 
-            // Set the initial brightness
-            cameraFlashSpotlight.intensity = initialBrightness; 
+        if (cameraFlashSpotlight != null)
+        {
+            originalIntensity = cameraFlashSpotlight.intensity;
+            cameraFlashSpotlight.intensity = initialBrightness;
         }
         else
         {
@@ -36,28 +45,44 @@ public class CameraFlashAnimation : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-
-        if (timer >= flashInterval)
+        if (flashDebugging)
         {
-            timer = 0f;
-            TriggerFlash();
+            timer += Time.deltaTime;
+
+            if (timer >= flashInterval)
+            {
+                timer = 0f;
+                TriggerFlash();
+            }
         }
 
         if (isFlashing)
         {
-            // Start the flash effect
-            cameraFlashSpotlight.intensity = flashIntensity;
+            flashTimer += Time.deltaTime;
 
-            // After the flash duration, return to the original intensity
-            Invoke("EndFlash", flashDuration);
+            if (flashTimer <= flashDuration)
+            {
+                // Calculate exponential flash effect
+                float t = flashTimer / flashDuration;
+                float exponentialIntensity = Mathf.Lerp(initialBrightness, flashIntensity, Mathf.Pow(t, 4)); // Exponential curve (power can be adjusted)
+
+                cameraFlashSpotlight.intensity = exponentialIntensity;
+            }
+            else if (flashTimer <= flashDuration + fadeOutDuration)
+            {
+                // Calculate exponential fade-out effect
+                float t = (flashTimer - flashDuration) / fadeOutDuration;
+                float exponentialIntensity = Mathf.Lerp(flashIntensity, initialBrightness, Mathf.Pow(t, 2)); // Slightly slower fade-out
+
+                cameraFlashSpotlight.intensity = exponentialIntensity;
+            }
+            else
+            {
+                isFlashing = false;
+                flashTimer = 0f;
+                cameraFlashSpotlight.intensity = initialBrightness;
+            }
         }
-    }
-
-    void EndFlash()
-    {
-        isFlashing = false;
-        cameraFlashSpotlight.intensity = initialBrightness;
     }
 
     // Method to trigger the flash effect

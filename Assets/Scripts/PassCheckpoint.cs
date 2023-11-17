@@ -10,14 +10,28 @@ public class PassCheckpoint : MonoBehaviour
     public Transform myLocation;
     public bool hasThisCheckPointPassed = false;
 
+    // Reference to the CameraFlashAnimation script
+    public CameraFlashAnimation cameraFlashAnimation;
+
+    void Start()
+    {
+        // Find the CameraFlashAnimation script in the scene
+        cameraFlashAnimation = FindObjectOfType<CameraFlashAnimation>();
+    }
+
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player" && !hasThisCheckPointPassed) //if the player passes the checkpoint
         {
             hasThisCheckPointPassed = true;
-            checkPointScript.SetCheckPoint(myLocation);//set the spawn point as the correct spawn point
-            anim.Play("CameraFlash");//flash people
-            flashAudio.Play();//music !
+            checkPointScript.SetCheckPoint(myLocation); //set the spawn point as the correct spawn point
+            // Trigger the camera flash animation
+            if (cameraFlashAnimation != null)
+            {
+                cameraFlashAnimation.TriggerFlash(); // Trigger the flash effect
+            }
+            anim.Play("CameraFlash"); // Flash people
+            flashAudio.Play(); // Play music!
         }
     }
 }
