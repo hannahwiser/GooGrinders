@@ -16,7 +16,7 @@ public class LeaderboardSequence : MonoBehaviour
     // Set this to true if the player won the game
     public bool playerWon = false;
 
-    private int currentScreen = 1;
+    private int currentScreen = 0;
 
     public void StartLeaderboardSequence()
     {
@@ -28,7 +28,7 @@ public class LeaderboardSequence : MonoBehaviour
 
         //currentScreen = 1;
 
-        screenController.MoveToWinningScreen(5);
+        screenController.MoveToWinningScreen(4);
         //if (currentScreen == 5)
         //{
             myField.ActivateInputField();
