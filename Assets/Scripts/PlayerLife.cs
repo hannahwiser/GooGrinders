@@ -196,7 +196,7 @@ public class PlayerLife : MonoBehaviour
         playerScript.LockRigidbody();
         playerScript.OnRail = true;
         playerScript.startAttached = true;
-
+        animController.animator.Play("Respawn");
         // set the damping values to 0 when you first respawn
         Cinemachine3rdPersonFollow thirdPersonFollow =
             virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
