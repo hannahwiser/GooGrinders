@@ -14,7 +14,7 @@ public class CheckpointHandler : MonoBehaviour
     public int gorgerCost;
     public Transform lastCheckpoint;
     public PlayerLife playerScript;
-    public AudioSource spendPointsAudio;
+    public AudioSource spendPointsAudio, confirmDeathAudio;
     public ScoreHUD scoreHUDscript;
     public Button spendPointsButton;
     public GameObject cam1, cam2;
@@ -74,6 +74,7 @@ public class CheckpointHandler : MonoBehaviour
 
     public void LetMeDie()
     {
+        confirmDeathAudio.Play();
         // get the stats for the leaderboard 
         int googorgersPopped = 0;
         float totalTimeGrinded = 0;
