@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
 
     // Jakes' rail particle emitter
     public ParticleSystem railParticles;
-    public float yourSpeedLimit = 0f;
+    public float minimumSpeedLimit = 0f;
     void Start()
     {
         if (!playerCollider)
@@ -686,7 +686,7 @@ public class Player : MonoBehaviour
         if (activate)
         {
             // check if the player is on the rail and going over a certain speed
-            if (OnRail && rb.velocity.magnitude > yourSpeedLimit)
+            if (OnRail && rb.velocity.magnitude > minimumSpeedLimit)
             {
                 // activate the particle emitter
                 ActivateRailParticles();
