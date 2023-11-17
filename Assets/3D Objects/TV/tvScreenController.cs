@@ -47,10 +47,18 @@ public class tvScreenController : MonoBehaviour
 
     private IEnumerator MoveToScreenCoroutine(Transform targetScreen)
     {
-        while (Vector3.Distance(tvRecorderCamera.transform.position, targetScreen.position) > 0.01f)
+        float distanceThreshold = 0.01f;
+        while (Vector3.Distance(tvRecorderCamera.transform.position, targetScreen.position) > distanceThreshold)
         {
-            tvRecorderCamera.transform.position = Vector3.Lerp(tvRecorderCamera.transform.position, targetScreen.position, Time.deltaTime * movementSpeed);
+            float step = movementSpeed * Time.deltaTime;
+
+            //tvRecorderCamera.transform.position = Vector3.Lerp(tvRecorderCamera.transform.position, targetScreen.position, Time.deltaTime * movementSpeed);
+
+            // move the camera towards the target position
+            tvRecorderCamera.transform.position = Vector3.MoveTowards(tvRecorderCamera.transform.position, targetScreen.position, step);
+
             yield return null;
         }
+        tvRecorderCamera.transform.position = targetScreen.position;
     }
 }

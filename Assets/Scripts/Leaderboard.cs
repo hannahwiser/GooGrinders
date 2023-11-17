@@ -13,6 +13,7 @@ using UnityEngine;
 using TMPro;
 using Dan.Main;
 using System.Linq;
+using System;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -67,14 +68,8 @@ public class Leaderboard : MonoBehaviour
 
         if (ContainsProfanityOrSlurs(username))
         {
-            Debug.LogWarning(
-                "SetLeaderboardEntry(): Username contains profanity or slurs. Defaulting the name to Sporet..."
-            );
-            //return;
-
-            // It's better to set their name to a default name instead of giving an error and letting them try again.
-            // The username will be set to "Sporet" in case of blocked words
-            usernameToUpload = "Sporet";
+            Debug.LogWarning("SetLeaderboardEntry(): Username contains profanity or slurs. Defaulting the name to Sporet...");
+            usernameToUpload = "Sporet"; // Default username for blocked words
         }
 
         // Process the username
@@ -84,12 +79,21 @@ public class Leaderboard : MonoBehaviour
             publicLeaderboardKey,
             usernameToUpload,
             score,
-            (
-                (msg) =>
+            (isSuccessful) =>
+            {
+                if (isSuccessful)
                 {
-                    GetLeaderBoard();
+                // Reset the player after uploading the entry to enable multiple entries for the same username
+                LeaderboardCreator.ResetPlayer(() =>
+                    {
+                        GetLeaderBoard();
+                    });
                 }
-            )
+                else
+                {
+                    Debug.LogError("Failed to upload the new entry to the leaderboard.");
+                }
+            }
         );
     }
 

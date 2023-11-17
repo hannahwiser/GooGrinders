@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LeaderboardSequence : MonoBehaviour
 {
@@ -15,11 +16,28 @@ public class LeaderboardSequence : MonoBehaviour
     public TMP_InputField myField;
     public TextMeshProUGUI inputScore;
 
-    // Set this to true if the player won the game
+    // set playerWon to true if the player won the game
     public bool playerWon = false;
 
     private int currentScreen = 0;
     private bool waitingForClick = false;
+
+    private bool scoreSubmitted = false;
+
+    private void Update()
+    {
+        if ((!playerWon && currentScreen == 4) || (playerWon && currentScreen == 5))
+        {
+            if (Input.GetKey(KeyCode.R))
+            {
+                SceneManager.LoadScene(1); // Restart level
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                SceneManager.LoadScene(0); // Quit to menu
+            }
+        }
+    }
 
     private void OnEnable()
     {
@@ -54,12 +72,20 @@ public class LeaderboardSequence : MonoBehaviour
         {
             if (currentScreen == 2 && playerWon)
             {
-                SubmitScore();
+                if (!scoreSubmitted)
+                {
+                    SubmitScore();
+                    // set the scoreSubmitted to true after submitting the score so the user can't spam the leaderboard
+                    scoreSubmitted = true;
+                    // move to next screen after a delay
+                    StartCoroutine(MoveToNextScreenWithDelay(0.5f)); 
+                }
             }
             else
             {
                 waitingForClick = false;
                 MoveToNextScreen();
+                //StartCoroutine(MoveToNextScreenWithDelay(0.05f)); // move to next screen after a delay
             }
         }
     }
@@ -114,5 +140,11 @@ public class LeaderboardSequence : MonoBehaviour
     public void SetWin(bool value)
     {
         playerWon = value;
+    }
+
+    IEnumerator MoveToNextScreenWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        MoveToNextScreen();
     }
 }
