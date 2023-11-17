@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentlyPaused = false;
         bgAudio = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
         volumeSlider.value = bgAudio.volume;
     }
@@ -42,9 +43,12 @@ public class PauseMenu : MonoBehaviour
 
     public void BackToGame()
     {
-        Time.timeScale = 1;
-        currentlyPaused = false;
-        anim.Play("PauseFadeOut");
+        if (currentlyPaused)
+        {
+            Time.timeScale = 1;
+            currentlyPaused = false;
+            anim.Play("PauseFadeOut");
+        }
     }
 
     public void ToScene(int scene)
