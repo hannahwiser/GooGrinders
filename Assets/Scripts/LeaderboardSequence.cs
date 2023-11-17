@@ -2,11 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class LeaderboardSequence : MonoBehaviour
 {
     public tvScreenController screenController;
+
+    [SerializeField]
+    private TMP_InputField myField;
 
     // Set this to true if the player won the game
     public bool playerWon = false;
@@ -16,12 +21,18 @@ public class LeaderboardSequence : MonoBehaviour
     public void StartLeaderboardSequence()
     {
         // set the initial screen based on playerWon
-        if (playerWon)
-            screenController.MoveToWinningScreen(1);
-        else
-            screenController.MoveToLosingScreen(1);
+        //if (playerWon)
+        //    screenController.MoveToWinningScreen(1);
+        //else
+        //    screenController.MoveToLosingScreen(1);
 
-        currentScreen = 1;
+        //currentScreen = 1;
+
+        screenController.MoveToWinningScreen(5);
+        //if (currentScreen == 5)
+        //{
+            myField.ActivateInputField();
+        //}
     }
 
     public void MoveToNextScreen()
