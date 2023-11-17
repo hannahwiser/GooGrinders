@@ -70,6 +70,13 @@ public class CheckpointHandler : MonoBehaviour
         scoreHUDscript.SetSpend(PlayerPrefs.GetInt("PlayerScore"));
         spendPointsAudio.Play(); //play the audio
         playerScript.Respawn(lastCheckpoint); //do the respawn legwork from another script i didnt write <3
+        //StartCoroutine(WaitToRespawn());
+    }
+
+    public IEnumerator WaitToRespawn()
+    {
+        yield return new WaitForSeconds(.5f);
+        playerScript.Respawn(lastCheckpoint); //do the respawn legwork from another script i didnt write <3
     }
 
     public void LetMeDie()
