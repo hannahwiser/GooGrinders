@@ -17,11 +17,14 @@ public class ScoreHUD : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        PlayerPrefs.SetInt("PlayerScore", 0);
         //setting everything to 0 when game starts
         numbers[0].SetText("0");
         numbers[1].SetText("0");
         numbers[2].SetText("0");
         numbers[3].SetText("0");
+        Debug.Log(PlayerPrefs.GetInt("PlayerScore"));
     }
 
     private void Update()

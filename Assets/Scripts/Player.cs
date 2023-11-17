@@ -274,6 +274,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(rb.velocity.magnitude);
         if (spline)
             transform.parent = spline.transform;
         HandleInput();
