@@ -18,6 +18,7 @@ public class MainMenuBehavior : MonoBehaviour
     public string zoomOutTitle;
     public GameObject textObject;
     public AudioSource backgroundAudio;
+    AsyncOperation asyncOperation;
 
     public GameObject currentVial;
 
@@ -26,6 +27,8 @@ public class MainMenuBehavior : MonoBehaviour
     {
         startButton.enabled = false;
         textObject.SetActive(false);
+        asyncOperation = SceneManager.LoadSceneAsync(1);
+        asyncOperation.allowSceneActivation = false;
     }
 
     public void SetCurrentVial(GameObject vial)
@@ -95,6 +98,8 @@ public class MainMenuBehavior : MonoBehaviour
     IEnumerator WaitForAnimation()
     {
         float timeCrunch = backgroundAudio.volume;
+
+
         while (timeCrunch > 0)
         {
             Debug.Log("RUN");
@@ -102,7 +107,8 @@ public class MainMenuBehavior : MonoBehaviour
             timeCrunch -= .001f;
             yield return new WaitForSeconds(.01f);
         }
-        SceneManager.LoadScene(1);
+        yield return new WaitForSeconds(2.8f);
+        asyncOperation.allowSceneActivation = true;
     }
 }
 

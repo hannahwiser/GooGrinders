@@ -718,4 +718,9 @@ public class Player : MonoBehaviour
     {
         CheckCollider(other);
     }
+
+    public void StopCharge()
+    {
+        charge.Stop();
+    }
 }

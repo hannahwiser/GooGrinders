@@ -7,6 +7,7 @@ using TMPro;
 //it doesnt just handle score it also plays the jump charge
 public class ScoreHUD : MonoBehaviour
 {
+    public Player playerScript;
     public TextMeshProUGUI[] numbers = new TextMeshProUGUI[4];
     public char[] currentString = new char[4];
     public Animator chargeAnim;
@@ -21,6 +22,14 @@ public class ScoreHUD : MonoBehaviour
         numbers[1].SetText("0");
         numbers[2].SetText("0");
         numbers[3].SetText("0");
+    }
+
+    private void Update()
+    {
+        if (!Input.GetKey(KeyCode.Space) && chargeAnim.GetCurrentAnimatorStateInfo(0).IsName("HUDChargeJump"))
+        {
+            FinishCharge();
+        }
     }
 
     //set the score by breaking score input down to char array
@@ -70,14 +79,13 @@ public class ScoreHUD : MonoBehaviour
 
     public void ChargeJump()
     {
-        check = true;
         chargeAnim.Play("HUDChargeJump");
         StartCoroutine(AmIStillCharging());
     }
 
     public IEnumerator AmIStillCharging()
     {
-        while (!check)
+        while (true)
         {
             yield return new WaitForEndOfFrame();
             if (!Input.GetKey(KeyCode.Space))
@@ -90,10 +98,7 @@ public class ScoreHUD : MonoBehaviour
 
     public void FinishCharge()
     {
-        if (check)
-        {
-            check = false;
-            chargeAnim.Play("HUDRetractCharge");
-        }
+        chargeAnim.Play("HUDRetractCharge");
+        playerScript.StopCharge();
     }
 }
