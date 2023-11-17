@@ -89,10 +89,10 @@ public class PlayerLife : MonoBehaviour
         {
             Die();
         }
-        if (Input.GetKey(KeyCode.G))
-        {
-            SceneManager.LoadScene(0);
-        }
+        //if (Input.GetKey(KeyCode.G))
+        //{
+        //    SceneManager.LoadScene(0);
+        //}
 
         // check if it makes sense for the Goonami to kill the player
         if (goonamiCanKill)
