@@ -9,58 +9,110 @@ using TMPro;
 public class LeaderboardSequence : MonoBehaviour
 {
     public tvScreenController screenController;
+    public BoxCollider TV;
+    public Leaderboard leaderboard;
 
-    [SerializeField]
-    private TMP_InputField myField;
+    public TMP_InputField myField;
+    public TextMeshProUGUI inputScore;
 
     // Set this to true if the player won the game
     public bool playerWon = false;
 
     private int currentScreen = 0;
+    private bool waitingForClick = false;
+
+    private void OnEnable()
+    {
+        TV.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        TV.enabled = false;
+    }
 
     public void StartLeaderboardSequence()
     {
         // set the initial screen based on playerWon
-        //if (playerWon)
-        //    screenController.MoveToWinningScreen(1);
-        //else
-        //    screenController.MoveToLosingScreen(1);
+        if (playerWon)
+            screenController.MoveToWinningScreen(0);
+        else
+            screenController.MoveToLosingScreen(0);
 
-        //currentScreen = 1;
+        currentScreen = 0;
+        waitingForClick = true;
 
-        screenController.MoveToWinningScreen(4);
-        //if (currentScreen == 5)
-        //{
+        if (currentScreen == 2 && playerWon)
+        {
             myField.ActivateInputField();
-        //}
+        }
+    }
+
+    void OnMouseDown()
+    {
+        if (waitingForClick)
+        {
+            if (currentScreen == 2 && playerWon)
+            {
+                SubmitScore();
+            }
+            else
+            {
+                waitingForClick = false;
+                MoveToNextScreen();
+            }
+        }
     }
 
     public void MoveToNextScreen()
     {
-        if (currentScreen < 5)
+        int maxScreens = playerWon ? 5 : 4;
+
+        if (currentScreen < maxScreens)
         {
             currentScreen++;
             if (playerWon)
                 screenController.MoveToWinningScreen(currentScreen);
             else
                 screenController.MoveToLosingScreen(currentScreen);
+            waitingForClick = true;
+
+            if (currentScreen == 2 && playerWon)
+            {
+                myField.ActivateInputField();
+            }
         }
     }
 
     public void MoveToPreviousScreen()
     {
-        if (currentScreen > 1)
+        if (currentScreen > 0)
         {
             currentScreen--;
             if (playerWon)
                 screenController.MoveToWinningScreen(currentScreen);
             else
                 screenController.MoveToLosingScreen(currentScreen);
+            waitingForClick = true;
         }
     }
 
-    internal void setWin(bool v)
+    public void SubmitScore()
     {
-        playerWon = v;
+        int parsedScore;
+        if (int.TryParse(inputScore.text, out parsedScore))
+        {
+            leaderboard.SetLeaderboardEntry(myField.text, parsedScore);
+        }
+        else
+        {
+            myField.text = "Sporet";
+            leaderboard.SetLeaderboardEntry(myField.text, parsedScore); 
+        }
+    }
+
+    public void SetWin(bool value)
+    {
+        playerWon = value;
     }
 }
