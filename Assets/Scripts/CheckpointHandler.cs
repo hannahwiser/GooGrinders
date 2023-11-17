@@ -14,7 +14,7 @@ public class CheckpointHandler : MonoBehaviour
     public int gorgerCost;
     public Transform lastCheckpoint;
     public PlayerLife playerScript;
-    public AudioSource spendPointsAudio;
+    public AudioSource spendPointsAudio, confirmDeathAudio;
     public ScoreHUD scoreHUDscript;
     public Button spendPointsButton;
     public GameObject cam1, cam2;
@@ -70,10 +70,18 @@ public class CheckpointHandler : MonoBehaviour
         scoreHUDscript.SetSpend(PlayerPrefs.GetInt("PlayerScore"));
         spendPointsAudio.Play(); //play the audio
         playerScript.Respawn(lastCheckpoint); //do the respawn legwork from another script i didnt write <3
+        //StartCoroutine(WaitToRespawn());
+    }
+
+    public IEnumerator WaitToRespawn()
+    {
+        yield return new WaitForSeconds(.5f);
+        playerScript.Respawn(lastCheckpoint); //do the respawn legwork from another script i didnt write <3
     }
 
     public void LetMeDie()
     {
+        confirmDeathAudio.Play();
         // get the stats for the leaderboard 
         int googorgersPopped = 0;
         float totalTimeGrinded = 0;
