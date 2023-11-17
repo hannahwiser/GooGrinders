@@ -7,7 +7,6 @@
  * Date: Sept 19, 2023
  */
 
-//using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -120,7 +119,7 @@ public class Leaderboard : MonoBehaviour
     {
         foreach (string word in nsfwWords)
         {
-            if (text.Contains(word.ToLower()))
+            if (text.ToLower().Contains(word.ToLower()))
             {
                 Debug.LogWarning($"ContainsProfanityOrSlurs() detected an NSFW word: {word}");
                 return true;
@@ -129,7 +128,7 @@ public class Leaderboard : MonoBehaviour
 
         foreach (string word in slurWords)
         {
-            if (text.Contains(word.ToLower()))
+            if (text.ToLower().Contains(word.ToLower()))
             {
                 Debug.LogWarning($"ContainsProfanityOrSlurs() detected a slur: {word}");
                 return true;
