@@ -24,6 +24,8 @@ public class CheckpointHandler : MonoBehaviour
     public Player player;
     int totalAttempts = 1;
     public LeaderboardSequence leaderboardSequence;
+    public TextMeshProUGUI explorersNote;
+    public int arrayPoint;
 
     private void Awake()
     {
@@ -42,7 +44,8 @@ public class CheckpointHandler : MonoBehaviour
         gorgerCost = 100;
 
         promptText.SetText("Would you like to spend " + gorgerCost + " googorger points to respawn at the most recent checkpoint?");
-        currentText.SetText(FunnyTexts[Random.Range(0, FunnyTexts.Length-1)]);
+        arrayPoint = Random.Range(0, FunnyTexts.Length - 1);
+        currentText.SetText(FunnyTexts[arrayPoint]);
         balanceText.SetText("current balance: " + PlayerPrefs.GetInt("PlayerScore") + " points");
 
         //making sure the player cant even press the button if they don't have enough $$
@@ -81,6 +84,7 @@ public class CheckpointHandler : MonoBehaviour
 
     public void LetMeDie()
     {
+        explorersNote.SetText(FunnyTexts[arrayPoint]);
         confirmDeathAudio.Play();
         // get the stats for the leaderboard 
         int googorgersPopped = 0;

@@ -57,8 +57,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenController: {fileID: 0}
   TV: {fileID: 0}
+  leaderboard: {fileID: 0}
   myField: {fileID: 0}
-  playerWon: 0
+  inputScore: {fileID: 0}
+  playerWon: 1
 --- !u!65 &4533130100592318956
 BoxCollider:
   m_ObjectHideFlags: 0
