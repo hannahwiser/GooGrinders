@@ -79,6 +79,9 @@ public class Player : MonoBehaviour
     // Track the total time grinded for Erriks leaderboard stuff
     public float totalTimeOnRail = 0f;
 
+    // Jakes' rail particle emitter
+    public ParticleSystem railParticles;
+    public float yourSpeedLimit = 0f;
     void Start()
     {
         if (!playerCollider)
@@ -369,6 +372,8 @@ public class Player : MonoBehaviour
             Vector3 clampedVelocity = horizontalVelocity.normalized * horizontalSpeedLimit;
             rb.velocity = new Vector3(clampedVelocity.x, rb.velocity.y, clampedVelocity.z);
         }
+
+        ToggleRailParticles(true);
     }
 
     private float debugTime = 0;
@@ -656,6 +661,42 @@ public class Player : MonoBehaviour
             GUI.Box(new Rect(0, textPos, 150, 20), text);
         }
         textPos += 20;
+    }
+
+    // activate the particle emitter
+    public void ActivateRailParticles()
+    {
+        if (railParticles != null)
+        {
+            railParticles.Play();
+        }
+    }
+    
+    // deactivate the particle emitter
+    public void DeactivateRailParticles()
+    {
+        if (railParticles != null)
+        {
+            railParticles.Stop();
+        }
+    }
+
+    public void ToggleRailParticles(bool activate)
+    {
+        if (activate)
+        {
+            // check if the player is on the rail and going over a certain speed
+            if (OnRail && rb.velocity.magnitude > yourSpeedLimit)
+            {
+                // activate the particle emitter
+                ActivateRailParticles();
+            }
+        }
+        else
+        {
+            // deactivate the particle emitter
+            DeactivateRailParticles();
+        }
     }
 
     private void OnGUI()

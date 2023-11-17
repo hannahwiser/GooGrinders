@@ -28,7 +28,7 @@ Material:
     m_Floats:
     - _Amplitude: 0.029
     - _Freq: 15
-    - _Line: 0.0049
+    - _Line: 0.0722
     - _LineSmooth: 0.1
     - _RimPower: 0.54
     m_Colors:

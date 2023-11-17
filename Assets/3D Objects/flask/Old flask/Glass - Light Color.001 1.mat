@@ -275,7 +275,7 @@ Material:
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _TransmittanceColor: {r: 0.053194284, g: 1, b: 0, a: 1}
+    - _TransmittanceColor: {r: 0.6650944, g: 1, b: 0.9965432, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
