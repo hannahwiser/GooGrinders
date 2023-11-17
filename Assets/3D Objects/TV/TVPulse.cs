@@ -9,8 +9,6 @@ public class TVPulse : MonoBehaviour
     public float maxIntensity = 2.0f;
     public float pulseSpeed = 1.0f;
 
-    private bool increasing = true;
-
     void Start()
     {
         if (tvSpotlight == null)
