@@ -25,17 +25,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663321028156171809}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 6.4}
+  m_LocalRotation: {x: -0, y: -0.030304756, z: 0, w: -0.9995407}
+  m_LocalPosition: {x: 0, y: 0, z: 1.9714742}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8885749943058168936}
-  m_RootOrder: 9
+  m_Father: {fileID: 7185639227729830634}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.86, y: 2.56}
+  m_AnchoredPosition: {x: -0.2697829, y: 1.1910157}
   m_SizeDelta: {x: 2.4407, y: 0.4121}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1107890081360302411
@@ -2670,7 +2670,6 @@ Transform:
   - {fileID: 8885749943356842855}
   - {fileID: 8885749942910070373}
   - {fileID: 8885749943982214424}
-  - {fileID: 2331983857937460650}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18153,6 +18152,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 2158738140200546034, guid: ca24202c78469d64ca88403cdabde174, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2396278515020086450, guid: ca24202c78469d64ca88403cdabde174, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -18347,6 +18350,11 @@ PrefabInstance:
 --- !u!4 &412460577989892097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9145083283121849135, guid: ca24202c78469d64ca88403cdabde174, type: 3}
+  m_PrefabInstance: {fileID: 8885749943900822318}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7185639227729830634 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1794687409629510084, guid: ca24202c78469d64ca88403cdabde174, type: 3}
   m_PrefabInstance: {fileID: 8885749943900822318}
   m_PrefabAsset: {fileID: 0}
 --- !u!20 &8124786981805269592 stripped

@@ -24,6 +24,8 @@ public class LeaderboardSequence : MonoBehaviour
 
     private bool scoreSubmitted = false;
 
+    public GameObject clickText;
+
     private void Update()
     {
         if ((!playerWon && currentScreen == 4) || (playerWon && currentScreen == 5))
