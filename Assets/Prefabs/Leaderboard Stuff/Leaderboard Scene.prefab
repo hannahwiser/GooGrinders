@@ -2252,6 +2252,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenController: {fileID: 0}
+  TV: {fileID: 0}
+  leaderboard: {fileID: 0}
+  myField: {fileID: 0}
+  inputScore: {fileID: 0}
+  playerWon: 0
+  clickText: {fileID: 0}
 --- !u!1 &8835226182879314955
 GameObject:
   m_ObjectHideFlags: 0

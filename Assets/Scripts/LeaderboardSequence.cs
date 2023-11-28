@@ -53,6 +53,7 @@ public class LeaderboardSequence : MonoBehaviour
 
     public void StartLeaderboardSequence()
     {
+        StartCoroutine(PlaySequence());
         // set the initial screen based on playerWon
         if (playerWon)
             screenController.MoveToWinningScreen(0);
@@ -68,7 +69,7 @@ public class LeaderboardSequence : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
+    /*void OnMouseDown()
     {
         if (waitingForClick)
         {
@@ -90,18 +91,40 @@ public class LeaderboardSequence : MonoBehaviour
                 //StartCoroutine(MoveToNextScreenWithDelay(0.05f)); // move to next screen after a delay
             }
         }
-    }
+    }*/
 
     public IEnumerator PlaySequence() //setting this up to play the end of game sequence
     {
-        yield return null;
+        yield return new WaitForSeconds(1.5f); //moving to information
+        MoveToNextScreen(); //moves to player info
+        yield return new WaitForSeconds(1.5f); //moving to name input
+        MoveToNextScreen(); //moves to name input
+        myField.ActivateInputField(); //activate the input text for the name
+        bool isEnterPressed = false;
+
+        while (!isEnterPressed)//wait for player to press enter
+        {
+            yield return new WaitForEndOfFrame();
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+            {
+                isEnterPressed = true;
+            }
+        }
+
+        MoveToNextScreen(); //moves to score screen 1
+        yield return new WaitForSeconds(1.5f);
+        MoveToNextScreen(); //moves to score screen 2
+        yield return new WaitForSeconds(1.5f);
+        MoveToNextScreen(); //moves to restart screen
     }
+
+
 
     public void MoveToNextScreen()
     {
-        int maxScreens = playerWon ? 5 : 4;
+        //int maxScreens = playerWon ? 5 : 4;
 
-        if (currentScreen < maxScreens)
+        //if (currentScreen < maxScreens)
         {
             currentScreen++;
             if (playerWon)
