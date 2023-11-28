@@ -92,6 +92,11 @@ public class LeaderboardSequence : MonoBehaviour
         }
     }
 
+    public IEnumerator PlaySequence() //setting this up to play the end of game sequence
+    {
+        yield return null;
+    }
+
     public void MoveToNextScreen()
     {
         int maxScreens = playerWon ? 5 : 4;
