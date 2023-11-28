@@ -41,7 +41,10 @@ public class LeaderboardSequence : MonoBehaviour
                 SceneManager.LoadScene(0); // Quit to menu
             }
         }
-        if (currentScreen == 2 && Input.GetKeyDown(KeyCode.Return)) nameEntered = true;
+        if (currentScreen == 2 && Input.GetKeyDown(KeyCode.Return))
+        {
+            nameEntered = true;
+        }
     }
 
     private void OnEnable()
@@ -129,7 +132,11 @@ public class LeaderboardSequence : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (currentScreen == 2) nameEntered = true;
+        myField.ActivateInputField();
+        if (currentScreen == 2 && myField.text.Length > 0) //make sure that its not someone clicking to input their name
+        {
+            nameEntered = true;
+        }
     }
 
 
