@@ -101,11 +101,11 @@ public class LeaderboardSequence : MonoBehaviour
 
     public IEnumerator PlaySequence() //setting this up to play the end of game sequence
     {
-        yield return new WaitForSeconds(1.3f); 
+        yield return new WaitForSeconds(2f); 
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
         MoveToNextScreen(); //moves to player info
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.8f);
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
         MoveToNextScreen(); //moves to name input
