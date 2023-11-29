@@ -86,8 +86,10 @@ public class CameraFlashAnimation : MonoBehaviour
     }
 
     // Method to trigger the flash effect
+    // Use CameraFlashAnimation.TriggerFlash(); in another script
     public void TriggerFlash()
     {
-        isFlashing = true;
+        isFlashing = true; // true doesn't actually trigger it
+        Debug.LogError("Is flashing = true.");
     }
 }

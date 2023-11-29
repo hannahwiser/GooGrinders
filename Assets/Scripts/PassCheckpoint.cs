@@ -28,6 +28,7 @@ public class PassCheckpoint : MonoBehaviour
             // Trigger the camera flash animation
             if (cameraFlashAnimation != null)
             {
+                Debug.LogError("Calling the flash animation method.");
                 cameraFlashAnimation.TriggerFlash(); // Trigger the flash effect
             }
             anim.Play("CameraFlash"); // Flash people
