@@ -18423,11 +18423,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2006951495157386794, guid: 4b8bc5d2c80446542a1cd87a744178b3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2293514113543124725, guid: 4b8bc5d2c80446542a1cd87a744178b3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8826132917488553174, guid: 4b8bc5d2c80446542a1cd87a744178b3, type: 3}
       propertyPath: m_IsActive
@@ -18520,6 +18520,10 @@ PrefabInstance:
     - target: {fileID: 8826132917866667668, guid: 4b8bc5d2c80446542a1cd87a744178b3, type: 3}
       propertyPath: m_Name
       value: PauseMenuCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8826132917866667668, guid: 4b8bc5d2c80446542a1cd87a744178b3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8826132917866667678, guid: 4b8bc5d2c80446542a1cd87a744178b3, type: 3}
       propertyPath: bgAudio
