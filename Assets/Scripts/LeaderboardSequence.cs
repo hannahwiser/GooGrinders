@@ -28,6 +28,9 @@ public class LeaderboardSequence : MonoBehaviour
 
     public bool nameEntered;
 
+    public GameObject scoreSubmittedConfirmation;
+    public AudioSource scoreSubmittedAudio;
+
     private void Update()
     {
         if ((!playerWon && currentScreen == 4) || (playerWon && currentScreen == 5))
@@ -104,30 +107,37 @@ public class LeaderboardSequence : MonoBehaviour
         yield return new WaitForSeconds(2f); 
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
-        MoveToNextScreen(); //moves to player info
+        MoveToNextScreen(); //moves to player info (screen 1)
         yield return new WaitForSeconds(1.8f);
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
-        MoveToNextScreen(); //moves to name input
+        MoveToNextScreen(); //moves to name input (screen 2)
         myField.ActivateInputField(); //activate the input text for the name
-        bool isEnterPressed = false;
+        //bool isEnterPressed = false;
 
         while (!nameEntered)//wait for player to press enter
         {
             yield return new WaitForEndOfFrame();
         }
 
+        SubmitScore();
+        scoreSubmittedAudio.Play();
+        yield return new WaitForSeconds(2.5f);
+        scoreSubmittedConfirmation.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        scoreSubmittedConfirmation.SetActive(false);
+        leaderboard.FlashNameIfBased();
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
-        MoveToNextScreen(); //moves to score screen 1
-        yield return new WaitForSeconds(1.3f);
+        MoveToNextScreen(); //moves to score screen 1 (screen 3)
+        yield return new WaitForSeconds(2.0f);
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
-        MoveToNextScreen(); //moves to score screen 2
-        yield return new WaitForSeconds(1.3f);
+        MoveToNextScreen(); //moves to score screen 2 (screen 4)
+        yield return new WaitForSeconds(2.0f);
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
-        MoveToNextScreen(); //moves to restart screen
+        MoveToNextScreen(); //moves to restart screen (screen 5)
     }
 
     void OnMouseDown()

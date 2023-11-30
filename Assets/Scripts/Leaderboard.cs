@@ -13,6 +13,7 @@ using TMPro;
 using Dan.Main;
 using System.Linq;
 using System;
+using System.Collections;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class Leaderboard : MonoBehaviour
     // Arrays to store the profanity and slur words
     private string[] nsfwWords;
     private string[] slurWords;
+
+    string usernameToUpload;
+    int scoreToUpload;
 
     private void Start()
     {
@@ -55,6 +59,33 @@ public class Leaderboard : MonoBehaviour
         );
     }
 
+    //hannah's figure out if we're on da leadaboard stuff here
+    public void FlashNameIfBased()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (usernameToUpload == names[i].ToString() && scoreToUpload.ToString() ==scores[i].ToString())
+            {
+                Debug.Log("Made it big time");
+                StartCoroutine(FlashName(i));
+                break;
+            }
+        }
+    }
+
+    public IEnumerator FlashName(int placeInArray)
+    {
+        for (int i = 0; i<5; i++)
+        {
+            Debug.Log("Flashing");
+            names[placeInArray].fontStyle = FontStyles.Normal;
+            yield return new WaitForSeconds(.25f);
+            names[placeInArray].fontStyle = FontStyles.Bold;
+            yield return new WaitForSeconds(.25f);
+        }
+    }
+
+
     // This method sets a new leaderboard entry, uploading the username and score to the leaderboard.
     // It also checks if the username contains profanity or slurs and avoids uploading the entry if it
     // does. Additionally, it processes the username, ensuring it's within a specified length, and
@@ -63,7 +94,9 @@ public class Leaderboard : MonoBehaviour
     {
         LoadProfanityWords();
 
-        string usernameToUpload = username;
+        //hannah added this so i can access outside this method
+        usernameToUpload = username;
+        scoreToUpload = score;
 
         if (ContainsProfanityOrSlurs(username))
         {
@@ -94,6 +127,7 @@ public class Leaderboard : MonoBehaviour
                 }
             }
         );
+        //FlashNameIfBased();
     }
 
     // This method loads the profanity and slur words from the "blacklist_nsfw_words.txt" and
