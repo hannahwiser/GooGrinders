@@ -379,11 +379,13 @@ public class Player : MonoBehaviour
 
     private float debugTime = 0;
 
+    private float checkDistance = 0;
     private void MainState()
     {
+        preventMultiRailChange = false;
         //we can probably cache this result until the player jumps or touches a new rail
         //for now i am lazy
-        
+
         using var native = new NativeSpline(spline.Spline, spline.transform.localToWorldMatrix);
         SplineUtility.GetNearestPoint(native, transform.position, out float3 point, out float time);
 
@@ -441,36 +443,85 @@ public class Player : MonoBehaviour
             float distance = Mathf.Infinity;
             float nearestTime = time;
             Vector3 closestPoint = transform.position;
-            
-            if(!FindNewRailCast())
-                for(int i = 0; i < railDistanceCastPoints; i++)
+            RaycastHit hit;
+            Vector3 dirTowardsCamera = (transform.position - cameraObj.transform.position).normalized;
+            if (!FindNewRailCast())
+            {
+               
+                for (int i = 0; i < railDistanceCastPoints; i++)
                 {
-                    Vector3 pointCheck = new Vector3(transform.position.x,transform.position.y + i, transform.position.z);
+                    Vector3 pointCheck = new Vector3(transform.position.x, transform.position.y + (i * .5f), transform.position.z);
                     SplineUtility.GetNearestPoint(
                     native,
                     pointCheck,
                     out point,
                     out time
                     );
+
                     //update values to closest position
-                    if(Vector3.Distance(point,pointCheck) < distance)
+                    if (Vector3.Distance(point, pointCheck) < distance)
                     {
-                        distance = Vector3.Distance(point,pointCheck);
+                        distance = Vector3.Distance(point, pointCheck);
                         closestPoint = point;
                         nearestTime = time;
                     }
                 }
-            
+                upVector = spline.EvaluateUpVector(nearestTime);
+                upVector = upVector.normalized;
+                tangentVector = spline.EvaluateTangent(nearestTime);
+                tangentVector = tangentVector.normalized;
+                joint.connectedAnchor = transform.position;
+                joint.axis = tangentVector;
+                fakeJoint.connectedAnchor = closestPoint;
+                fakeJoint.axis = tangentVector;
+                //rb.velocity = fakeRB.velocity;
+            }
+            else if(Physics.SphereCast(transform.position - dirTowardsCamera,.5f, dirTowardsCamera,out hit, 4f))
+            {
+                if (hit.collider.tag == "Rail")
+                {
+                    transform.position = hit.point;
+                    spline = hit.collider.GetComponent<SplineContainer>();
+
+                    using var nextNative = new NativeSpline(spline.Spline, spline.transform.localToWorldMatrix);
+
+                    SplineUtility.GetNearestPoint(nextNative, transform.position, out point, out time);
+                    nearestTime = time;
+                    upVector = spline.EvaluateUpVector(nearestTime);
+                    upVector = upVector.normalized;
+                    tangentVector = spline.EvaluateTangent(nearestTime);
+                    tangentVector = tangentVector.normalized;
+                    joint.connectedAnchor = transform.position;
+                    joint.axis = tangentVector;
+                    fakeJoint.connectedAnchor = closestPoint;
+                    fakeJoint.axis = tangentVector;
+                }
+
+                    
+            }
+            checkDistance = distance;
+
             //these lines need to be kept, but replace the nearest time with time
             //of you remove the above section
-            upVector = spline.EvaluateUpVector(nearestTime);
-            upVector = upVector.normalized;
-            tangentVector = spline.EvaluateTangent(nearestTime);
-            tangentVector = tangentVector.normalized;
-            joint.connectedAnchor = transform.position;
-            joint.axis = tangentVector;
-            fakeJoint.connectedAnchor = closestPoint;
-            fakeJoint.axis = tangentVector;
+            
+            //Debug.Log(Vector3.Distance(transform.position, fakeObject.transform.position));
+            if (transform.position.y < fakeObject.transform.position.y)//Vector3.Distance(transform.position,fakeObject.transform.position) < 5)
+            {
+                //first get new closest point as a failsafe, then teleport player to that position
+                //transform.position = new Vector3(fakeObject.transform.position.x, transform.position.y, fakeObject.transform.position.z);
+                Vector3 pointCheck = transform.position;
+                using var neoNative = new NativeSpline(spline.Spline, spline.transform.localToWorldMatrix);
+                SplineUtility.GetNearestPoint(
+                neoNative,
+                pointCheck,
+                out point,
+                out time
+                );
+                Debug.Log(spline);
+                if(transform.position.y < ((Vector3)point).y)
+                    if(Vector3.Distance(transform.position, (Vector3)point) < 5)
+                        transform.position = point;//new Vector3(fakeObject.transform.position.x, transform.position.y, fakeObject.transform.position.z);
+            }
             //FindNewRailCast();
         }
         else
@@ -563,6 +614,9 @@ public class Player : MonoBehaviour
 
     private bool FindNewRailCast()
     {
+        if (preventMultiRailChange)
+            return false;
+
         if (Physics.SphereCast(transform.position, .5f, Vector3.down, out RaycastHit hit))
         {
             if (hit.collider.tag == "Rail")// && hit.collider != splineCollider)
@@ -572,9 +626,27 @@ public class Player : MonoBehaviour
                     tempSpline.Spline,
                     tempSpline.transform.localToWorldMatrix
                 );
-                
-                
+                //if (hit.distance > checkDistance && checkDistance != 0)
+                //    return false;
+                spline = tempSpline;
                 SplineUtility.GetNearestPoint(native, hit.point, out float3 point, out float time);
+                //Debug.Log("fuck you");
+                //var nPoint = (Vector3)point;
+                //transform.position = new Vector3(nPoint.x, transform.position.y, nPoint.z);
+                
+                Vector3 upVector = spline.EvaluateUpVector(time);
+                upVector = upVector.normalized;
+                Vector3 tangentVector = spline.EvaluateTangent(time);
+                tangentVector = tangentVector.normalized;
+                if (fakeObject)
+                { 
+                    joint.connectedAnchor = transform.position;
+                    joint.axis = tangentVector;
+                    fakeJoint.connectedAnchor = point;
+                    fakeJoint.axis = tangentVector;
+
+                   // transform.position = new Vector3(fakeObject.transform.position.x, transform.position.y, fakeObject.transform.position.z);
+                }
                 return true;
             }
         }
@@ -714,7 +786,7 @@ public class Player : MonoBehaviour
         DrawText("Time: " + debugTime);
         DrawText("Score: " + PlayerPrefs.GetInt("PlayerScore"));
     }
-
+    private bool preventMultiRailChange = false;
     private void CheckCollider(Collision other)
     {
         //reattach the player to the rail
@@ -727,6 +799,7 @@ public class Player : MonoBehaviour
                 spline = other.gameObject.GetComponent<SplineContainer>();
                 if (spline)
                 {
+                    preventMultiRailChange = true;
                     //renable the previous collider!!!
                     splineCollider.enabled = true;
                     splineCollider = spline.GetComponent<Collider>();
