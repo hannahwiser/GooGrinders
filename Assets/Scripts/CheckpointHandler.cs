@@ -49,7 +49,7 @@ public class CheckpointHandler : MonoBehaviour
         balanceText.SetText("current balance: " + PlayerPrefs.GetInt("PlayerScore") + " points");
 
         //making sure the player cant even press the button if they don't have enough $$
-        if (PlayerPrefs.GetInt("PlayerScore") <= 0)
+        if (PlayerPrefs.GetInt("PlayerScore") < 100)
         {
             confirmSpendText.SetText("Outta Points");
             spendPointsButton.enabled = false;
