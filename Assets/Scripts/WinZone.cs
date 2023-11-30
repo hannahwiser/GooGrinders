@@ -12,7 +12,7 @@ public class WinZone : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             leaderboardSequence.SetWin(true);
-            chkptScript.LetMeDie();
+            chkptScript.LetMeWin();
         }
     }
 }

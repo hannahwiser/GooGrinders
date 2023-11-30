@@ -82,6 +82,28 @@ public class CheckpointHandler : MonoBehaviour
         playerScript.Respawn(lastCheckpoint); //do the respawn legwork from another script i didnt write <3
     }
 
+    public void LetMeWin()
+    {
+        explorersNote.SetText("Wow. We're surprised to see you here.");
+        int googorgersPopped = 0;
+        float totalTimeGrinded = 0;
+
+        if (itemCollector != null)
+        {
+            googorgersPopped = itemCollector.googorgersPopped;
+        }
+        if (playerScript != null)
+        {
+            totalTimeGrinded = player.totalTimeOnRail;
+        }
+        leaderboardUpdater.UpdateLeaderboardStats(PlayerPrefs.GetInt("PlayerScore"), googorgersPopped, totalTimeGrinded, totalAttempts);
+        cam1.SetActive(false);
+        cam2.SetActive(true);
+        deathCanvas.GetComponent<Animator>().Play("DeathPopIn");
+
+        leaderboardSequence.StartLeaderboardSequence();
+    }
+
     public void LetMeDie()
     {
         explorersNote.SetText(FunnyTexts[arrayPoint]);
