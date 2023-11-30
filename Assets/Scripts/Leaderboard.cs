@@ -14,6 +14,9 @@ using Dan.Main;
 using System.Linq;
 using System;
 using System.Collections;
+using Dan.Models;
+using System.Security.Cryptography.X509Certificates;
+using TMPro;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -32,6 +35,9 @@ public class Leaderboard : MonoBehaviour
 
     string usernameToUpload;
     int scoreToUpload;
+
+    public TMP_FontAsset normalFont;
+    public TMP_FontAsset winnerFont;
 
     private void Start()
     {
@@ -64,26 +70,20 @@ public class Leaderboard : MonoBehaviour
     {
         for (int i = 0; i < 10; i++)
         {
-            if (usernameToUpload == names[i].ToString() && scoreToUpload.ToString() ==scores[i].ToString())
+            if (usernameToUpload == names[i].text && scoreToUpload.ToString() ==scores[i].text)
             {
                 Debug.Log("Made it big time");
-                StartCoroutine(FlashName(i));
+                ChangeToWinner(i);
                 break;
             }
         }
     }
 
-    public IEnumerator FlashName(int placeInArray)
+    public void ChangeToWinner(int placeInArray)
     {
-        for (int i = 0; i<5; i++)
-        {
-            Debug.Log("Flashing");
-            names[placeInArray].fontStyle = FontStyles.Normal;
-            yield return new WaitForSeconds(.25f);
-            names[placeInArray].fontStyle = FontStyles.Bold;
-            yield return new WaitForSeconds(.25f);
-        }
+        names[placeInArray].font = winnerFont;
     }
+
 
 
     // This method sets a new leaderboard entry, uploading the username and score to the leaderboard.

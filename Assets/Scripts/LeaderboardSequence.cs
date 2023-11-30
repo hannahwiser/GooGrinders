@@ -122,14 +122,14 @@ public class LeaderboardSequence : MonoBehaviour
 
         SubmitScore();
         scoreSubmittedAudio.Play();
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.2f);
         scoreSubmittedConfirmation.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1);
         scoreSubmittedConfirmation.SetActive(false);
-        leaderboard.FlashNameIfBased();
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
         MoveToNextScreen(); //moves to score screen 1 (screen 3)
+        leaderboard.FlashNameIfBased();
         yield return new WaitForSeconds(2.0f);
         this.GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(.2f);
