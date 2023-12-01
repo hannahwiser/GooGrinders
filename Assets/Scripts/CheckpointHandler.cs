@@ -99,7 +99,6 @@ public class CheckpointHandler : MonoBehaviour
         leaderboardUpdater.UpdateLeaderboardStats(PlayerPrefs.GetInt("PlayerScore"), googorgersPopped, totalTimeGrinded, totalAttempts);
         cam1.SetActive(false);
         cam2.SetActive(true);
-        deathCanvas.GetComponent<Animator>().Play("DeathPopIn");
 
         leaderboardSequence.StartLeaderboardSequence();
     }
