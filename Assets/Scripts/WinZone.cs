@@ -14,7 +14,7 @@ public class WinZone : MonoBehaviour
         {
             //leaderboardSequence.SetWin(true);
             chkptScript.LetMeWin();
-            sporet.SetActive(false);
+            Destroy(sporet);
         }
     }
 }
