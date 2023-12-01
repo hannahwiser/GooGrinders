@@ -96,6 +96,8 @@ public class CheckpointHandler : MonoBehaviour
         {
             totalTimeGrinded = player.totalTimeOnRail;
         }
+        Time.timeScale = 0;
+        Time.timeScale = 1;
         leaderboardUpdater.UpdateLeaderboardStats(PlayerPrefs.GetInt("PlayerScore"), googorgersPopped, totalTimeGrinded, totalAttempts);
         cam1.SetActive(false);
         cam2.SetActive(true);
