@@ -1,3 +1,10 @@
+/**
+ * File: Winzone
+ * Programmer: Hannah Wiser
+ * Description: This script lets the player win
+ * Date: Nov XX, 2023
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
