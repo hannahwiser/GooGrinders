@@ -124,31 +124,31 @@ Meet Sporet, the gooey scientist with the goo-dacious long arms. His colleagues 
 
 ### Week of 09/08/23 - 09/15/23 (Progress Update #1)
 
-- ~~Task delegation solidified~~
-- ~~2 weekly meetings setup~~
-- ~~Team skill level assessed via survey~~
-- ~~Everyone in Discord~~
-- ~~Team bonding activity~~
-- ~~Unity & Plastic SCM setup~~
-- ~~Version control rundown, expectations for communication~~
-- ~~Team lead creates materials for novice members next week~~
-- ~~Mars will create testing scene~~
-- ~~Progress update slideshow will contain information on team and previous work~~
-- ~~Writing team will give lore for the score system~~
+- Task delegation solidified
+- 2 weekly meetings setup
+- Team skill level assessed via survey
+- Everyone in Discord
+- Team bonding activity
+- Unity & Plastic SCM setup
+- Version control rundown, expectations for communication
+- Team lead creates materials for novice members next week
+- Mars will create testing scene
+- Progress update slideshow will contain information on team and previous work
+- Writing team will give lore for the score system
 
 ### Week of 09/15/23 - 09/22/23
 
 - Movement programming creates base by the end of the week
-- ~~Novice members are delegated exercises to strengthen skills~~
+- Novice members are delegated exercises to strengthen skills
 - Writing team will continue lore work with finalized score system
-- ~~Playtesters familiarize themselves with playtesting techniques~~
-- ~~Main theme composition begins, samples are given to team lead~~
+- Playtesters familiarize themselves with playtesting techniques
+- Main theme composition begins, samples are given to team lead
 - Level designers begin creating ideas for vertical traversal and set up a whiteboxed scene that is properly scaled to character with influence from writing team
-- ~~VFX design will begin~~
+- VFX design will begin
 - Basic camera movement exists
-- ~~Character modeler begins~~, un-rigged model complete by the end of the week
+- Character modeler begins, un-rigged model complete by the end of the week
 - Environment modeler begins, rails complete by the end of the week
-- ~~Concept artists will work with design team and writing team to create aesthetics of level in some sample sketches~~
+- Concept artists will work with design team and writing team to create aesthetics of level in some sample sketches
 - UI design for the main menu with art assets complete
 - Writers will give lore for rails
 
