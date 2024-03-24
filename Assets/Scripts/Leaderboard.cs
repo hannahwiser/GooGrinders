@@ -26,9 +26,6 @@ public class Leaderboard : MonoBehaviour
     [SerializeField]
     private List<TextMeshProUGUI> scores;
 
-    private string publicLeaderboardKey =
-        "186b749c493dcea3110a114dafdbaa3584564d23f641110a0bcfa615be2d0b04";
-
     // Arrays to store the profanity and slur words
     private string[] nsfwWords;
     private string[] slurWords;
@@ -39,116 +36,59 @@ public class Leaderboard : MonoBehaviour
     public TMP_FontAsset normalFont;
     public TMP_FontAsset winnerFont;
 
+    // Initializes the leaderboard script by loading profanity words and updating the UI with local leaderboard data
     private void Start()
     {
-        GetLeaderBoard();
+        LoadProfanityWords();
+        UpdateLocalLeaderboardUI();
     }
 
-    // Retrieves the leaderboard data from an external source, likely an online service or server, and
-    // updates the UI elements in your game to display the leaderboard entries.
-    public void GetLeaderBoard()
+    // Method to update the local leaderboard UI
+    private void UpdateLocalLeaderboardUI()
     {
-        LeaderboardCreator.GetLeaderboard(
-            publicLeaderboardKey,
-            (
-                (msg) =>
-                {
-                    int loopLength = (msg.Length < names.Count) ? msg.Length : names.Count;
+        string username = PlayerPrefs.GetString("PlayerUsername", "Sporet");
+        int score = PlayerPrefs.GetInt("PlayerScore", 0);
 
-                    for (int i = 0; i < loopLength; i++)
-                    {
-                        names[i].text = msg[i].Username;
-                        scores[i].text = msg[i].Score.ToString();
-                    }
-                }
-            )
-        );
+        // Display the player's username and score on the UI
+        names[0].text = username;
+        scores[0].text = score.ToString();
     }
 
-    //hannah's figure out if we're on da leadaboard stuff here
-    public void FlashNameIfBased()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            if (usernameToUpload == names[i].text && scoreToUpload.ToString() ==scores[i].text)
-            {
-                Debug.Log("Made it big time");
-                ChangeToWinner(i);
-                break;
-            }
-        }
-    }
-
-    public void ChangeToWinner(int placeInArray)
-    {
-        names[placeInArray].font = winnerFont;
-    }
-
-
-
-    // This method sets a new leaderboard entry, uploading the username and score to the leaderboard.
-    // It also checks if the username contains profanity or slurs and avoids uploading the entry if it
-    // does. Additionally, it processes the username, ensuring it's within a specified length, and
-    // fetches the updated leaderboard data.
+    // Method to set a new leaderboard entry locally
     public void SetLeaderboardEntry(string username, int score)
     {
-        LoadProfanityWords();
-
-        //hannah added this so i can access outside this method
-        usernameToUpload = username;
-        scoreToUpload = score;
-
         if (ContainsProfanityOrSlurs(username))
         {
-            Debug.LogWarning("SetLeaderboardEntry(): Username contains profanity or slurs. Defaulting the name to Sporet...");
-            usernameToUpload = "Sporet"; // Default username for blocked words
+            Debug.LogWarning(
+                "SetLeaderboardEntry(): Username contains profanity or slurs. Defaulting the name to Sporet..."
+            );
+            username = "Sporet"; // Default username for blocked words
         }
 
-        // Process the username
-        usernameToUpload = usernameToUpload.Substring(0, Mathf.Min(usernameToUpload.Length, 7));
+        PlayerPrefs.SetString("PlayerUsername", username);
+        PlayerPrefs.SetInt("PlayerScore", score);
 
-        LeaderboardCreator.UploadNewEntry(
-            publicLeaderboardKey,
-            usernameToUpload,
-            score,
-            (isSuccessful) =>
-            {
-                if (isSuccessful)
-                {
-                // Reset the player after uploading the entry to enable multiple entries for the same username
-                LeaderboardCreator.ResetPlayer(() =>
-                    {
-                        GetLeaderBoard();
-                    });
-                }
-                else
-                {
-                    Debug.LogError("Failed to upload the new entry to the leaderboard.");
-                }
-            }
-        );
-        //FlashNameIfBased();
+        UpdateLocalLeaderboardUI();
+
     }
 
-    // This method loads the profanity and slur words from the "blacklist_nsfw_words.txt" and
-    // "blacklist_slur_words.txt" files into respective arrays for use in filtering.
+    // Method to load profanity and slur words from resources
     private void LoadProfanityWords()
     {
         TextAsset nsfwText = Resources.Load<TextAsset>("blacklist_nsfw_words");
         TextAsset slurText = Resources.Load<TextAsset>("blacklist_slur_words");
 
-        nsfwWords = nsfwText.text
-            .Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries)
-            .Select(word => word.Trim())
-            .ToArray();
-        slurWords = slurText.text
-            .Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries)
-            .Select(word => word.Trim())
-            .ToArray();
+        nsfwWords = nsfwText.text.Split(
+            new char[] { ',' },
+            System.StringSplitOptions.RemoveEmptyEntries
+        );
+        slurWords = slurText.text.Split(
+            new char[] { ',' },
+            System.StringSplitOptions.RemoveEmptyEntries
+        );
     }
 
-    // This method checks if a given text (e.g., a username) contains any of the loaded profanity
-    // or slur words, returning true if it does and false otherwise.
+    // Method to check if a given text contains profanity or slurs
     private bool ContainsProfanityOrSlurs(string text)
     {
         foreach (string word in nsfwWords)
@@ -171,4 +111,24 @@ public class Leaderboard : MonoBehaviour
 
         return false;
     }
+
+    //hannah's figure out if we're on da leadaboard stuff here
+    public void FlashNameIfBased()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            if (usernameToUpload == names[i].text && scoreToUpload.ToString() == scores[i].text)
+            {
+                Debug.Log("Made it big time");
+                ChangeToWinner(i);
+                break;
+            }
+        }
+    }
+    // changes the font of the username at the specified index in the leaderboard UI to indicate that the player is a winner
+    public void ChangeToWinner(int placeInArray)
+    {
+        names[placeInArray].font = winnerFont;
+    }
+
 }
