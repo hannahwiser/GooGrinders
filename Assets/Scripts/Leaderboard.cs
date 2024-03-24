@@ -45,6 +45,8 @@ public class Leaderboard : MonoBehaviour
     {
         LoadLeaderboard();
         UpdateLeaderboardUI();
+        // Reset PlayerPrefs
+        //PlayerPrefs.DeleteAll();
     }
 
     private void LoadLeaderboard()
@@ -54,11 +56,20 @@ public class Leaderboard : MonoBehaviour
 
         for (int i = 0; i < MAX_ENTRIES; i++)
         {
-            string username = PlayerPrefs.GetString($"Username_{i}", "Sporet");
-            int score = PlayerPrefs.GetInt($"Score_{i}", 0);
+            usernames.Add("");
+            userScores.Add(0);
+        }
 
-            usernames.Add(username);
-            userScores.Add(score);
+        for (int i = 0; i < MAX_ENTRIES; i++)
+        {
+            string username = PlayerPrefs.GetString($"Username_{i}");
+            int score = PlayerPrefs.GetInt($"Score_{i}");
+
+            if (!string.IsNullOrEmpty(username))
+            {
+                usernames[i] = username;
+                userScores[i] = score;
+            }
         }
     }
 
@@ -70,8 +81,6 @@ public class Leaderboard : MonoBehaviour
             scores[i].text = userScores[i].ToString();
         }
     }
-
-
 
     // Method to update the local leaderboard UI
     private void UpdateLocalLeaderboardUI()
@@ -87,13 +96,13 @@ public class Leaderboard : MonoBehaviour
     // Method to set a new leaderboard entry locally
     public void SetLeaderboardEntry(string username, int score)
     {
+        // Check if the score qualifies for the leaderboard
         if (IsHighScore(score))
         {
             int insertIndex = GetInsertIndex(score);
 
             ShiftEntriesDown(insertIndex);
 
-            // Insert the new entry
             usernames[insertIndex] = username;
             userScores[insertIndex] = score;
 
