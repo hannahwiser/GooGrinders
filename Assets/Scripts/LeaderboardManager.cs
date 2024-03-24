@@ -16,15 +16,15 @@ using UnityEngine.Events;
 public class LeaderboardManager : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI inputScore;
-
-    [SerializeField]
     private TMP_InputField inputName;
 
-    public UnityEvent<string, int> submitScoreEvent;
+    [SerializeField]
+    private TMP_InputField inputScore;
 
-    public void SubmitScore()
+    public void UpdateLocalLeaderboard()
     {
-        submitScoreEvent.Invoke(inputName.text, int.Parse(inputScore.text));
+        string username = inputName.text;
+        int score = int.Parse(inputScore.text);
+        FindObjectOfType<Leaderboard>().SetLeaderboardEntry(username, score);
     }
 }
